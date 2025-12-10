@@ -1,0 +1,706 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:1:1-56:12
+INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:1:1-56:12
+INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:1:1-56:12
+INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:1:1-56:12
+MERGED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:1:1-56:12
+MERGED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-19:12
+MERGED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-46:12
+MERGED from [:firebase_core] D:\FlutterProjects\hit_me_up\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
+MERGED from [:geolocator_android] D:\FlutterProjects\hit_me_up\build\geolocator_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:shared_preferences] D:\FlutterProjects\hit_me_up\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:android_alarm_manager_plus] D:\FlutterProjects\hit_me_up\build\android_alarm_manager_plus\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-28:12
+MERGED from [:fluttertoast] D:\FlutterProjects\hit_me_up\build\fluttertoast\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:permission_handler] D:\FlutterProjects\hit_me_up\build\permission_handler\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:webview_flutter_android] D:\FlutterProjects\hit_me_up\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\5b93e12828701a2549e597f97232d3af\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:17:1-58:12
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\0967ff5eacf05fd77682ed8bd5ce0b6e\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-base:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2a032fa6b186d41a17be875e30b87f57\AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.firebase:firebase-analytics:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9077056cc632a6b3d9a6bc7248461492\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:17:1-36:12
+MERGED from [com.google.firebase:firebase-datatransport:18.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3c58fbdd369e74a45b0d0535a72708da\AndroidManifest.xml:15:1-34:12
+MERGED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:2:1-24:12
+MERGED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:15:1-40:12
+MERGED from [androidx.appcompat:appcompat:1.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\094ea29ce866674d6b8a8f1d1f314ebc\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media:media:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7cc4c7672bc439ecc6459047087995f8\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.webkit:webkit:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\aef5f69a15315c2d08703f80afe85f21\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6fd7542f541880d74d7ab19ee9f4c886\AndroidManifest.xml:2:1-13:12
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\a2c03c4edb818c284bb3fd43769f7e35\AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.firebase:firebase-installations-interop:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\fb7b3d8298a2b51a420edbfdbda78e5e\AndroidManifest.xml:15:1-23:12
+MERGED from [com.google.android.gms:play-services-tasks:17.2.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\42823db69e2cbc6e97e74d9451b2734b\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\b955e9727329906b9d4b07a52566830e\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:17:1-46:12
+MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\18582fafeb61b5ae95cc35d71f78e551\AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\43e2dc619c6dd4c5023f6f05a7ef41a9\AndroidManifest.xml:17:1-31:12
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2e381f2d291eb6ca9c69aada678378a1\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6681db0ba54093d4b724f7119bb6208f\AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7b755bf5b307c748f886ca3251c5ac1c\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\eb1497d244ce7e5c0ed792405f76934f\AndroidManifest.xml:17:1-27:12
+MERGED from [com.google.android.gms:play-services-measurement-base:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3a3212eee94fd12b5e308e508c774303\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9acf67f6022f574ba43f41e87a23a14a\AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\bcf62a2d2aa1d93eb55190139f5cc091\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.2.4] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\e4961a42ba498391a9dd43c16e3a948f\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\e210579b04d5cf2617667123f2dd4eee\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7339c53a0df2bfb50c5c1e4a3a8ad5b7\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\09acb38795168ada8c15218c2eef60c6\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\80991d9e7d2535263612325576a7c833\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3a2549d5538739417aa16efaf979aebe\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b50f29ca29ac53b8e6b2c8e21577a0c\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\dba5c03f2d7cc231f43c96e8348c9b12\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\c9b8ce7f4a7fa788cb1027e263040acc\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.6.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\5689aadaaea42aad3f015a8e459a9a4c\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\de43eb80f441c6e291015d4b99b94e7f\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\41e5ce3313c5c94099d33a1b5bd42d5c\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\832bd8284b5a9de6ff79f972d0d8016b\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7924c98451bf9755f580e4089915a657\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\0694e6e668f898de10fa93ee490add66\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4c1598a8b576433aa38c420be1a2ac4f\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\98184640c826842cce56606a8ec5fc94\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:15:1-38:12
+MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:15:1-41:12
+MERGED from [com.google.android.datatransport:transport-api:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4ec43f71902afd391da47afbf05523a2\AndroidManifest.xml:15:1-22:12
+MERGED from [com.google.firebase:firebase-components:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2cc386521a22d6bd6781792e46125be2\AndroidManifest.xml:15:1-23:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\739409d8f0ef4c1b3e375a8a1af8c8ba\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9828401327cd2efe0b0ad59895e71635\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\d69f6f03322d32c07037fa60010717f7\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\5b09d17f44d9432606c430516e8f66f2\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.firebase:firebase-encoders-json:18.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\dfe309a7d244e1f4b829132c96291c09\AndroidManifest.xml:15:1-23:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\fa2f14794e3f896279abb709b4e62cb2\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ad2d899fc9134911613a556bc2522aa8\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\a99eadccfdbd8dad76722bd2cc540b86\AndroidManifest.xml:17:1-22:12
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\42f17be255f6bbf9ddd8d2274219da62\AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\d70b5d22fbef02732010261a5a1fed7c\AndroidManifest.xml:17:1-24:12
+INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+	package
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:2:5-37
+		INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml
+		INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\debug\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:1:1-56:12
+		INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\debug\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:1:1-56:12
+		INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\debug\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:3:5-81
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:3:22-78
+uses-permission#android.permission.INTERNET
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:4:5-66
+MERGED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:4:5-66
+MERGED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:4:5-66
+MERGED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-67
+MERGED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-67
+MERGED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-67
+MERGED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-67
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:22:5-67
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:11:5-67
+MERGED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:11:5-67
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6fd7542f541880d74d7ab19ee9f4c886\AndroidManifest.xml:8:5-67
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6fd7542f541880d74d7ab19ee9f4c886\AndroidManifest.xml:8:5-67
+MERGED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\43e2dc619c6dd4c5023f6f05a7ef41a9\AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\43e2dc619c6dd4c5023f6f05a7ef41a9\AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\eb1497d244ce7e5c0ed792405f76934f\AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\eb1497d244ce7e5c0ed792405f76934f\AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:26:5-67
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:26:5-67
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:4:22-64
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:6:5-79
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:6:22-76
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:7:5-80
+MERGED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
+MERGED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-81
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:7:22-78
+uses-permission#android.permission.WAKE_LOCK
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:8:5-67
+MERGED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-68
+MERGED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-68
+MERGED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-68
+MERGED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-68
+MERGED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:23:5-68
+MERGED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:23:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6fd7542f541880d74d7ab19ee9f4c886\AndroidManifest.xml:9:5-68
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6fd7542f541880d74d7ab19ee9f4c886\AndroidManifest.xml:9:5-68
+MERGED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\43e2dc619c6dd4c5023f6f05a7ef41a9\AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\43e2dc619c6dd4c5023f6f05a7ef41a9\AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\eb1497d244ce7e5c0ed792405f76934f\AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\eb1497d244ce7e5c0ed792405f76934f\AndroidManifest.xml:25:5-68
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:8:22-65
+uses-permission#android.permission.SCHEDULE_EXACT_ALARM
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:9:5-78
+MERGED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-79
+MERGED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-79
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:9:22-76
+application
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:10:4-55:19
+MERGED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-17:19
+MERGED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-17:19
+MERGED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-44:19
+MERGED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-44:19
+MERGED from [:firebase_core] D:\FlutterProjects\hit_me_up\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-13:19
+MERGED from [:firebase_core] D:\FlutterProjects\hit_me_up\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-13:19
+MERGED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-26:19
+MERGED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-26:19
+MERGED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:27:5-56:19
+MERGED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:27:5-56:19
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\0967ff5eacf05fd77682ed8bd5ce0b6e\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\0967ff5eacf05fd77682ed8bd5ce0b6e\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-base:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2a032fa6b186d41a17be875e30b87f57\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2a032fa6b186d41a17be875e30b87f57\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.firebase:firebase-analytics:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9077056cc632a6b3d9a6bc7248461492\AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-analytics:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9077056cc632a6b3d9a6bc7248461492\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:26:5-34:19
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:26:5-34:19
+MERGED from [com.google.firebase:firebase-datatransport:18.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3c58fbdd369e74a45b0d0535a72708da\AndroidManifest.xml:24:5-32:19
+MERGED from [com.google.firebase:firebase-datatransport:18.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3c58fbdd369e74a45b0d0535a72708da\AndroidManifest.xml:24:5-32:19
+MERGED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:14:5-22:19
+MERGED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:14:5-22:19
+MERGED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:25:5-38:19
+MERGED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:25:5-38:19
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\a2c03c4edb818c284bb3fd43769f7e35\AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\a2c03c4edb818c284bb3fd43769f7e35\AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-tasks:17.2.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\42823db69e2cbc6e97e74d9451b2734b\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:17.2.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\42823db69e2cbc6e97e74d9451b2734b\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\b955e9727329906b9d4b07a52566830e\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\b955e9727329906b9d4b07a52566830e\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:28:5-44:19
+MERGED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:28:5-44:19
+MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\18582fafeb61b5ae95cc35d71f78e551\AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\18582fafeb61b5ae95cc35d71f78e551\AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\43e2dc619c6dd4c5023f6f05a7ef41a9\AndroidManifest.xml:28:5-29:19
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\43e2dc619c6dd4c5023f6f05a7ef41a9\AndroidManifest.xml:28:5-29:19
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2e381f2d291eb6ca9c69aada678378a1\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2e381f2d291eb6ca9c69aada678378a1\AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6681db0ba54093d4b724f7119bb6208f\AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6681db0ba54093d4b724f7119bb6208f\AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7b755bf5b307c748f886ca3251c5ac1c\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7b755bf5b307c748f886ca3251c5ac1c\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3a3212eee94fd12b5e308e508c774303\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3a3212eee94fd12b5e308e508c774303\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9acf67f6022f574ba43f41e87a23a14a\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9acf67f6022f574ba43f41e87a23a14a\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.core:core:1.6.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\5689aadaaea42aad3f015a8e459a9a4c\AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.6.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\5689aadaaea42aad3f015a8e459a9a4c\AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\41e5ce3313c5c94099d33a1b5bd42d5c\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\41e5ce3313c5c94099d33a1b5bd42d5c\AndroidManifest.xml:24:5-25:19
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:25:5-39:19
+MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:25:5-39:19
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\42f17be255f6bbf9ddd8d2274219da62\AndroidManifest.xml:7:5-20
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\42f17be255f6bbf9ddd8d2274219da62\AndroidManifest.xml:7:5-20
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.6.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\5689aadaaea42aad3f015a8e459a9a4c\AndroidManifest.xml:24:18-86
+	android:label
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:12:9-34
+	android:roundIcon
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:14:8-57
+	android:icon
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:13:9-47
+	android:usesCleartextTraffic
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:15:8-43
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:11:8-57
+activity#com.hitme.up.hit_me_up.MainActivity
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:16:9-48:20
+	android:launchMode
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:18:13-43
+	android:hardwareAccelerated
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:21:13-47
+	android:windowSoftInputMode
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:22:13-55
+	android:configChanges
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:20:13-163
+	android:theme
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:19:13-47
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:17:13-41
+meta-data#io.flutter.embedding.android.NormalTheme
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:27:13-30:17
+	android:resource
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:29:15-52
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:28:15-70
+meta-data#io.flutter.embedding.android.SplashScreenDrawable
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:36:13-39:17
+	android:resource
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:38:15-61
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:37:15-79
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:40:13-43:29
+action#android.intent.action.MAIN
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:41:17-68
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:41:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:42:17-76
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:42:27-74
+intent-filter#action:name:FLUTTER_NOTIFICATION_CLICK+category:name:android.intent.category.DEFAULT
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:44:13-47:29
+action#FLUTTER_NOTIFICATION_CLICK
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:45:17-69
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:45:25-66
+category#android.intent.category.DEFAULT
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:46:17-76
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:46:27-73
+meta-data#flutterEmbedding
+ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:52:9-54:33
+	android:value
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:54:13-30
+	android:name
+		ADDED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml:53:13-44
+uses-sdk
+INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml
+INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml
+MERGED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:firebase_core] D:\FlutterProjects\hit_me_up\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:firebase_core] D:\FlutterProjects\hit_me_up\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:geolocator_android] D:\FlutterProjects\hit_me_up\build\geolocator_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:geolocator_android] D:\FlutterProjects\hit_me_up\build\geolocator_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] D:\FlutterProjects\hit_me_up\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] D:\FlutterProjects\hit_me_up\build\shared_preferences\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:android_alarm_manager_plus] D:\FlutterProjects\hit_me_up\build\android_alarm_manager_plus\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:android_alarm_manager_plus] D:\FlutterProjects\hit_me_up\build\android_alarm_manager_plus\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:fluttertoast] D:\FlutterProjects\hit_me_up\build\fluttertoast\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:fluttertoast] D:\FlutterProjects\hit_me_up\build\fluttertoast\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:permission_handler] D:\FlutterProjects\hit_me_up\build\permission_handler\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:permission_handler] D:\FlutterProjects\hit_me_up\build\permission_handler\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:webview_flutter_android] D:\FlutterProjects\hit_me_up\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:webview_flutter_android] D:\FlutterProjects\hit_me_up\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\5b93e12828701a2549e597f97232d3af\AndroidManifest.xml:20:5-43
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\5b93e12828701a2549e597f97232d3af\AndroidManifest.xml:20:5-43
+MERGED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\0967ff5eacf05fd77682ed8bd5ce0b6e\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\0967ff5eacf05fd77682ed8bd5ce0b6e\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-base:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2a032fa6b186d41a17be875e30b87f57\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2a032fa6b186d41a17be875e30b87f57\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9077056cc632a6b3d9a6bc7248461492\AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-analytics:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9077056cc632a6b3d9a6bc7248461492\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-datatransport:18.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3c58fbdd369e74a45b0d0535a72708da\AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-datatransport:18.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3c58fbdd369e74a45b0d0535a72708da\AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\094ea29ce866674d6b8a8f1d1f314ebc\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\094ea29ce866674d6b8a8f1d1f314ebc\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7cc4c7672bc439ecc6459047087995f8\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7cc4c7672bc439ecc6459047087995f8\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.webkit:webkit:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\aef5f69a15315c2d08703f80afe85f21\AndroidManifest.xml:20:5-44
+MERGED from [androidx.webkit:webkit:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\aef5f69a15315c2d08703f80afe85f21\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6fd7542f541880d74d7ab19ee9f4c886\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6fd7542f541880d74d7ab19ee9f4c886\AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\a2c03c4edb818c284bb3fd43769f7e35\AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\a2c03c4edb818c284bb3fd43769f7e35\AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-installations-interop:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\fb7b3d8298a2b51a420edbfdbda78e5e\AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-installations-interop:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\fb7b3d8298a2b51a420edbfdbda78e5e\AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.gms:play-services-tasks:17.2.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\42823db69e2cbc6e97e74d9451b2734b\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.2.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\42823db69e2cbc6e97e74d9451b2734b\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\b955e9727329906b9d4b07a52566830e\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\b955e9727329906b9d4b07a52566830e\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\18582fafeb61b5ae95cc35d71f78e551\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\18582fafeb61b5ae95cc35d71f78e551\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\43e2dc619c6dd4c5023f6f05a7ef41a9\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\43e2dc619c6dd4c5023f6f05a7ef41a9\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2e381f2d291eb6ca9c69aada678378a1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2e381f2d291eb6ca9c69aada678378a1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6681db0ba54093d4b724f7119bb6208f\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6681db0ba54093d4b724f7119bb6208f\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7b755bf5b307c748f886ca3251c5ac1c\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7b755bf5b307c748f886ca3251c5ac1c\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\eb1497d244ce7e5c0ed792405f76934f\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\eb1497d244ce7e5c0ed792405f76934f\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3a3212eee94fd12b5e308e508c774303\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3a3212eee94fd12b5e308e508c774303\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9acf67f6022f574ba43f41e87a23a14a\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9acf67f6022f574ba43f41e87a23a14a\AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\bcf62a2d2aa1d93eb55190139f5cc091\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.3.6] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\bcf62a2d2aa1d93eb55190139f5cc091\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.4] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\e4961a42ba498391a9dd43c16e3a948f\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.2.4] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\e4961a42ba498391a9dd43c16e3a948f\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\e210579b04d5cf2617667123f2dd4eee\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\e210579b04d5cf2617667123f2dd4eee\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7339c53a0df2bfb50c5c1e4a3a8ad5b7\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7339c53a0df2bfb50c5c1e4a3a8ad5b7\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\09acb38795168ada8c15218c2eef60c6\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\09acb38795168ada8c15218c2eef60c6\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\80991d9e7d2535263612325576a7c833\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\80991d9e7d2535263612325576a7c833\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3a2549d5538739417aa16efaf979aebe\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3a2549d5538739417aa16efaf979aebe\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b50f29ca29ac53b8e6b2c8e21577a0c\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b50f29ca29ac53b8e6b2c8e21577a0c\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\dba5c03f2d7cc231f43c96e8348c9b12\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\dba5c03f2d7cc231f43c96e8348c9b12\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\c9b8ce7f4a7fa788cb1027e263040acc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\c9b8ce7f4a7fa788cb1027e263040acc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.6.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\5689aadaaea42aad3f015a8e459a9a4c\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.6.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\5689aadaaea42aad3f015a8e459a9a4c\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\de43eb80f441c6e291015d4b99b94e7f\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\de43eb80f441c6e291015d4b99b94e7f\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\41e5ce3313c5c94099d33a1b5bd42d5c\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\41e5ce3313c5c94099d33a1b5bd42d5c\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\832bd8284b5a9de6ff79f972d0d8016b\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\832bd8284b5a9de6ff79f972d0d8016b\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7924c98451bf9755f580e4089915a657\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\7924c98451bf9755f580e4089915a657\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\0694e6e668f898de10fa93ee490add66\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\0694e6e668f898de10fa93ee490add66\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4c1598a8b576433aa38c420be1a2ac4f\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4c1598a8b576433aa38c420be1a2ac4f\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\98184640c826842cce56606a8ec5fc94\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\98184640c826842cce56606a8ec5fc94\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-api:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4ec43f71902afd391da47afbf05523a2\AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-api:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4ec43f71902afd391da47afbf05523a2\AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.firebase:firebase-components:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2cc386521a22d6bd6781792e46125be2\AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-components:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2cc386521a22d6bd6781792e46125be2\AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\739409d8f0ef4c1b3e375a8a1af8c8ba\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\739409d8f0ef4c1b3e375a8a1af8c8ba\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9828401327cd2efe0b0ad59895e71635\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.3.1] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9828401327cd2efe0b0ad59895e71635\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\d69f6f03322d32c07037fa60010717f7\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\d69f6f03322d32c07037fa60010717f7\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\5b09d17f44d9432606c430516e8f66f2\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\5b09d17f44d9432606c430516e8f66f2\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.firebase:firebase-encoders-json:18.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\dfe309a7d244e1f4b829132c96291c09\AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-encoders-json:18.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\dfe309a7d244e1f4b829132c96291c09\AndroidManifest.xml:19:5-21:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\fa2f14794e3f896279abb709b4e62cb2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\fa2f14794e3f896279abb709b4e62cb2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ad2d899fc9134911613a556bc2522aa8\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ad2d899fc9134911613a556bc2522aa8\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\a99eadccfdbd8dad76722bd2cc540b86\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\a99eadccfdbd8dad76722bd2cc540b86\AndroidManifest.xml:20:5-44
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\42f17be255f6bbf9ddd8d2274219da62\AndroidManifest.xml:5:5-44
+MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\42f17be255f6bbf9ddd8d2274219da62\AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\d70b5d22fbef02732010261a5a1fed7c\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\d70b5d22fbef02732010261a5a1fed7c\AndroidManifest.xml:20:5-22:41
+INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\debug\AndroidManifest.xml
+INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\debug\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml
+		INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\debug\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\main\AndroidManifest.xml
+		INJECTED from D:\FlutterProjects\hit_me_up\android\app\src\debug\AndroidManifest.xml
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-79
+MERGED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-79
+MERGED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-79
+MERGED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:10:5-79
+MERGED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:10:5-79
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6fd7542f541880d74d7ab19ee9f4c886\AndroidManifest.xml:7:5-79
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6fd7542f541880d74d7ab19ee9f4c886\AndroidManifest.xml:7:5-79
+MERGED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\43e2dc619c6dd4c5023f6f05a7ef41a9\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\43e2dc619c6dd4c5023f6f05a7ef41a9\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\eb1497d244ce7e5c0ed792405f76934f\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\eb1497d244ce7e5c0ed792405f76934f\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:25:5-79
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:25:5-79
+MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:22:5-79
+	android:name
+		ADDED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-76
+service#com.google.firebase.components.ComponentDiscoveryService
+ADDED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-16:19
+MERGED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:33:9-37:19
+MERGED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:33:9-37:19
+MERGED from [:firebase_core] D:\FlutterProjects\hit_me_up\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
+MERGED from [:firebase_core] D:\FlutterProjects\hit_me_up\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
+MERGED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:49:9-55:19
+MERGED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:49:9-55:19
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:27:9-33:19
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:27:9-33:19
+MERGED from [com.google.firebase:firebase-datatransport:18.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3c58fbdd369e74a45b0d0535a72708da\AndroidManifest.xml:25:9-31:19
+MERGED from [com.google.firebase:firebase-datatransport:18.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3c58fbdd369e74a45b0d0535a72708da\AndroidManifest.xml:25:9-31:19
+MERGED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:15:9-21:19
+MERGED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:15:9-21:19
+MERGED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:33:9-37:35
+MERGED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:33:9-37:35
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:51:13-37
+	tools:targetApi
+		ADDED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:37:13-32
+	android:directBootAware
+		ADDED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:35:13-43
+	android:name
+		ADDED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:12:18-89
+meta-data#com.google.firebase.components:io.flutter.plugins.firebaseanalytics.FlutterFirebaseAppRegistrar
+ADDED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-15:85
+	android:value
+		ADDED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:15:17-82
+	android:name
+		ADDED from [:firebase_analytics] D:\FlutterProjects\hit_me_up\build\firebase_analytics\intermediates\library_manifest\debug\AndroidManifest.xml:14:17-127
+service#io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService
+ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-15:72
+	android:exported
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-37
+	android:permission
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-69
+	android:name
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-107
+service#io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingService
+ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-22:19
+	android:exported
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-37
+	android:name
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-97
+intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
+ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-21:29
+action#com.google.firebase.MESSAGING_EVENT
+ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-78
+	android:name
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:20:25-75
+receiver#io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingReceiver
+ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:24:9-31:20
+	android:exported
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:26:13-36
+	android:permission
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:27:13-73
+	android:name
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:25:13-98
+intent-filter#action:name:com.google.android.c2dm.intent.RECEIVE
+ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:28:13-30:29
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:29:17-81
+	android:name
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:29:25-78
+meta-data#com.google.firebase.components:io.flutter.plugins.firebase.messaging.FlutterFirebaseAppRegistrar
+ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:34:13-36:85
+	android:value
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:36:17-82
+	android:name
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:35:17-128
+provider#io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider
+ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:39:9-43:38
+	android:authorities
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:41:13-88
+	android:exported
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:42:13-37
+	android:initOrder
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:43:13-35
+	android:name
+		ADDED from [:firebase_messaging] D:\FlutterProjects\hit_me_up\build\firebase_messaging\intermediates\library_manifest\debug\AndroidManifest.xml:40:13-102
+meta-data#com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar
+ADDED from [:firebase_core] D:\FlutterProjects\hit_me_up\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+	android:value
+		ADDED from [:firebase_core] D:\FlutterProjects\hit_me_up\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+	android:name
+		ADDED from [:firebase_core] D:\FlutterProjects\hit_me_up\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-124
+uses-permission#android.permission.VIBRATE
+ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-66
+	android:name
+		ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-63
+uses-permission#android.permission.USE_FULL_SCREEN_INTENT
+ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-81
+	android:name
+		ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:9:22-78
+receiver#com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver
+ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:13:9-15:40
+	android:exported
+		ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-37
+	android:name
+		ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-97
+receiver#com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver
+ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-25:20
+	android:exported
+		ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-37
+	android:name
+		ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-101
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED+action:name:android.intent.action.MY_PACKAGE_REPLACED+action:name:android.intent.action.QUICKBOOT_POWERON+action:name:com.htc.intent.action.QUICKBOOT_POWERON
+ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-24:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:20:17-79
+	android:name
+		ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:20:25-76
+action#android.intent.action.MY_PACKAGE_REPLACED
+ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:21:17-84
+	android:name
+		ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:21:25-81
+action#android.intent.action.QUICKBOOT_POWERON
+ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:22:17-82
+	android:name
+		ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:22:25-79
+action#com.htc.intent.action.QUICKBOOT_POWERON
+ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:23:17-82
+	android:name
+		ADDED from [:flutter_local_notifications] D:\FlutterProjects\hit_me_up\build\flutter_local_notifications\intermediates\library_manifest\debug\AndroidManifest.xml:23:25-79
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:25:5-82
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6fd7542f541880d74d7ab19ee9f4c886\AndroidManifest.xml:11:5-82
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\6fd7542f541880d74d7ab19ee9f4c886\AndroidManifest.xml:11:5-82
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:25:22-79
+receiver#com.google.firebase.iid.FirebaseInstanceIdReceiver
+ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:28:9-35:20
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:30:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:31:13-73
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:29:13-78
+service#com.google.firebase.messaging.FirebaseMessagingService
+ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:41:9-48:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:44:13-37
+	android:directBootAware
+		ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:43:13-43
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:42:13-82
+meta-data#com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar
+ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:52:13-54:85
+	android:value
+		ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:54:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\28609905e8de7e771f8383b84981fb2e\AndroidManifest.xml:53:17-119
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2a032fa6b186d41a17be875e30b87f57\AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2a032fa6b186d41a17be875e30b87f57\AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2a032fa6b186d41a17be875e30b87f57\AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\2a032fa6b186d41a17be875e30b87f57\AndroidManifest.xml:24:13-79
+meta-data#com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar
+ADDED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:30:13-32:85
+	android:value
+		ADDED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:32:17-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-api:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9247f03bfba79d664f86812892ebad0e\AndroidManifest.xml:31:17-139
+meta-data#com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar
+ADDED from [com.google.firebase:firebase-datatransport:18.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3c58fbdd369e74a45b0d0535a72708da\AndroidManifest.xml:28:13-30:85
+	android:value
+		ADDED from [com.google.firebase:firebase-datatransport:18.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3c58fbdd369e74a45b0d0535a72708da\AndroidManifest.xml:30:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-datatransport:18.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3c58fbdd369e74a45b0d0535a72708da\AndroidManifest.xml:29:17-115
+meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar
+ADDED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:18:13-20:85
+	android:value
+		ADDED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:20:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\434c997948aa444dc8c21e31fb4b2239\AndroidManifest.xml:19:17-127
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:26:9-31:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:28:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:30:13-37
+	android:directBootAware
+		ADDED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:29:13-43
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:31:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9b9bde505e5a89d2453500fc476b5772\AndroidManifest.xml:27:13-77
+uses-permission#com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
+ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\43e2dc619c6dd4c5023f6f05a7ef41a9\AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\43e2dc619c6dd4c5023f6f05a7ef41a9\AndroidManifest.xml:26:5-110
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:26:22-107
+receiver#com.google.android.gms.measurement.AppMeasurementReceiver
+ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:29:9-33:20
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:31:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:30:13-85
+service#com.google.android.gms.measurement.AppMeasurementService
+ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:35:9-38:40
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:38:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:36:13-84
+service#com.google.android.gms.measurement.AppMeasurementJobService
+ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:39:9-43:72
+	android:enabled
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:41:13-35
+	android:exported
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:42:13-37
+	android:permission
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:43:13-69
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\3d530b28f53974980ca9c9e52a2c2688\AndroidManifest.xml:40:13-87
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9acf67f6022f574ba43f41e87a23a14a\AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9acf67f6022f574ba43f41e87a23a14a\AndroidManifest.xml:25:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:17.5.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\9acf67f6022f574ba43f41e87a23a14a\AndroidManifest.xml:24:13-58
+service#com.google.android.datatransport.runtime.backends.TransportBackendDiscovery
+ADDED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:36:9-38:40
+MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:36:9-38:40
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:31:13-37
+	android:name
+		ADDED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:30:13-103
+meta-data#backend:com.google.android.datatransport.cct.CctBackendFactory
+ADDED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:32:13-34:39
+	android:value
+		ADDED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:34:17-36
+	android:name
+		ADDED from [com.google.android.datatransport:transport-backend-cct:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\ae1303a76eede63adc5fc35848dc5400\AndroidManifest.xml:33:17-94
+service#com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService
+ADDED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:26:9-30:19
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:28:13-37
+	android:permission
+		ADDED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:29:13-69
+	android:name
+		ADDED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:27:13-117
+receiver#com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver
+ADDED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:32:9-34:40
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:34:13-37
+	android:name
+		ADDED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\wiundows10ent\.gradle\caches\transforms-2\files-2.1\4364c8b161bde2ecf2470094217ea402\AndroidManifest.xml:33:13-132

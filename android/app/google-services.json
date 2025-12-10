@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "1097685114255",
+    "project_id": "hitmeuplocal-6cf84",
+    "storage_bucket": "hitmeuplocal-6cf84.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097685114255:android:4cb247febc1664e85b3ffa",
+        "android_client_info": {
+          "package_name": "com.hitme.up.hit_me_up"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1097685114255-i12i3kofvm67gb38pl656t4ig3416760.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNAoCxN0t3FmswioFEOHBgSuBecPUKP2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1097685114255-i12i3kofvm67gb38pl656t4ig3416760.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1097685114255-oj54hekvj91i35kmojb1ashnh61imaa7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hitmeup.mobile"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097685114255:android:feadebe9da5ffe8a5b3ffa",
+        "android_client_info": {
+          "package_name": "com.hitme.up.local"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1097685114255-i12i3kofvm67gb38pl656t4ig3416760.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNAoCxN0t3FmswioFEOHBgSuBecPUKP2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1097685114255-i12i3kofvm67gb38pl656t4ig3416760.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1097685114255-oj54hekvj91i35kmojb1ashnh61imaa7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hitmeup.mobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

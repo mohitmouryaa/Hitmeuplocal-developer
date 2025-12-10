@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">382640331820-drs8m5sot2sq209q7kam80u005fhvcvj.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">382640331820</string>
+    <string name="google_api_key" translatable="false">AIzaSyD0znKohRmaWq9KQzJ-6xNq3RhXTnSGehc</string>
+    <string name="google_app_id" translatable="false">1:382640331820:android:4f0c824e848b9de7a30589</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD0znKohRmaWq9KQzJ-6xNq3RhXTnSGehc</string>
+    <string name="google_storage_bucket" translatable="false">hitmeup-bd630.appspot.com</string>
+    <string name="project_id" translatable="false">hitmeup-bd630</string>
+</resources>

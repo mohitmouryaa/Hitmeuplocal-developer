@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hit_me_up/UI/app_drawer.dart';
 
 class AboutUsScreen extends StatefulWidget {
   final Function drawerCall;
-  const AboutUsScreen({Key? key,required this.drawerCall}) : super(key: key);
+  const AboutUsScreen({super.key,required this.drawerCall});
 
   @override
   State<AboutUsScreen> createState() => _AboutUsScreenState();
@@ -32,7 +31,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
           ),
-          backgroundColor: Colors.white),
+          backgroundColor: Colors.white,),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -40,22 +39,22 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
               alignment: Alignment.center,
               child: const Text(
-                "It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts. It is a long established fact that a Your Source For Local Discounts.nnIt is a long established fact that a Your Source For Local Discounts English.",
+                'It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts. It is a long established fact that a Your Source For Local Discounts.nnIt is a long established fact that a Your Source For Local Discounts English.',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 17,
-                    fontStyle: FontStyle.normal),
+                    fontStyle: FontStyle.normal,),
               ),
             ),
             Container(
               padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
               alignment: Alignment.center,
               child: const Text(
-                "It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts. It is a long established fact that a Your Source For Local Discounts.nnIt is a long established fact that a Your Source For Local Discounts English.",
+                'It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts. It is a long established fact that a Your Source For Local Discounts.nnIt is a long established fact that a Your Source For Local Discounts English.',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 17,
-                    fontStyle: FontStyle.normal),
+                    fontStyle: FontStyle.normal,),
               ),
             ),
           ],

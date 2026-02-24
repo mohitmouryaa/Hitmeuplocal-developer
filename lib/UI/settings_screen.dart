@@ -5,13 +5,13 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../common/common.dart';
-import '../common/service_api.dart';
-import '../providers/auth_provider.dart';
+import 'package:hit_me_up/common/common.dart';
+import 'package:hit_me_up/common/service_api.dart';
+import 'package:hit_me_up/providers/auth_provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   final Function drawerCall;
-  const SettingsScreen({Key? key,required this.drawerCall}) : super(key: key);
+  const SettingsScreen({super.key,required this.drawerCall});
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -48,7 +48,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
           ),
-          backgroundColor: Colors.white),
+          backgroundColor: Colors.white,),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
@@ -90,7 +90,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             //const SizedBox(height: -5,),
-            Text("(Delete account will permanently delete your account)" ,style: TextStyle(color: Colors.grey , fontSize: 10),),
+            const Text('(Delete account will permanently delete your account)' ,style: TextStyle(color: Colors.grey , fontSize: 10),),
             // ElevatedButton.icon(
             //   onPressed: onDeleteAccount,
             //   icon: const Icon(Icons.delete),
@@ -119,7 +119,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             children: [
               GestureDetector(
                 onTap: () => Navigator.pop(context, false),
-                child: roundedButton(" NO "),
+                child: roundedButton(' NO '),
               ),
               GestureDetector(
                 onTap: () {
@@ -127,10 +127,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   authProvider.logout();
                   Navigator.pop(context, true);
                 },
-                child: roundedButton(" YES "),
+                child: roundedButton(' YES '),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -153,16 +153,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
             children: [
               GestureDetector(
                 onTap: () => Navigator.pop(context, false),
-                child: roundedButton(" NO "),
+                child: roundedButton(' NO '),
               ),
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context, true);
                 },
-                child: roundedButton(" YES "),
+                child: roundedButton(' YES '),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -180,7 +180,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: roundedButton(" Cancel "),
+                child: roundedButton(' Cancel '),
               ),
               TextButton(
                 onPressed: () async {
@@ -190,13 +190,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   }
                   Navigator.pop(context);
                 },
-                child: roundedButton(" Proceed "),
+                child: roundedButton(' Proceed '),
               ),
             ],
           ),
         );
       }else{
-        deleteUserAccount();
+        await deleteUserAccount();
       }
     }
   }
@@ -204,7 +204,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> loadUserName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userData = prefs.getString('user_data');
-    print("userData"+userData.toString());
     //print("userName"+userData["name"].toString());
     //String name = userData["name"];
 
@@ -212,7 +211,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       try {
         final Map<String, dynamic> userMap = jsonDecode(userData);
         setState(() {
-          userName = userMap["name"] ?? 'Guest';
+          userName = userMap['name'] ?? 'Guest';
         });
       } catch (e) {
         // handle JSON parse error
@@ -231,15 +230,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showLoader(context);
     bool autoRenewal = false;
       String deviceTimeZone = await getTimeZone();
-      print('Device Time Zone: $deviceTimeZone');
       dynamic user = await getSharedPreference(kDataLoginUser);
       var param = {
-        "user_id": user[kId].toString(),
-        "user_timezone": deviceTimeZone,
+        'user_id': user[kId].toString(),
+        'user_timezone': deviceTimeZone,
         // "device_type": Platform.isAndroid?'2':'1',
       };
-      const url = "$baseUrl/check-subscriptions";
-      var result = await callApi("POST", param, url);
+      const url = '$baseUrl/check-subscriptions';
+      var result = await callApi('POST', param, url);
       // hideLoader(context);
       if(mounted) {
         hideLoader(context);
@@ -249,7 +247,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           autoRenewal = true;
         }
       } else {
-        showToast(context, result!=null?result[kDataMessage]:"Server Error");
+        showToast(context, result[kDataMessage]);
       }
     if(mounted) {
       setState(() {});
@@ -261,8 +259,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     showLoader(context);
     dynamic user = await getSharedPreference(kDataLoginUser);
     String user_id =  user[kId].toString();
-    final url = "$baseUrl/delete-user/$user_id";
-    var result = await callApi("GET", null, url);
+    final url = '$baseUrl/delete-user/$user_id';
+    var result = await callApi('GET', null, url);
     // hideLoader(context);
     if(mounted) {
       hideLoader(context);
@@ -274,7 +272,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       authProvider.logout();
       removeSharedPreference(context);
     } else {
-      showToast(context, result!=null?result[kDataMessage]:"Server Error");
+      showToast(context, result[kDataMessage]);
     }
   }
 

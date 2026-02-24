@@ -1,16 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hit_me_up/UI/promotions_list_screen.dart';
 import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
-import 'package:hit_me_up/model/category_list_data.dart';
 import 'package:hit_me_up/model/promotion_list_data.dart';
 
 class BusinessListScreen extends StatefulWidget {
 
   const BusinessListScreen(
-      {Key? key})
-      : super(key: key);
+      {super.key,});
 
   @override
   State<BusinessListScreen> createState() =>
@@ -18,7 +14,6 @@ class BusinessListScreen extends StatefulWidget {
 }
 
 class _BusinessListScreenState extends State<BusinessListScreen> {
-  List<CategoryListData> _categoryList = [];
   List<PromotionListData> _offerList = [];
   var rest;
 
@@ -33,17 +28,17 @@ class _BusinessListScreenState extends State<BusinessListScreen> {
 
 
   Future<void> getBusinessListData() async {
-    dynamic user = await getSharedPreference(kDataLoginUser);
-    const url = "$baseUrl/promotions-list";
+    await getSharedPreference(kDataLoginUser);
+    const url = '$baseUrl/promotions-list';
    var param = {
      // "user_id": user[kId].toString(),
-      "user_id": "5",
-      "category_id": "4",
+      'user_id': '5',
+      'category_id': '4',
     };
-    var result = await callApi("POST", param, url);
+    var result = await callApi('POST', param, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      var rest = result["data"] as List;
+      var rest = result['data'] as List;
       _offerList = rest
           .map<PromotionListData>((json) => PromotionListData.fromJson(json))
           .toList();
@@ -118,8 +113,8 @@ class _BusinessListScreenState extends State<BusinessListScreen> {
                                             blurRadius: 4.0,
                                             color: Colors.black45,
                                           ),
-                                        ]),
-                                  )))
+                                        ],),
+                                  ),),),
                         ],
                       ),
                       Align(
@@ -161,24 +156,24 @@ class _BusinessListScreenState extends State<BusinessListScreen> {
                                             width: 100,
                                             child: Center(
                                               child: Text(
-                                                  _offerList[index].business_detail["name"],
+                                                  _offerList[index].business_detail['name'],
                                                 textAlign: TextAlign.center,
                                                 maxLines: 2,
                                                 style: const TextStyle(
-                                                    fontSize: 12, color: Colors.white),
+                                                    fontSize: 12, color: Colors.white,),
                                               ),
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ),
                                   );
                                 }),
-                              )))
+                              ),),),
                     ],
-                  )
+                  ),
                 ],
-              )),
+              ),),
         ],
       ),
     );

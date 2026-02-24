@@ -1,8 +1,5 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hit_me_up/UI/app_drawer.dart';
 import 'package:hit_me_up/UI/congratulation_screen.dart';
 import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
@@ -10,7 +7,7 @@ import 'package:page_transition/page_transition.dart';
 
 class LoginPinPage extends StatefulWidget {
   final String orderId;
-  const LoginPinPage({Key? key,required this.orderId}) : super(key: key);
+  const LoginPinPage({super.key,required this.orderId});
 
   @override
   State<LoginPinPage> createState() => _LoginPinPageState();
@@ -35,7 +32,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
                   'assets/splash_bg.png',
                   fit: BoxFit.fill,
                 ),
-              )
+              ),
             ],
           ),
           SingleChildScrollView(
@@ -58,8 +55,8 @@ class _LoginPinPageState extends State<LoginPinPage> {
                               blurRadius: 4.0,
                               color: Colors.black45,
                             ),
-                          ]),
-                    )),
+                          ],),
+                    ),),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
@@ -76,7 +73,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
                     height: 230,
                     child: Center(
                       child: Image.asset(
-                        "assets/unlock_discounts.png", height: 230,
+                        'assets/unlock_discounts.png', height: 230,
                         fit: BoxFit.fitWidth,
                         // color: Colors.orangeAccent,
                       ),
@@ -100,13 +97,13 @@ class _LoginPinPageState extends State<LoginPinPage> {
                       //hintText: 'Pin #',
                       hintText: 'Check mail for pin.',
                       hintStyle: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                          color: Colors.black, fontWeight: FontWeight.bold,),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                           borderSide: const BorderSide(
                             width: 0,
                             style: BorderStyle.none,
-                          )),
+                          ),),
                       fillColor: editField,
                       filled: true,
                     ),
@@ -134,11 +131,11 @@ class _LoginPinPageState extends State<LoginPinPage> {
                         padding: const EdgeInsets.only(top: 5, bottom: 5),
                         alignment: Alignment.center,
                         child: const Text(
-                          "Subscribe",
+                          'Subscribe',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.bold,),
                         ),
                       ),
                     ),
@@ -146,32 +143,32 @@ class _LoginPinPageState extends State<LoginPinPage> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
   Future navigationHomePage() async {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-    Navigator.pushReplacement(
+    await Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+    await Navigator.pushReplacement(
         context,
         PageTransition(
-            type: PageTransitionType.rightToLeft, child: const CongratulationScreen()));
+            type: PageTransitionType.rightToLeft, child: const CongratulationScreen(),),);
   }
 
   /*"sub_active":1(Subscribed),"showTrial":0(Trial version expired)*/
   void apiRegisterUsingPin(BuildContext context) async {
     var param = {
-      "order_id": widget.orderId,
-      "pin": _pinController.text.toString().trim(),
+      'order_id': widget.orderId,
+      'pin': _pinController.text.toString().trim(),
     };
 
-    const url = "$baseUrl/payment-pin-verification";
-    var result = await callApi("POST", param, url);
+    const url = '$baseUrl/payment-pin-verification';
+    var result = await callApi('POST', param, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
       /*showToast(context, result[kDataMessage]);*/
-      navigationHomePage();
+      await navigationHomePage();
     } else {
       showToast(context, result[kDataMessage]);
     }

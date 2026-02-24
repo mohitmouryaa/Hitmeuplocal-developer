@@ -1,20 +1,13 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hit_me_up/UI/login_screen.dart';
-import 'package:hit_me_up/UI/select_country.dart';
-import 'package:hit_me_up/UI/select_phone_code.dart';
-import 'package:hit_me_up/UI/select_state.dart';
 import 'package:hit_me_up/common/common.dart';
-import 'package:hit_me_up/common/service_api.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class NGORegisterPage extends StatefulWidget {
   final Function drawerCall;
   final url,title;
 
-  const NGORegisterPage({Key? key, required this.drawerCall,required this.url,required this.title}) : super(key: key);
+  const NGORegisterPage({super.key, required this.drawerCall,required this.url,required this.title});
 
   @override
   State<NGORegisterPage> createState() => _NGORegisterPageState();
@@ -45,11 +38,10 @@ class _NGORegisterPageState extends State<NGORegisterPage> {
           },
           onWebResourceError: (error) {
             // Handle any errors that occur
-            print('Error loading web resource: $error');
           },
         ),
       )
-      ..loadRequest(Uri.parse("https://dev.01s.in/hitmeup/public/signup?role_id=4")); // Load the initial URL
+      ..loadRequest(Uri.parse('https://dev.01s.in/hitmeup/public/signup?role_id=4')); // Load the initial URL
   }
 
   @override
@@ -82,7 +74,7 @@ class _NGORegisterPageState extends State<NGORegisterPage> {
 
           // Loading spinner when the page is loading
           if (_isLoading)
-            Center(
+            const Center(
               child: CircularProgressIndicator(
                 color: buttonParrotColor,
               ),

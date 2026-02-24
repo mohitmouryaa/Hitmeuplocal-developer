@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hit_me_up/UI/common_promotion_by_id.dart';
 import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
@@ -7,7 +6,7 @@ import 'package:page_transition/page_transition.dart';
 
 class BusinessOwnerRegister extends StatefulWidget {
   final Function drawerCall;
-  const BusinessOwnerRegister({Key? key,required this.drawerCall}) : super(key: key);
+  const BusinessOwnerRegister({super.key,required this.drawerCall});
 
   @override
   State<BusinessOwnerRegister> createState() => _BusinessOwnerRegisterState();
@@ -16,7 +15,7 @@ class BusinessOwnerRegister extends StatefulWidget {
 class _BusinessOwnerRegisterState extends State<BusinessOwnerRegister> {
   final _addressController = TextEditingController();
   final _phoneController = TextEditingController();
-  String _id="";
+  String _id='';
   Map childString={};
   List<dynamic> responseList=[];
 
@@ -28,16 +27,16 @@ class _BusinessOwnerRegisterState extends State<BusinessOwnerRegister> {
   }
 
   void getBusinessList() async {
-    String url = "$baseUrl/business-list";
-    var result = await callApi("GET", null, url);
+    String url = '$baseUrl/business-list';
+    var result = await callApi('GET', null, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      responseList= result["data"] as List;
+      responseList= result['data'] as List;
       if(responseList.isNotEmpty) {
         childString = responseList[0];
-        _addressController.text=childString["address"];
-        _id=childString["id"].toString();
-        _phoneController.text=childString["mobile"];
+        _addressController.text=childString['address'];
+        _id=childString['id'].toString();
+        _phoneController.text=childString['mobile'];
       }
       setState(() {});
     } else {
@@ -46,10 +45,10 @@ class _BusinessOwnerRegisterState extends State<BusinessOwnerRegister> {
   }
 
   Future navigationPromotionPage() async {
-    Navigator.push(
+    await Navigator.push(
       context,
         PageTransition(
-            type: PageTransitionType.rightToLeft, child: CommonPromotionByIdList(id: _id,url: "promotions-list-by-id",distance: "",))
+            type: PageTransitionType.rightToLeft, child: CommonPromotionByIdList(id: _id,url: 'promotions-list-by-id',distance: '',),),
     );
   }
 
@@ -76,7 +75,7 @@ class _BusinessOwnerRegisterState extends State<BusinessOwnerRegister> {
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
           ),
-          backgroundColor: Colors.white),
+          backgroundColor: Colors.white,),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -86,7 +85,7 @@ class _BusinessOwnerRegisterState extends State<BusinessOwnerRegister> {
                 height: 210,
                 child: Center(
                   child: Image.asset(
-                    "assets/owner_image.png", height: 200,
+                    'assets/owner_image.png', height: 200,
                     fit: BoxFit.fitWidth,
                     // color: Colors.orangeAccent,
                   ),
@@ -102,33 +101,33 @@ class _BusinessOwnerRegisterState extends State<BusinessOwnerRegister> {
               decoration: BoxDecoration(
                   border: Border.all(color: greyBorder, width: 0.0),
                   color: greyFilled,
-                  borderRadius: const BorderRadius.all(Radius.circular(25))),
+                  borderRadius: const BorderRadius.all(Radius.circular(25)),),
               child: DropdownButtonFormField<dynamic>(
                 style: const TextStyle(color: Colors.black, fontSize: 14),
                 icon: const Icon(Icons.keyboard_arrow_down),
                 decoration: const InputDecoration.collapsed(hintText: ''),
-                value: childString!=null?childString["name"]:childString,
-                hint: const Text("Select Owner"),
+                initialValue: childString['name'],
+                hint: const Text('Select Owner'),
                 isExpanded: true,
                 items: responseList
                     .toSet()
                     .toList()
                     .map((label) => DropdownMenuItem(
+                  value: label['name'],
                   child: Text(
-                    label["name"],
+                    label['name'],
                     style: const TextStyle(fontWeight: FontWeight.w400),
                     maxLines: null,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  value: label["name"],
-                ))
+                ),)
                     .toList(),
                 onChanged: (value) {
                   int index = responseList.indexWhere(
-                          (data) => data["name"] == value);
-                   _addressController.text=responseList[index]["address"];
-                   _phoneController.text=responseList[index]["mobile"];
-                  _id=responseList[index]["id"].toString();
+                          (data) => data['name'] == value,);
+                   _addressController.text=responseList[index]['address'];
+                   _phoneController.text=responseList[index]['mobile'];
+                  _id=responseList[index]['id'].toString();
                   setState(() {});
                 },
               ),
@@ -224,19 +223,19 @@ class _BusinessOwnerRegisterState extends State<BusinessOwnerRegister> {
                           height: 10,
                           child: Center(
                             child: Image.asset(
-                              "assets/discount_icon.png",
+                              'assets/discount_icon.png',
                               fit: BoxFit.fitWidth,
                               // color: Colors.orangeAccent,
                             ),
                           ),
                         ),),
                         const Text(
-                          "Discount Offered",
+                          'Discount Offered',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
-                              fontWeight: FontWeight.normal),
-                        )
+                              fontWeight: FontWeight.normal,),
+                        ),
                       ],
                     ),
                   ),

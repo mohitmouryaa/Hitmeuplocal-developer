@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hit_me_up/UI/app_drawer.dart';
@@ -14,12 +13,11 @@ import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-
-import '../providers/auth_provider.dart';
+import 'package:hit_me_up/providers/auth_provider.dart';
 
 class LoginPage extends StatefulWidget {
 
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -30,15 +28,15 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   int trialActive = 0;
   int trialExpired = 0;
-  String subText = "1 Year Subscription";
-  String trialText = "3 Days Trial";
+  String subText = '1 Year Subscription';
+  String trialText = '3 Days Trial';
   int subActive = 0;
   int subExpired = 0;
-  String pinVerified = "0";
-  String orderId = "";
+  String pinVerified = '0';
+  String orderId = '';
   bool isTrialClicked = false;
   late FirebaseMessaging messaging;
-  String _token="";
+  String _token='';
   late FToast fToast;
 
   @override
@@ -47,50 +45,52 @@ class _LoginPageState extends State<LoginPage> {
       fToast = FToast();
       fToast.init(context);
       messaging = FirebaseMessaging.instance;
-      messaging.getToken().then((value){
-        _token=value.toString();
+      messaging.getToken().then((value) {
+        _token = value.toString();
+      }).catchError((e) {
+        // FCM token unavailable on simulators / devices without APNs support
       });
 
   }
 
   Future navigationRegisterPage() async {
-    Navigator.push(
+    await Navigator.push(
       context,
       PageTransition(
-          type: PageTransitionType.rightToLeft, child: const RegisterPage()),
+          type: PageTransitionType.rightToLeft, child: const RegisterPage(),),
     );
   }
 
   Future navigationForgotPasswordPage() async {
-    Navigator.push(
+    await Navigator.push(
       context,
       PageTransition(
-          type: PageTransitionType.rightToLeft, child: const ForgotPasswordPage()),
+          type: PageTransitionType.rightToLeft, child: const ForgotPasswordPage(),),
     );
   }
 
   Future navigationPurchasePage(String userId, bool isTrial) async {
-    Navigator.push(
+    await Navigator.push(
         context,
         PageTransition(
             type: PageTransitionType.rightToLeft,
-            child: LoginPurchaseSubscription(userId: userId,trialText: trialText,subText: subText,isTrialClicked: isTrialClicked,)));
+            child: LoginPurchaseSubscription(userId: userId,trialText: trialText,subText: subText,isTrialClicked: isTrialClicked,),),);
   }
 
   Future navigationHomePage() async {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-    Navigator.pushReplacement(
+    await Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+    await Navigator.pushReplacement(
         context,
         PageTransition(
-            type: PageTransitionType.rightToLeft, child: const AppDrawer(isNotification: false)));
+            type: PageTransitionType.rightToLeft, child: const AppDrawer(isNotification: false),),);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.only(top: 10), // Adjust padding as needed
+        title: const Padding(
+          padding: EdgeInsets.only(top: 10), // Adjust padding as needed
           child: Text(
             'Login',
             textAlign: TextAlign.center,
@@ -122,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                   'assets/splash_bg.png',
                   fit: BoxFit.fill,
                 ),
-              )
+              ),
             ],
           ),
           SingleChildScrollView(
@@ -163,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 230,
                     child: Center(
                       child: Image.asset(
-                        "assets/logo.png", height: 230,
+                        'assets/logo.png', height: 230,
                         fit: BoxFit.fitWidth,
                         // color: Colors.orangeAccent,
                       ),
@@ -185,13 +185,13 @@ class _LoginPageState extends State<LoginPage> {
                       contentPadding: const EdgeInsets.only(left: 10),
                       hintText: 'Email*',
                       hintStyle: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                          color: Colors.black, fontWeight: FontWeight.bold,),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                           borderSide: const BorderSide(
                             width: 0,
                             style: BorderStyle.none,
-                          )),
+                          ),),
                       fillColor: editField,
                       filled: true,
                     ),
@@ -213,13 +213,13 @@ class _LoginPageState extends State<LoginPage> {
                       contentPadding: const EdgeInsets.only(left: 10),
                       hintText: 'Password*',
                       hintStyle: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                          color: Colors.black, fontWeight: FontWeight.bold,),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                           borderSide: const BorderSide(
                             width: 0,
                             style: BorderStyle.none,
-                          )),
+                          ),),
                       fillColor: editField,
                       filled: true,
                     ),
@@ -251,11 +251,11 @@ class _LoginPageState extends State<LoginPage> {
                         padding: const EdgeInsets.only(top: 5, bottom: 5),
                         alignment: Alignment.center,
                         child: const Text(
-                          "Login",
+                          'Login',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.bold,),
                         ),
                       ),
                     ),
@@ -277,7 +277,7 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.black45,
                           ),
                         ],
-                      )),
+                      ),),
                 ),
                 Center(
                   child: InkWell(
@@ -296,11 +296,11 @@ class _LoginPageState extends State<LoginPage> {
                         padding: const EdgeInsets.only(top: 5, bottom: 5),
                         alignment: Alignment.center,
                         child: const Text(
-                          "Skip",
+                          'Skip',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.bold,),
                         ),
                       ),
                     ),
@@ -326,7 +326,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.black45,
                             ),
                           ],
-                        )),
+                        ),),
                   ),
                 ),
                 GestureDetector(
@@ -349,40 +349,39 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.black45,
                             ),
                           ],
-                        )),
+                        ),),
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
   Future navigationLoginScreen(String orderId) async {
-    Navigator.pushReplacement(
+    await Navigator.pushReplacement(
         context,
         PageTransition(
             type: PageTransitionType.rightToLeft,
             child: LoginPinPage(
               orderId: orderId,
-            )));
+            ),),);
   }
 
   /*"sub_active":1(Subscribed),"showTrial":0(Trial version expired)*/
   void apiLoginUser(BuildContext context) async {
     var param = {
-      "login_type": "1",
-      "email": _emailController.text.toString().trim(),
-      "password": _passwordController.text.toString().trim(),
-      "device_token": _token.isNotEmpty?_token:"NoDeviceTokenFound",
+      'login_type': '1',
+      'email': _emailController.text.toString().trim(),
+      'password': _passwordController.text.toString().trim(),
+      'device_token': _token.isNotEmpty?_token:'NoDeviceTokenFound',
      // "device_token": 'example',
-      "device_type": Platform.isAndroid?"android":"ios",
+      'device_type': Platform.isAndroid?'android':'ios',
     };
-    print(param.toString());
-    const url = "$baseUrl/login";
-    var result = await callApi("POST", param, url);
+    const url = '$baseUrl/login';
+    var result = await callApi('POST', param, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
       showToast(context, result[kDataMessage]);
@@ -394,17 +393,17 @@ class _LoginPageState extends State<LoginPage> {
         isTrialClicked = false;
         trialExpired = result[kData][kSubscription][kTrial][kExpired];
         if (trialExpired == 0) {
-          trialText = "${result[kData][kSubscription][kTrial][kPackageName]} expired on ${result[kData][kSubscription][kTrial][kExpiredDate]}";
+          trialText = '${result[kData][kSubscription][kTrial][kPackageName]} expired on ${result[kData][kSubscription][kTrial][kExpiredDate]}';
         } else {
           isTrialClicked = true;
-          trialText = "Trial Expired";
+          trialText = 'Trial Expired';
         }
       } else {
         if(trialExpired==0){
           isTrialClicked = true;
         }else{
           isTrialClicked = false;
-          trialText = "Trial Expired";
+          trialText = 'Trial Expired';
         }
       }
       subActive = result[kData][kSubscription][kSubscription][kActive];
@@ -414,36 +413,36 @@ class _LoginPageState extends State<LoginPage> {
         orderId = result[kData][kSubscription][kSubscription][kOrderId].toString();
         if (subExpired == 0) {
           subText =
-          "${result[kData][kSubscription][kSubscription][kPackageName]} expired on ${result[kData][kSubscription][kSubscription][kExpiredDate]}";
+          '${result[kData][kSubscription][kSubscription][kPackageName]} expired on ${result[kData][kSubscription][kSubscription][kExpiredDate]}';
         } else {
-          subText = "1 Year Subscription";
+          subText = '1 Year Subscription';
         }
       } else {
-        subText = "1 Year Subscription";
+        subText = '1 Year Subscription';
       }
 
       if(trialActive == 1 && trialExpired==0){
-        navigationHomePage();
+        await navigationHomePage();
       }else if(subActive == 1 && subExpired==0){
-        if(pinVerified == "0") {
-          navigationLoginScreen(orderId);
+        if(pinVerified == '0') {
+          await navigationLoginScreen(orderId);
         }else{
-          navigationHomePage();
+          await navigationHomePage();
         }
       }else{
         /*navigationPurchasePage(result[kData][kId].toString(),
             result[kData][kSubscription][kShowTrial] == 1);*/
-        Navigator.pushReplacement(
+        await Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => const AppDrawer(isNotification: false),
-            ));
+            ),);
       }
     } else {
       //showToast(context, result[kDataMessage]);
       fToast.showToast(
         child: showCustomToast(context, result[kDataMessage]),
-        toastDuration: Duration(seconds: 5),
+        toastDuration: const Duration(seconds: 5),
         gravity: ToastGravity.CENTER,
       );
     }

@@ -1,19 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/auth_provider.dart';
+import 'package:hit_me_up/providers/auth_provider.dart';
 
 class HomeScreenPage extends StatefulWidget {
   final Function drawerCall,openViewCall;
 
-  const HomeScreenPage({Key? key, required this.drawerCall, required this.openViewCall}) : super(key: key);
+  const HomeScreenPage({super.key, required this.drawerCall, required this.openViewCall});
 
   @override
   State<HomeScreenPage> createState() => _HomeScreenPageState();
@@ -22,8 +21,7 @@ class HomeScreenPage extends StatefulWidget {
 class _HomeScreenPageState extends State<HomeScreenPage> {
   List<dynamic> stateList = [];
   Map stateData={};
-  String _stateId="";
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  String _stateId='';
   final _cityController = TextEditingController();
   final _zipCodeController = TextEditingController();
   late Position position;
@@ -40,11 +38,11 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
 
   void requestLocationPermission() async {
     if (await Permission.location.isRestricted) {
-      Map<Permission, PermissionStatus> statuses = await [
+      await [
         Permission.location,
       ].request();
     }else if (await Permission.speech.isPermanentlyDenied) {
-      openAppSettings();
+      await openAppSettings();
     }
   }
 
@@ -54,33 +52,24 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
   }
 
   getCurrentLocation() async {
-    LocationPermission permission;
-    permission = await Geolocator.requestPermission();
     bool agb = await Geolocator.isLocationServiceEnabled();
     if (agb) {
       position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
-      if (position!=null) {
-        var data={
-          kSearchType:"GPS",
-          kScreen:kSubCategory,
-          "lat":position.latitude.toString(),
-          "long":position.longitude.toString()
-          //"lat":'27.7644005',
-          //"long":'-82.3985596'
-          // "lat":'36.8464723',
-          // "long":'-76.045599'
+      var data={
+        kSearchType:'GPS',
+        kScreen:kSubCategory,
+        'lat':position.latitude.toString(),
+        'long':position.longitude.toString(),
+        //"lat":'27.7644005',
+        //"long":'-82.3985596'
+        // "lat":'36.8464723',
+        // "long":'-76.045599'
 
 
-        };
-        hideLoader(context);
-        widget.openViewCall(data);
-      } else {
-        hideLoader(context);
-        Timer(const Duration(seconds: 3), () {
-          showToast(context, "Please enable your location to view offer's");
-        });
-      }
-    } else {
+      };
+      hideLoader(context);
+      widget.openViewCall(data);
+        } else {
       hideLoader(context);
       Timer(const Duration(seconds: 3), () {
         showToast(context, "Please enable your location to view offer's");
@@ -90,25 +79,25 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
 
    getStateListData(BuildContext context) async {
 
-    String url= "" ;
+    String url= '' ;
     if(!isGuest){
       dynamic user = await getSharedPreference(kDataLoginUser);
       //print("Country ID - "+user["country"]["id"].toString());
        url = "$baseUrl/states-list/${user["country"]["id"]}";
     }else{
       int countryId = 231;
-      url =  "$baseUrl/states-list/$countryId";
+      url =  '$baseUrl/states-list/$countryId';
     }
 
-    var result = await callApi("GET", null, url);
+    var result = await callApi('GET', null, url);
     if (mounted) {
       hideLoader(context);
     }
     if (result[kDataCode] == 200) {
-      stateList = result["data"] as List;
+      stateList = result['data'] as List;
       if (stateList.isNotEmpty) {
          stateData = stateList[1];
-         _stateId = stateData["id"].toString();
+         _stateId = stateData['id'].toString();
       }
     } else {
         showToast(context, result[kDataMessage]);
@@ -173,8 +162,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                             blurRadius: 4.0,
                                             color: Colors.black45,
                                           ),
-                                        ]),
-                                  )))
+                                        ],),
+                                  ),),),
                         ],
                       ),
                       Align(
@@ -184,7 +173,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                           alignment: Alignment.topLeft,
                           color: Colors.white,
                           margin: const EdgeInsets.only(
-                              left: 0.0, top: 10, right: 0.0),
+                              left: 0.0, top: 10, right: 0.0,),
                         ),
                       ),
                       Expanded(
@@ -206,24 +195,24 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                 child: Image.asset(
                                   'assets/gps_search_icon.png',
                                   fit: BoxFit.fill,
-                                )),
+                                ),),
                             const Padding(
                               padding: EdgeInsets.only(top: 10),
                               child: Text(
-                                "GPS Search",
+                                'GPS Search',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,
-                                    fontWeight: FontWeight.normal),
+                                    fontWeight: FontWeight.normal,),
                               ),
-                            )
+                            ),
                         ],
                       ),
-                          ))
+                          ),),
                     ],
-                  )
+                  ),
                 ],
-              )),
+              ),),
           Expanded(
               flex: 45,
               child: Stack(
@@ -260,25 +249,25 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                         const Padding(
                           padding: EdgeInsets.only(top: 10),
                           child: Text(
-                            "Manual Search",
+                            'Manual Search',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
-                                fontWeight: FontWeight.normal),
+                                fontWeight: FontWeight.normal,),
                           ),
-                        )
+                        ),
                       ],
                     ),
-                  )
+                  ),
                 ],
-              ))
+              ),),
         ],
       ),
     );
   }
 
   _showBottomSheet(
-      BuildContext context) {
+      BuildContext context,) {
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -290,7 +279,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
               return GestureDetector(
                 onTap: () => Navigator.of(context).pop(),
                 child: Container(
-                  color: Color.fromRGBO(0, 0, 0, 0.001),
+                  color: const Color.fromRGBO(0, 0, 0, 0.001),
                   child: GestureDetector(
                     onTap: () {},
                     child: Wrap(
@@ -314,12 +303,12 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                     const Expanded(
                                         flex: 8,
                                         child: Text(
-                                          "Update List",
+                                          'Update List',
                                           style: TextStyle(
                                               fontSize: 16,
                                               color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        )),
+                                              fontWeight: FontWeight.bold,),
+                                        ),),
                                     Expanded(
                                         flex: 2,
                                         child: IconButton(
@@ -329,7 +318,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                             Icons.clear,
                                             color: Colors.black,
                                           ),
-                                        ))
+                                        ),),
                                   ],
                                 ),
                                 const SizedBox(
@@ -346,37 +335,35 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                       border: Border.all(color: greyBorder, width: 0.0),
                                       color: Colors.transparent,
                                       borderRadius:
-                                      const BorderRadius.all(Radius.circular(25))),
+                                      const BorderRadius.all(Radius.circular(25)),),
                                   child: DropdownButtonFormField<dynamic>(
                                     style: const TextStyle(
-                                        color: Colors.black, fontSize: 14),
+                                        color: Colors.black, fontSize: 14,),
                                     icon: const Icon(Icons.keyboard_arrow_down),
                                     decoration:
                                     const InputDecoration.collapsed(hintText: ''),
-                                    value: stateData != null
-                                        ? stateData["name"]
-                                        : null,
-                                    hint: const Text("Select State"),
+                                    value: stateData['name'],
+                                    hint: const Text('Select State'),
                                     isExpanded: true,
                                     items: stateList
                                         .toSet()
                                         .toList()
                                         .map((label) => DropdownMenuItem(
+                                      value: label['name'],
                                       child: Text(
-                                        label["name"],
+                                        label['name'],
                                         style: const TextStyle(
-                                            fontWeight: FontWeight.w400),
+                                            fontWeight: FontWeight.w400,),
                                         maxLines: 1,
                                         overflow: TextOverflow.clip,
                                       ),
-                                      value: label["name"],
-                                    ))
+                                    ),)
                                         .toList(),
                                     onChanged: (value) {
                                       int index = stateList
-                                          .indexWhere((data) => data["name"] == value);
+                                          .indexWhere((data) => data['name'] == value);
                                       stateData=stateList[index];
-                                      _stateId = stateList[index]["id"].toString();
+                                      _stateId = stateList[index]['id'].toString();
                                       setState(() {});
                                     },
                                   ),
@@ -402,13 +389,13 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(25.0),
                                         borderSide: const BorderSide(
-                                            color: greyBorder, width: 0.0),
+                                            color: greyBorder, width: 0.0,),
                                       ),
 
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(25.0),
                                         borderSide: const BorderSide(
-                                            color: greyBorder, width: 0.0),
+                                            color: greyBorder, width: 0.0,),
                                       ),
                                       border: const OutlineInputBorder(),
                                       fillColor: Colors.transparent,
@@ -416,7 +403,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                     ),
                                   ),
                                 ),
-                                const Text("OR"),
+                                const Text('OR'),
                                 Container(
                                   margin: const EdgeInsets.only(top: 15, bottom: 15),
                                   alignment: Alignment.center,
@@ -440,12 +427,12 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(25.0),
                                         borderSide: const BorderSide(
-                                            color: greyBorder, width: 0.0),
+                                            color: greyBorder, width: 0.0,),
                                       ),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(25.0),
                                         borderSide: const BorderSide(
-                                            color: greyBorder, width: 0.0),
+                                            color: greyBorder, width: 0.0,),
                                       ),
                                       border: const OutlineInputBorder(),
                                       fillColor: Colors.transparent,
@@ -463,7 +450,6 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                     ),
                                     child: InkWell(
                                       onTap: () {
-                                        var searchValue = '';
                                         /*if(_stateId.isNotEmpty && _cityController.text.isNotEmpty && _zipCodeController.text.isNotEmpty){
                                           searchValue = _zipCodeController.text;
                                         }else if(_stateId.isNotEmpty && _cityController.text.isNotEmpty && _zipCodeController.text.isEmpty){
@@ -483,7 +469,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                         //type = 2 for search with zip code
                                         if(_stateId.isNotEmpty && _cityController.text.isNotEmpty){
                                           data={
-                                            kSearchType:"Manual",
+                                            kSearchType:'Manual',
                                             kScreen:kSubCategory,
                                             kType: 1,
                                             kState: _stateId,
@@ -494,7 +480,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                         }
                                         else if (_zipCodeController.text.isNotEmpty){
                                           data={
-                                            kSearchType:"Manual",
+                                            kSearchType:'Manual',
                                             kScreen:kSubCategory,
                                             kType: 2,
                                             kZipCode: _zipCodeController.text.toString().trim(),
@@ -503,7 +489,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                           Navigator.of(context).pop();
                                         }
                                         else{
-                                          showToast(context, "Please enter City or Zip Code");
+                                          showToast(context, 'Please enter City or Zip Code');
                                         }
                                       },
                                       child: Container(
@@ -513,12 +499,12 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                         const EdgeInsets.only(top: 5, bottom: 5),
                                         alignment: Alignment.center,
                                         child: const Text(
-                                          "Apply",
+                                          'Apply',
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 15,
                                               letterSpacing: 1,
-                                              fontWeight: FontWeight.bold),
+                                              fontWeight: FontWeight.bold,),
                                         ),
                                       ),
                                     ),
@@ -534,7 +520,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                     padding: EdgeInsets.only(
                                         bottom: MediaQuery.of(context)
                                             .viewInsets
-                                            .bottom))
+                                            .bottom,),),
                               ],
                             ),
                           ),
@@ -544,10 +530,8 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                   ),
                 ),
               );
-            });
+            },);
       },
-    ).whenComplete(() {
-      print("Closed");
-    });
+    ).whenComplete(() {});
   }
 }

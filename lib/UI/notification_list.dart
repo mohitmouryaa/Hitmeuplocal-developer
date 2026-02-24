@@ -10,8 +10,7 @@ import 'package:page_transition/page_transition.dart';
 class NotificationListScreen extends StatefulWidget {
   final Function drawerCall;
 
-  const NotificationListScreen({Key? key, required this.drawerCall})
-      : super(key: key);
+  const NotificationListScreen({super.key, required this.drawerCall});
 
   @override
   State<NotificationListScreen> createState() => _NotificationListScreenState();
@@ -30,11 +29,11 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
   void getNotificationListData() async {
 
     dynamic user = await getSharedPreference(kDataLoginUser);
-    String url = "$baseUrl/notifications-list/${user[kId].toString()}";
-    var result = await callApi("GET", null, url);
+    String url = '$baseUrl/notifications-list/${user[kId].toString()}';
+    var result = await callApi('GET', null, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      var rest = result["data"] as List;
+      var rest = result['data'] as List;
       _notificationList = rest
           .map<NotificationListData>((json) => NotificationListData.fromJson(json))
           .toList();
@@ -44,11 +43,11 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
     }
   }
 
-  Future navigationPromotionPage(String _id) async {
+  Future navigationPromotionPage(String id) async {
     final result = await Navigator.push(
         context,
         PageTransition(
-            type: PageTransitionType.rightToLeft, child: CommonPromotionByIdList(id: _id,url: "promotion-list-by-notification",distance: "",))
+            type: PageTransitionType.rightToLeft, child: CommonPromotionByIdList(id: id,url: 'promotion-list-by-notification',distance: '',),),
     );
     if(result==null){
       showLoader(context);
@@ -107,8 +106,8 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                                         blurRadius: 4.0,
                                         color: Colors.black45,
                                       ),
-                                    ]),
-                              )))
+                                    ],),
+                              ),),),
                     ],
                   ),
                   Align(
@@ -126,7 +125,7 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                           child: ListView.builder(
                     itemCount: _notificationList.length,
                     itemBuilder: (context, index) {
-                      DateTime tempDate = DateFormat("yyyy-MM-dd hh:mm:ss").parse(_notificationList[index].created_at);
+                      DateTime tempDate = DateFormat('yyyy-MM-dd hh:mm:ss').parse(_notificationList[index].created_at);
                       return InkWell(
                         onTap: (){
                           navigationPromotionPage(_notificationList[index].id);
@@ -136,7 +135,7 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                           child: Container(
                             height: 80,
                             decoration: BoxDecoration(
-                              color: _notificationList[index].read=="1"?Colors.grey.shade400:Colors.white,
+                              color: _notificationList[index].read=='1'?Colors.grey.shade400:Colors.white,
                               borderRadius: const BorderRadius.all(Radius.circular(15)),
                             ),
                             child: Column(
@@ -152,7 +151,7 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                                       Container(
                                           alignment: Alignment.topLeft,
                                           padding: const EdgeInsets.only(
-                                              left: 10),
+                                              left: 10,),
                                           child: Text(
                                             _notificationList[index].title,
                                             maxLines: 1,
@@ -160,28 +159,28 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                                                 fontSize: 14,
                                                 fontWeight:
                                                 FontWeight.w600,
-                                                color: Colors.black),
+                                                color: Colors.black,),
                                             textAlign: TextAlign.start,
                                             overflow:
                                             TextOverflow.ellipsis,
-                                          )
+                                          ),
                                       ),
                                       Container(
                                           alignment: Alignment.topRight,
                                           padding: const EdgeInsets.only(
-                                              right: 10,top: 15),
+                                              right: 10,top: 15,),
                                           child: Text(
-                                            DateFormat("MMMM dd, yyyy hh:mma").format(tempDate),
+                                            DateFormat('MMMM dd, yyyy hh:mma').format(tempDate),
                                             maxLines: 1,
                                             style: const TextStyle(
                                                 fontSize: 14,
                                                 fontWeight:
                                                 FontWeight.w600,
-                                                color: Colors.black),
+                                                color: Colors.black,),
                                             textAlign: TextAlign.start,
                                             overflow:
                                             TextOverflow.ellipsis,
-                                          )
+                                          ),
                                       ),
                                     ],
                                   ),
@@ -192,11 +191,11 @@ class _NotificationListScreenState extends State<NotificationListScreen> {
                         ),
                       );
                     },
-                  )))
+                  ),),),
                 ],
-              )
+              ),
             ],
-          )),
+          ),),
         ],
       ),
     );

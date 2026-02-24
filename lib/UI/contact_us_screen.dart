@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hit_me_up/UI/login_screen.dart';
 import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
 
 class ContactUsPage extends StatefulWidget {
   final Function drawerCall;
-  const ContactUsPage({Key? key,required this.drawerCall}) : super(key: key);
+  const ContactUsPage({super.key,required this.drawerCall});
 
   @override
   State<ContactUsPage> createState() => _ContactUsPageState();
 }
 
 class _ContactUsPageState extends State<ContactUsPage> {
-  TextEditingController _nameController = new TextEditingController();
-  TextEditingController _phoneController = new TextEditingController();
-  TextEditingController _emailController = new TextEditingController();
-  TextEditingController _commentController = new TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _commentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
           ),
-          backgroundColor: Colors.white),
+          backgroundColor: Colors.white,),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -50,7 +49,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
                 height: 210,
                 child: Center(
                   child: Image.asset(
-                    "assets/contact_us_bg.png", height: 200,
+                    'assets/contact_us_bg.png', height: 200,
                     fit: BoxFit.fitWidth,
                     // color: Colors.orangeAccent,
                   ),
@@ -206,17 +205,17 @@ class _ContactUsPageState extends State<ContactUsPage> {
                     padding: const EdgeInsets.only(top: 5, bottom: 5),
                     alignment: Alignment.center,
                     child: const Text(
-                      "Send",
+                      'Send',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                           letterSpacing: 1,
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold,),
                     ),
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -225,21 +224,21 @@ class _ContactUsPageState extends State<ContactUsPage> {
 
    void apiContactUs(BuildContext context) async {
     var param = {
-      "name": _nameController.text.toString().trim(),
-      "email": _emailController.text.toString().trim(),
-      "mobile": _phoneController.text.toString().trim(),
-      "comment": _commentController.text.toString().trim(),
+      'name': _nameController.text.toString().trim(),
+      'email': _emailController.text.toString().trim(),
+      'mobile': _phoneController.text.toString().trim(),
+      'comment': _commentController.text.toString().trim(),
     };
-    const url = "$baseUrl/contact-us";
-    var result = await callApi("POST", param, url);
+    const url = '$baseUrl/contact-us';
+    var result = await callApi('POST', param, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
       showToast(context,result[kDataMessage].toString());
       setState(() {
-        _nameController.text = "";
-        _phoneController.text = "";
-        _emailController.text = "";
-        _commentController.text = "";
+        _nameController.text = '';
+        _phoneController.text = '';
+        _emailController.text = '';
+        _commentController.text = '';
       });
     } else {
       showToast(context, result[kDataMessage].toString());

@@ -1,14 +1,12 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hit_me_up/UI/login_screen.dart';
 import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
 
 class FundraisingRequestForm extends StatefulWidget {
 
-  const FundraisingRequestForm({Key? key,}) : super(key: key);
+  const FundraisingRequestForm({super.key,});
 
   @override
   State<FundraisingRequestForm> createState() => _FundraisingRequestFormState();
@@ -45,7 +43,7 @@ class _FundraisingRequestFormState extends State<FundraisingRequestForm> {
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
           ),
-          backgroundColor: Colors.white),
+          backgroundColor: Colors.white,),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
@@ -267,17 +265,17 @@ class _FundraisingRequestFormState extends State<FundraisingRequestForm> {
                       padding: const EdgeInsets.only(top: 5, bottom: 5),
                       alignment: Alignment.center,
                       child: const Text(
-                        "Ok",
+                        'Ok',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             letterSpacing: 1,
-                            fontWeight: FontWeight.bold),
+                            fontWeight: FontWeight.bold,),
                       ),
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -287,15 +285,15 @@ class _FundraisingRequestFormState extends State<FundraisingRequestForm> {
 
   void apiFundRequest(BuildContext context) async {
     var param = {
-      "name": _nameController.text.toString().trim(),
-      "org_name": _organizationNameController.text.toString().trim(),
-      "email": _emailController.text.toString().trim(),
-      "mobile": _phoneController.text.toString().trim(),
-      "address": _addressController.text.toString().trim(),
-      "comment": _commentController.text.toString().trim(),
+      'name': _nameController.text.toString().trim(),
+      'org_name': _organizationNameController.text.toString().trim(),
+      'email': _emailController.text.toString().trim(),
+      'mobile': _phoneController.text.toString().trim(),
+      'address': _addressController.text.toString().trim(),
+      'comment': _commentController.text.toString().trim(),
     };
-    const url = "$baseUrl/fund-rasing-request";
-    var result = await callApi("POST", param, url);
+    const url = '$baseUrl/fund-rasing-request';
+    var result = await callApi('POST', param, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
       showToast(context,result[kDataMessage],);

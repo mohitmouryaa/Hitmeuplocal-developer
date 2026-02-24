@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
 
 class StateCitySelection extends StatefulWidget {
-  const StateCitySelection({Key? key}) : super(key: key);
+  const StateCitySelection({super.key});
 
   @override
   _StateCitySelectionState createState() => _StateCitySelectionState();
@@ -14,7 +13,6 @@ class StateCitySelection extends StatefulWidget {
 class _StateCitySelectionState extends State<StateCitySelection> {
   List<dynamic> stateList = [];
   Map stateData={};
-  String _stateId="";
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final _cityController = TextEditingController();
   final _zipCodeController = TextEditingController();
@@ -60,7 +58,7 @@ class _StateCitySelectionState extends State<StateCitySelection> {
                               child: Padding(
                                   padding: EdgeInsets.only(top: 35, right: 50),
                                   child: Text(
-                                    "Select your location",
+                                    'Select your location',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white,
@@ -72,8 +70,8 @@ class _StateCitySelectionState extends State<StateCitySelection> {
                                             blurRadius: 4.0,
                                             color: Colors.black45,
                                           ),
-                                        ]),
-                                  )))
+                                        ],),
+                                  ),),),
                         ],
                       ),
                       Align(
@@ -97,37 +95,34 @@ class _StateCitySelectionState extends State<StateCitySelection> {
                             border: Border.all(color: greyBorder, width: 0.0),
                             color: Colors.transparent,
                             borderRadius:
-                            const BorderRadius.all(Radius.circular(25))),
+                            const BorderRadius.all(Radius.circular(25)),),
                         child: DropdownButtonFormField<dynamic>(
                           style: const TextStyle(
-                              color: Colors.black, fontSize: 14),
+                              color: Colors.black, fontSize: 14,),
                           icon: const Icon(Icons.keyboard_arrow_down),
                           decoration:
                           const InputDecoration.collapsed(hintText: ''),
-                          value: stateData != null
-                              ? stateData["name"]
-                              : null,
-                          hint: const Text("Select State"),
+                          initialValue: stateData['name'],
+                          hint: const Text('Select State'),
                           isExpanded: true,
                           items: stateList
                               .toSet()
                               .toList()
                               .map((label) => DropdownMenuItem(
+                            value: label['name'],
                             child: Text(
-                              label["name"],
+                              label['name'],
                               style: const TextStyle(
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w400,),
                               maxLines: 1,
                               overflow: TextOverflow.clip,
                             ),
-                            value: label["name"],
-                          ))
+                          ),)
                               .toList(),
                           onChanged: (value) {
                             int index = stateList
-                                .indexWhere((data) => data["name"] == value);
+                                .indexWhere((data) => data['name'] == value);
                             stateData=stateList[index];
-                            _stateId = stateList[index]["id"].toString();
                             setState(() {});
                           },
                         ),
@@ -153,13 +148,13 @@ class _StateCitySelectionState extends State<StateCitySelection> {
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25.0),
                               borderSide: const BorderSide(
-                                  color: greyBorder, width: 0.0),
+                                  color: greyBorder, width: 0.0,),
                             ),
 
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25.0),
                               borderSide: const BorderSide(
-                                  color: greyBorder, width: 0.0),
+                                  color: greyBorder, width: 0.0,),
                             ),
                             border: const OutlineInputBorder(),
                             fillColor: Colors.transparent,
@@ -190,12 +185,12 @@ class _StateCitySelectionState extends State<StateCitySelection> {
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25.0),
                               borderSide: const BorderSide(
-                                  color: greyBorder, width: 0.0),
+                                  color: greyBorder, width: 0.0,),
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25.0),
                               borderSide: const BorderSide(
-                                  color: greyBorder, width: 0.0),
+                                  color: greyBorder, width: 0.0,),
                             ),
                             border: const OutlineInputBorder(),
                             fillColor: Colors.transparent,
@@ -223,38 +218,38 @@ class _StateCitySelectionState extends State<StateCitySelection> {
                               const EdgeInsets.only(top: 5, bottom: 5),
                               alignment: Alignment.center,
                               child: const Text(
-                                "Apply",
+                                'Apply',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 15,
                                     letterSpacing: 1,
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold,),
                               ),
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
-              )),
+              ),),
         ],
       ),
-    );;
+    );
   }
 
   void getStateListData() async {
     dynamic user = await getSharedPreference(kDataLoginUser);
     final url = "$baseUrl/states-list/${user["country"]["id"]}";
-    var result = await callApi("GET", null, url);
+    var result = await callApi('GET', null, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      stateList = result["data"] as List;
+      stateList = result['data'] as List;
       if (stateList.isNotEmpty) {
         // stateData = stateList[1];
         // _stateId = stateData["id"];
       }
-      WidgetsBinding.instance!.addPostFrameCallback(_onLayoutDone);
+      WidgetsBinding.instance.addPostFrameCallback(_onLayoutDone);
       setState(() {});
     } else {
       showToast(context, result[kDataMessage]);

@@ -1,20 +1,14 @@
-import 'dart:io';
 
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hit_me_up/UI/registration_screen.dart';
 import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
 import 'package:page_transition/page_transition.dart';
 
-import 'app_drawer.dart';
-import 'login_pin_purchase.dart';
-import 'login_purchase_subscription.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
 
-  const ForgotPasswordPage({Key? key}) : super(key: key);
+  const ForgotPasswordPage({super.key});
 
   @override
   State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
@@ -29,10 +23,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   Future navigationRegisterPage() async {
-    Navigator.push(
+    await Navigator.push(
       context,
       PageTransition(
-          type: PageTransitionType.rightToLeft, child: const RegisterPage()),
+          type: PageTransitionType.rightToLeft, child: const RegisterPage(),),
     );
   }
 
@@ -55,7 +49,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             ),
             onPressed: () => Navigator.pop(context),
           ),
-          backgroundColor: Colors.white
+          backgroundColor: Colors.white,
         //backgroundColor: appBarGreen,
       ),
       body: Stack(
@@ -70,7 +64,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   'assets/splash_bg.png',
                   fit: BoxFit.fill,
                 ),
-              )
+              ),
             ],
           ),
           SingleChildScrollView(
@@ -84,7 +78,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     height: 230,
                     child: Center(
                       child: Image.asset(
-                        "assets/logo.png", height: 230,
+                        'assets/logo.png', height: 230,
                         fit: BoxFit.fitWidth,
                         // color: Colors.orangeAccent,
                       ),
@@ -106,13 +100,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       contentPadding: const EdgeInsets.only(left: 10),
                       hintText: 'Email*',
                       hintStyle: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                          color: Colors.black, fontWeight: FontWeight.bold,),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25.0),
                           borderSide: const BorderSide(
                             width: 0,
                             style: BorderStyle.none,
-                          )),
+                          ),),
                       fillColor: editField,
                       filled: true,
                     ),
@@ -140,11 +134,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         padding: const EdgeInsets.only(top: 5, bottom: 5),
                         alignment: Alignment.center,
                         child: const Text(
-                          "Send reset email",
+                          'Send reset email',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.bold,),
                         ),
                       ),
                     ),
@@ -152,7 +146,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -160,11 +154,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   void apiForgotPassword(BuildContext context) async {
     var param = {
-      "email": _emailController.text,
+      'email': _emailController.text,
     };
-    print(param.toString());
-    const url = "$baseUrl/sendForgetPasswordLink";
-    var result = await callApi("POST", param, url);
+    const url = '$baseUrl/sendForgetPasswordLink';
+    var result = await callApi('POST', param, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
       showToast(context, result[kDataMessage]);

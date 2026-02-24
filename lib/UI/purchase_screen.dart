@@ -2,23 +2,21 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hit_me_up/UI/app_drawer.dart';
-import 'package:hit_me_up/UI/become_partner.dart';
 import 'package:hit_me_up/UI/registration_screen.dart';
 import 'package:hit_me_up/UI/subscription_plan_list.dart';
 import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-
-import '../providers/auth_provider.dart';
-import 'login_screen.dart';
+import 'package:hit_me_up/providers/auth_provider.dart';
+import 'package:hit_me_up/UI/login_screen.dart';
 
 class PurchaseSubscription extends StatefulWidget {
   final Function drawerCall;
   final String subText,trialText;
   final bool isTrialClicked;
-  const PurchaseSubscription({Key? key,required this.drawerCall,required this.subText,required this.trialText
-    ,required this.isTrialClicked}) : super(key: key);
+  const PurchaseSubscription({super.key,required this.drawerCall,required this.subText,required this.trialText
+    ,required this.isTrialClicked,});
 
   @override
   State<PurchaseSubscription> createState() => _PurchaseSubscriptionState();
@@ -36,18 +34,18 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
   }
 
   Future navigationRegisterPage() async {
-    Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const RegisterPage()),
     );
   }
 
   Future navigationHomePage() async {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-    Navigator.pushReplacement(
+    await Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+    await Navigator.pushReplacement(
         context,
         PageTransition(
-            type: PageTransitionType.rightToLeft, child: const AppDrawer(isNotification: false)));
+            type: PageTransitionType.rightToLeft, child: const AppDrawer(isNotification: false),),);
   }
 
   @override
@@ -91,8 +89,8 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
                                 blurRadius: 4.0,
                                 color: Colors.black45,
                               ),
-                            ]),
-                          )))
+                            ],),
+                          ),),),
                     ],
                   ),
                   Align(
@@ -115,40 +113,40 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
                         child: InkWell(
                           onTap: () {
                             if(isGuest){
-                              _loginRequired("Please login to get Free Trial");
+                              _loginRequired('Please login to get Free Trial');
                             }else{
                               if(widget.isTrialClicked){
                                 showLoader(context);
                                 apiTrialPurchase();
                               }else{
-                                if(widget.trialText.contains("expired on")){
+                                if(widget.trialText.contains('expired on')){
                                   showMessage(kAlert, widget.trialText, context);
                                 }else{
-                                  showMessage(kAlert, "Your trial period has been expired", context);
+                                  showMessage(kAlert, 'Your trial period has been expired', context);
                                 }
                               }
                             }
                           },
                           child: Container(
                             height: 50,
-                            width: widget.trialText.contains("expired on")?270:260,
+                            width: widget.trialText.contains('expired on')?270:260,
                             padding: const EdgeInsets.only(top: 5, bottom: 5),
                             alignment: Alignment.center,
                             child: Text(
                               widget.trialText,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                  color: buttonColor, fontSize: 16,fontWeight: FontWeight.normal),
+                                  color: buttonColor, fontSize: 16,fontWeight: FontWeight.normal,),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ))
+                  ),),
                 ],
-              )
+              ),
             ],
-          )),
+          ),),
           Expanded(flex: 45,child:  Stack(
             fit: StackFit.expand,
             children: [
@@ -163,7 +161,7 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
                   child: GestureDetector(
                     onTap: () {
                       if(isGuest){
-                        _loginRequired("Please login to buy subscription");
+                        _loginRequired('Please login to buy subscription');
                       }else{
                         navigationSubscriptionPage();
                       }
@@ -177,7 +175,7 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
                     child:
                     Container(
                       height: 50,
-                      width: widget.subText.contains("expires on")?300:200,
+                      width: widget.subText.contains('expires on')?300:200,
                       padding: const EdgeInsets.only(top: 5, bottom: 5,left: 7,right: 7),
                       alignment: Alignment.center,
                       child: Center(
@@ -186,15 +184,15 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           style: TextStyle(
-                              color: buttonParrotColor, fontSize: widget.subText.contains("expires on")?13:16,fontWeight: FontWeight.normal, overflow: TextOverflow.ellipsis),
+                              color: buttonParrotColor, fontSize: widget.subText.contains('expires on')?13:16,fontWeight: FontWeight.normal, overflow: TextOverflow.ellipsis,),
                         ),
                       ),
                     ),
                   ),
                 ),
-              )
+              ),
             ],
-          ))
+          ),),
         ],
       ),
     );
@@ -202,21 +200,21 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
 
   Future navigationSubscriptionPage() async {
     dynamic user = await getSharedPreference(kDataLoginUser);
-    Navigator.push(
+    await Navigator.push(
         context,
         PageTransition(
-            type: PageTransitionType.rightToLeft, child: SubscriptionPlanList(userId: user[kId].toString(),)));
+            type: PageTransitionType.rightToLeft, child: SubscriptionPlanList(userId: user[kId].toString(),),),);
   }
 
   void apiTrialPurchase() async {
     dynamic user = await getSharedPreference(kDataLoginUser);
     var param = {
-      "sub_id": "0",
-      "user_id": user[kId].toString(),
-      "type": "0",
+      'sub_id': '0',
+      'user_id': user[kId].toString(),
+      'type': '0',
     };
-    const url = "$baseUrl/buy-subscriptions";
-    var result = await callApi("POST", param, url);
+    const url = '$baseUrl/buy-subscriptions';
+    var result = await callApi('POST', param, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
       showToast(context, kTrialPeriodStart);
@@ -232,10 +230,10 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
 
   void _loginRequired(String message) {
     showToast(context, message);
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
+        MaterialPageRoute(builder: (context) => const LoginPage()),
       );
     });
 

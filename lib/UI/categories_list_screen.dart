@@ -10,7 +10,7 @@ class CategoriesListScreen extends StatefulWidget {
   final Function drawerCall,openViewCall;
   final dynamic data;
 
-  const CategoriesListScreen({Key? key,required this.drawerCall,required this.openViewCall,required this.data}) : super(key: key);
+  const CategoriesListScreen({super.key,required this.drawerCall,required this.openViewCall,required this.data});
 
   @override
   State<CategoriesListScreen> createState() => _CategoriesListScreenState();
@@ -57,7 +57,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
     String searchType = widget.data['search_type']; //GPS type - "GPS" and Search by State and city - "Manual"
     var param;
 
-    if(searchType == "Manual"){
+    if(searchType == 'Manual'){
       int  manualType = widget.data['type'];
       if(manualType == 1){
         String state = widget.data['state'];
@@ -76,7 +76,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
         };
       }
     }
-    else if(searchType == "GPS"){
+    else if(searchType == 'GPS'){
       String lat = widget.data['lat'];
       String lng = widget.data['long'];
       param = {
@@ -88,13 +88,12 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
 
     }
 
-    print('Parameters - '+param.toString());
-    const url = "$baseUrl/categories-list";
-    var result= await callApi("POST", param , url);
+    const url = '$baseUrl/categories-list';
+    var result= await callApi('POST', param , url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
       setState(() {
-         rest = result["data"] as List;
+         rest = result['data'] as List;
         _categoryList = rest.map<CategoryListData>((json) => CategoryListData.fromJson(json)).toList();
          noPromotionsAvailable = 'No Promotions available around you.';
       });
@@ -105,7 +104,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
   }
 
   Future navigationSubCategoryPage(String id,String title) async {
-    Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SubCategoriesListScreen(id: id,title: title,searchType: widget.data,data: rest,)),
     );
@@ -155,9 +154,9 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                                   blurRadius: 4.0,
                                   color: Colors.black45,
                                 ),
-                              ]),
-                            )),
-                      )),
+                              ],),
+                            ),),
+                      ),),
                     ],
                   ),
                   Align(
@@ -197,35 +196,35 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                                         maxLines: 2,
                                         style: const TextStyle(
                                             fontSize: 12,
-                                            color: Colors.white
+                                            color: Colors.white,
                                         ),
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
                           );
                         }),
-                  ))):Expanded(
+                  ),),):Expanded(
                     child: Center(
                       child: Text(
                         noPromotionsAvailable,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.bold,shadows: <Shadow>[
+                        style: const TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.bold,shadows: <Shadow>[
                           Shadow(
                             offset: Offset(0.0, 4.0),
                             blurRadius: 4.0,
                             color: Colors.black45,
                           ),
-                        ]),
+                        ],),
                       ),
                     ),
                   ),
                 ],
-              )
+              ),
             ],
-          )),
+          ),),
         ],
       ),
     );

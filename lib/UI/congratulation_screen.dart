@@ -6,7 +6,7 @@ import 'package:hit_me_up/UI/app_drawer.dart';
 
 class CongratulationScreen extends StatefulWidget {
 
-  const CongratulationScreen({Key? key}) : super(key: key);
+  const CongratulationScreen({super.key});
 
   @override
   State<CongratulationScreen> createState() => _CongratulationScreenState();
@@ -57,7 +57,7 @@ class _CongratulationScreenState extends State<CongratulationScreen> {
                     height: 300,
                     child: Center(
                       child: Image.asset(
-                        "assets/congratulation.gif", height: 300,
+                        'assets/congratulation.gif', height: 300,
                         fit: BoxFit.fitWidth,
                         // color: Colors.orangeAccent,
                       ),
@@ -68,22 +68,22 @@ class _CongratulationScreenState extends State<CongratulationScreen> {
                   padding: const EdgeInsets.only(top: 15),
                   alignment: Alignment.center,
                   child: const Text(
-                    "Thanks for purchasing our package",
+                    'Thanks for purchasing our package',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 18,
-                        fontStyle: FontStyle.italic),
+                        fontStyle: FontStyle.italic,),
                   ),
                 ),
                 Container(
                   padding: const EdgeInsets.only(top: 15),
                   alignment: Alignment.center,
                   child: const Text(
-                    "and",
+                    'and',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 18,
-                        fontStyle: FontStyle.italic),
+                        fontStyle: FontStyle.italic,),
                   ),
                 ),
                 Container(
@@ -91,15 +91,15 @@ class _CongratulationScreenState extends State<CongratulationScreen> {
                   alignment: Alignment.center,
                   child: const Text(
                     //"Your package is valid upto",
-                    "Your package is Activated",
+                    'Your package is Activated',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 18,
-                        fontStyle: FontStyle.italic),
+                        fontStyle: FontStyle.italic,),
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

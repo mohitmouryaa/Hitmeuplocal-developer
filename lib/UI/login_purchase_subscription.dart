@@ -8,8 +8,8 @@ import 'package:hit_me_up/common/service_api.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/auth_provider.dart';
-import 'login_screen.dart';
+import 'package:hit_me_up/providers/auth_provider.dart';
+import 'package:hit_me_up/UI/login_screen.dart';
 
 class LoginPurchaseSubscription extends StatefulWidget {
   final String userId;
@@ -17,12 +17,11 @@ class LoginPurchaseSubscription extends StatefulWidget {
   final bool isTrialClicked;
 
   const LoginPurchaseSubscription(
-      {Key? key,
+      {super.key,
       required this.userId,
       required this.subText,
       required this.trialText,
-      required this.isTrialClicked})
-      : super(key: key);
+      required this.isTrialClicked,});
 
   @override
   State<LoginPurchaseSubscription> createState() =>
@@ -81,8 +80,8 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
                                     blurRadius: 4.0,
                                     color: Colors.black45,
                                   ),
-                                ]),
-                          )),
+                                ],),
+                          ),),
                         ),
                         Align(
                           alignment: Alignment.topLeft,
@@ -91,7 +90,7 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
                             alignment: Alignment.topLeft,
                             color: Colors.white,
                             margin: const EdgeInsets.only(
-                                left: 0.0, top: 10, right: 0.0),
+                                left: 0.0, top: 10, right: 0.0,),
                           ),
                         ),
                         Expanded(
@@ -111,14 +110,14 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
                                     showLoader(context);
                                     apiTrialPurchase();
                                   } else {
-                                    if (widget.trialText.contains("expired on")) {
+                                    if (widget.trialText.contains('expired on')) {
                                       showMessage(
-                                          kAlert, widget.trialText, context);
+                                          kAlert, widget.trialText, context,);
                                     } else {
                                       showMessage(
                                           kAlert,
-                                          "Your trial period has been expired",
-                                          context);
+                                          'Your trial period has been expired',
+                                          context,);
                                     }
                                   }
                                   // widget.openViewCall("home");
@@ -126,7 +125,7 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
                               },
                               child: Container(
                                 height: 40,
-                                width: widget.trialText.contains("expired on")
+                                width: widget.trialText.contains('expired on')
                                     ? 270
                                     : 200,
                                 padding: const EdgeInsets.only(top: 5, bottom: 5),
@@ -136,16 +135,16 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
                                   style: const TextStyle(
                                       color: buttonColor,
                                       fontSize: 16,
-                                      fontWeight: FontWeight.normal),
+                                      fontWeight: FontWeight.normal,),
                                 ),
                               ),
                             ),
                           ),
-                        ))
+                        ),),
                       ],
-                    )
+                    ),
                   ],
-                )),
+                ),),
             Expanded(
                 flex: 45,
                 child: Stack(
@@ -161,9 +160,9 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
                           if(isGuest){
                             _loginRequired();
                           }else{
-                            if (widget.subText.contains("expired on")) {
+                            if (widget.subText.contains('expired on')) {
                               showMessage(
-                                  kAlert, "Your current plan is Active.", context);
+                                  kAlert, 'Your current plan is Active.', context,);
                             } else {
                               navigationSubscriptionPage(widget.userId);
                             }
@@ -181,18 +180,18 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
                             padding: const EdgeInsets.only(top: 5, bottom: 5),
                             alignment: Alignment.center,
                             child: const Text(
-                              "1 Year Subscription",
+                              '1 Year Subscription',
                               style: TextStyle(
                                   color: buttonParrotColor,
                                   fontSize: 16,
-                                  fontWeight: FontWeight.normal),
+                                  fontWeight: FontWeight.normal,),
                             ),
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
-                ))
+                ),),
           ],
         ),
       ),
@@ -200,43 +199,43 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
   }
 
   Future navigationHomePage() async {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-    Navigator.pushReplacement(
+    await Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+    await Navigator.pushReplacement(
         context,
         PageTransition(
-            type: PageTransitionType.rightToLeft, child: const AppDrawer(isNotification: false)));
+            type: PageTransitionType.rightToLeft, child: const AppDrawer(isNotification: false),),);
   }
 
   void _loginRequired() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => LoginPage()),
+      MaterialPageRoute(builder: (context) => const LoginPage()),
     );
   }
 
   Future navigationSubscriptionPage(String userId) async {
-    Navigator.push(
+    await Navigator.push(
         context,
         PageTransition(
             type: PageTransitionType.rightToLeft,
             child: SubscriptionPlanList(
               userId: userId,
-            )));
+            ),),);
   }
 
   void apiTrialPurchase() async {
     var param = {
-      "sub_id": "0",
-      "user_id": widget.userId,
-      "type": "0",
+      'sub_id': '0',
+      'user_id': widget.userId,
+      'type': '0',
     };
     //const url = "$baseUrl/buy-subscriptions";
-    const url = "$baseUrl/pay-subscriptions";
-    var result = await callApi("POST", param, url);
+    const url = '$baseUrl/pay-subscriptions';
+    var result = await callApi('POST', param, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
       showToast(context, kTrialPeriodStart);
-      navigationHomePage();
+      await navigationHomePage();
     } else {
       showToast(context, result[kDataMessage]);
     }

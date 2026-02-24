@@ -7,6 +7,6 @@ class OfferListData {
 
   factory OfferListData.fromJson(Map<String, dynamic> json) {
     return OfferListData(
-        discount_type: json['discount_type'] , discount: json['discount']);
+        discount_type: json['discount_type'] , discount: json['discount'],);
   }
 }

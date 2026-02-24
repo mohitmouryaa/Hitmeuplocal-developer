@@ -5,7 +5,7 @@ import 'package:hit_me_up/model/phone_code_list_data.dart';
 
 class SelectPhoneCode extends StatefulWidget {
 
-  const SelectPhoneCode({Key? key}) : super(key: key);
+  const SelectPhoneCode({super.key});
 
   @override
   _SelectPhoneCodeState createState() => _SelectPhoneCodeState();
@@ -24,12 +24,12 @@ class _SelectPhoneCodeState extends State<SelectPhoneCode> {
   }
 
   void getPhoneCodeData() async {
-    const url = "$baseUrl/countries-list";
-    var result = await callApi("GET", null, url);
+    const url = '$baseUrl/countries-list';
+    var result = await callApi('GET', null, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
       setState(() {
-        var rest = result["data"]["phonecodesList"] as List;
+        var rest = result['data']['phonecodesList'] as List;
         countryCodeData = rest
             .map<PhoneCodeListData>((json) => PhoneCodeListData.fromJson(json))
             .toList();
@@ -40,7 +40,7 @@ class _SelectPhoneCodeState extends State<SelectPhoneCode> {
   }
 
   void _sendDataBack(String id, String value) {
-    String values = id + "@" + value;
+    String values = '$id@$value';
     Navigator.pop(context, values);
   }
 
@@ -74,7 +74,7 @@ class _SelectPhoneCodeState extends State<SelectPhoneCode> {
                 fontWeight: FontWeight.w600,
                 fontSize: 18,
                 color: Colors.white,
-                fontStyle: FontStyle.normal),
+                fontStyle: FontStyle.normal,),
           ),
         ),
         leading: IconButton(
@@ -97,7 +97,7 @@ class _SelectPhoneCodeState extends State<SelectPhoneCode> {
                 title: TextField(
                   controller: controller,
                   decoration: const InputDecoration(
-                      hintText: 'Search', border: InputBorder.none),
+                      hintText: 'Search', border: InputBorder.none,),
                   onChanged: onSearchTextChanged,
                 ),
                 trailing: IconButton(
@@ -116,10 +116,11 @@ class _SelectPhoneCodeState extends State<SelectPhoneCode> {
               itemCount: _searchResult.length,
               itemBuilder: (context, i) {
                 return Card(
+                  margin: const EdgeInsets.all(0.0),
                   child: ListTile(
                     onTap: () => _sendDataBack(
                         _searchResult[i].id.toString(),
-                        _searchResult[i].phonecode.toString()),
+                        _searchResult[i].phonecode.toString(),),
                     leading: Stack(
                       children: [
                         const SizedBox(
@@ -133,16 +134,15 @@ class _SelectPhoneCodeState extends State<SelectPhoneCode> {
                           height: 45,
                           width: 45,
                           child: Center(
-                            child: Text("+${_searchResult[i].phonecode.toString()}",
+                            child: Text('+${_searchResult[i].phonecode.toString()}',
                               textAlign: TextAlign.center,
                               style: const TextStyle(fontSize: 12,color: Colors.white),),
                           ),
-                        )
+                        ),
                       ],
                     ),
                     title: Text(_searchResult[i].name),
                   ),
-                  margin: const EdgeInsets.all(0.0),
                 );
               },
             )
@@ -150,10 +150,11 @@ class _SelectPhoneCodeState extends State<SelectPhoneCode> {
               itemCount: countryCodeData.length,
               itemBuilder: (context, index) {
                 return Card(
+                  margin: const EdgeInsets.all(0.0),
                   child: ListTile(
                     onTap: () => _sendDataBack(
                         countryCodeData[index].id.toString(),
-                        countryCodeData[index].phonecode.toString()),
+                        countryCodeData[index].phonecode.toString(),),
                     leading: Stack(
                       children: [
                         const SizedBox(
@@ -167,16 +168,15 @@ class _SelectPhoneCodeState extends State<SelectPhoneCode> {
                           height: 45,
                           width: 45,
                           child: Center(
-                            child: Text("+${countryCodeData[index].phonecode.toString()}",
+                            child: Text('+${countryCodeData[index].phonecode.toString()}',
                               textAlign: TextAlign.center,
                               style: const TextStyle(fontSize: 12,color: Colors.white),),
                           ),
-                        )
+                        ),
                       ],
                     ),
                     title: Text(countryCodeData[index].name,style: const TextStyle(color: Colors.black),),
                   ),
-                  margin: const EdgeInsets.all(0.0),
                 );
               },
             ),

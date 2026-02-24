@@ -11,11 +11,10 @@ class CommonPromotionByIdList extends StatefulWidget {
   final String id,url,distance;
 
   const CommonPromotionByIdList(
-      {Key? key,
+      {super.key,
         required this.id,
         required this.url,
-        required this.distance,})
-      : super(key: key);
+        required this.distance,});
 
   @override
   State<CommonPromotionByIdList> createState() =>
@@ -27,12 +26,12 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
   int bannerCount=0;
   int trialActive = 0;
   int trialExpired = 0;
-  String subText = "1 Year Subscription";
-  String trialText = "3 Days Trial";
+  String subText = '1 Year Subscription';
+  String trialText = '3 Days Trial';
   int subActive = 0;
   int subExpired = 0;
-  String pinVerified = "0";
-  String orderId = "";
+  String pinVerified = '0';
+  String orderId = '';
   bool isTrialClicked = false;
 
   @override
@@ -46,10 +45,10 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (
-          context) => OfferDetailPage(requestType: widget.url.contains("notification")?"2":"1",businessId: _offerList[index].business_id.toString(),promotionId: _offerList[index].promotion_id.toString(),
+          context,) => OfferDetailPage(requestType: widget.url.contains('notification')?'2':'1',businessId: _offerList[index].business_id.toString(),promotionId: _offerList[index].promotion_id.toString(),
           name: _offerList[index].business_detail['name'],title: _offerList[index].title,
           address: "${_offerList[index].business_detail['country']['name']}, ${_offerList[index].business_detail['state']['name']}, ${_offerList[index].business_detail['city']}, ${_offerList[index].business_detail['address']}, ${_offerList[index].business_detail['pincode']}",description: _offerList[index].description,
-          distance: widget.distance.isEmpty ? "" : widget.distance.toString() ,email: _offerList[index].business_detail['email'],mobile: _offerList[index].business_detail['mobile'], webUrl : _offerList[index].business_detail['website_url'], lat : _offerList[index].business_detail['latitude'].toString(), lng : _offerList[index].business_detail['longitude'].toString())),
+          distance: widget.distance.isEmpty ? '' : widget.distance.toString() ,email: _offerList[index].business_detail['email'],mobile: _offerList[index].business_detail['mobile'], webUrl : _offerList[index].business_detail['website_url'], lat : _offerList[index].business_detail['latitude'].toString(), lng : _offerList[index].business_detail['longitude'].toString(),),),
     );
     if(result== true){
       showLoader(context);
@@ -59,10 +58,10 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
 
   void getPromotionList() async {
     dynamic user = await getSharedPreference(kDataLoginUser);
-    String url = "$baseUrl/${widget.url}/${widget.id}/${user[kId].toString()}";
-    var result = await callApi("GET", null, url);
+    String url = '$baseUrl/${widget.url}/${widget.id}/${user[kId].toString()}';
+    var result = await callApi('GET', null, url);
     if (result[kDataCode] == 200) {
-      var rest = result["data"] as List;
+      var rest = result['data'] as List;
       _offerList = rest
           .map<PromotionListData>((json) => PromotionListData.fromJson(json))
           .toList();
@@ -75,10 +74,10 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
   void checkSubscription() async {
     dynamic user = await getSharedPreference(kDataLoginUser);
     var param = {
-      "user_id": user[kId].toString(),
+      'user_id': user[kId].toString(),
     };
-    const url = "$baseUrl/check-subscriptions";
-    var result = await callApi("POST", param, url);
+    const url = '$baseUrl/check-subscriptions';
+    var result = await callApi('POST', param, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
       trialActive = result[kData][kTrial][kActive];
@@ -87,17 +86,17 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
         trialExpired = result[kData][kTrial][kExpired];
         if (trialExpired == 0) {
           trialText =
-          "${result[kData][kTrial][kPackageName]} expired on ${result[kData][kTrial][kExpiredDate]}";
+          '${result[kData][kTrial][kPackageName]} expired on ${result[kData][kTrial][kExpiredDate]}';
         } else {
           isTrialClicked = true;
-          trialText = "Trial Expired";
+          trialText = 'Trial Expired';
         }
       } else {
         if(trialExpired==0){
           isTrialClicked = true;
         }else{
           isTrialClicked = false;
-          trialText = "Trial Expired";
+          trialText = 'Trial Expired';
         }
       }
 
@@ -105,18 +104,18 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
 
       if (subActive == 1) {
         isTrialClicked = false;
-        trialText = "Trial Expired";
+        trialText = 'Trial Expired';
         subExpired = result[kData][kSubscription][kExpired];
         pinVerified = result[kData][kSubscription][kPinVerified].toString();
         orderId = result[kData][kSubscription][kOrderId].toString();
         if (subExpired == 0) {
           subText =
-          "${result[kData][kSubscription][kPackageName]} expired on ${result[kData][kSubscription][kExpiredDate]}";
+          '${result[kData][kSubscription][kPackageName]} expired on ${result[kData][kSubscription][kExpiredDate]}';
         } else {
-          subText = "1 Year Subscription";
+          subText = '1 Year Subscription';
         }
       } else {
-        subText = "1 Year Subscription";
+        subText = '1 Year Subscription';
       }
       setState(() {});
     } else {
@@ -136,18 +135,18 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
               subText: subText,
               isTrialClicked: isTrialClicked,
               trialText: trialText,
-            )));
+            ),),);
   }
 
 
   Future navigationLoginScreen() async {
-    Navigator.pushReplacement(
+    await Navigator.pushReplacement(
         context,
         PageTransition(
             type: PageTransitionType.rightToLeft,
             child: LoginPinPage(
               orderId: orderId,
-            )));
+            ),),);
   }
 
 
@@ -186,7 +185,7 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
                               child: Padding(
                                   padding: EdgeInsets.only(top: 35, right: 50),
                                   child: Text(
-                                    "Promotions",
+                                    'Promotions',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white,
@@ -198,8 +197,8 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
                                             blurRadius: 4.0,
                                             color: Colors.black45,
                                           ),
-                                        ]),
-                                  ))),
+                                        ],),
+                                  ),),),
                         ],
                       ),
                       Align(
@@ -222,7 +221,7 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
                                     if(trialActive == 1 && trialExpired==0){
                                       navigationHomePage(index);
                                     }else if(subActive == 1 && subExpired==0){
-                                      if(pinVerified == "0") {
+                                      if(pinVerified == '0') {
                                         navigationLoginScreen();
                                       }else{
                                         navigationHomePage(index);
@@ -255,20 +254,20 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
                                             textAlign: TextAlign.center,
                                             maxLines: 2,
                                             style: const TextStyle(
-                                                fontSize: 13, color: Colors.white),
+                                                fontSize: 13, color: Colors.white,),
                                           ),
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
                               );
                             }),
-                          ))
+                          ),),
                     ],
-                  )
+                  ),
                 ],
-              )),
+              ),),
         ],
       ),
     );

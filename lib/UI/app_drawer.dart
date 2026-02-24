@@ -1,11 +1,7 @@
-import 'dart:io';
-import 'dart:isolate';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hit_me_up/UI/about_us_screen.dart';
-import 'package:hit_me_up/UI/business_owner_register.dart';
 import 'package:hit_me_up/UI/categories_list_screen.dart';
 import 'package:hit_me_up/UI/contact_us_screen.dart';
 import 'package:hit_me_up/UI/home_screen.dart';
@@ -20,19 +16,17 @@ import 'package:hit_me_up/UI/settings_screen.dart';
 import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:firebase_core/firebase_core.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/auth_provider.dart';
-import 'login_purchase_subscription.dart';
+import 'package:hit_me_up/providers/auth_provider.dart';
+import 'package:hit_me_up/UI/login_purchase_subscription.dart';
 
 class AppDrawer extends StatefulWidget {
   final bool isNotification;
 
-  const AppDrawer({Key? key,required this.isNotification}) : super(key: key);
+  const AppDrawer({super.key,required this.isNotification});
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
@@ -51,14 +45,14 @@ class _AppDrawerState extends State<AppDrawer> {
 
   int trialActive = 0;
   int trialExpired = 0;
-  String trialText = "3 Days Trial";
+  String trialText = '3 Days Trial';
   bool isTrialClicked = false;
 
   int subActive = 0;
   int subExpired = 0;
-  String subText = "1 Year Subscription";
-  String pinVerified = "0";
-  String orderId = "";
+  String subText = '1 Year Subscription';
+  String pinVerified = '0';
+  String orderId = '';
   late FirebaseMessaging messaging;
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   late AndroidNotificationChannel channel;
@@ -101,17 +95,12 @@ class _AppDrawerState extends State<AppDrawer> {
                 channel.name,
                 icon: 'launch_background',
               ),
-            ));
+            ),);
         _onNotificationReceived(notification.body.toString());
       }else if(notification != null && apple != null){
         _onNotificationReceived(notification.body.toString());
       }
-      print('Got a message whilst in the foreground!');
-      print('Message data: ${message.data}');
-
-
       if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification}');
       }
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
@@ -125,7 +114,7 @@ class _AppDrawerState extends State<AppDrawer> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Notification!'),
-        content: const Text("You received a new notification!"),
+        content: const Text('You received a new notification!'),
         actions: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -133,21 +122,21 @@ class _AppDrawerState extends State<AppDrawer> {
             children: [
               GestureDetector(
                 onTap: () => Navigator.pop(context, false),
-                child: roundedButton(" Cancel "),
+                child: roundedButton(' Cancel '),
               ),
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context, true);
                 },
-                child: roundedButton(" View "),
+                child: roundedButton(' View '),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
     if (result == true) {
-      navigationHomePage();
+      await navigationHomePage();
     }
   }
 
@@ -164,15 +153,14 @@ class _AppDrawerState extends State<AppDrawer> {
      } else{
        showLoader(context);
        String deviceTimeZone = await getTimeZone();
-       print('Device Time Zone: $deviceTimeZone');
        dynamic user = await getSharedPreference(kDataLoginUser);
        var param = {
-         "user_id": user[kId].toString(),
-         "user_timezone": deviceTimeZone,
+         'user_id': user[kId].toString(),
+         'user_timezone': deviceTimeZone,
          // "device_type": Platform.isAndroid?'2':'1',
        };
-       const url = "$baseUrl/check-subscriptions";
-       var result = await callApi("POST", param, url);
+       const url = '$baseUrl/check-subscriptions';
+       var result = await callApi('POST', param, url);
        // hideLoader(context);
        if(mounted) {
          hideLoader(context);
@@ -185,46 +173,46 @@ class _AppDrawerState extends State<AppDrawer> {
            isTrialClicked = false;
            if (trialExpired == 0) {
              trialText =
-             "${result[kData][kTrial][kPackageName]} expired on ${result[kData][kTrial][kExpiredDate]}";
+             '${result[kData][kTrial][kPackageName]} expired on ${result[kData][kTrial][kExpiredDate]}';
            } else {
              isTrialClicked = false;
-             trialText = "Trial Expired";
+             trialText = 'Trial Expired';
            }
          } else {
            if(trialExpired==0){
              isTrialClicked = true;
            }else{
              isTrialClicked = false;
-             trialText = "Trial Expired";
+             trialText = 'Trial Expired';
            }
          }
 
          if (subActive == 1) {
            isTrialClicked = false;
-           trialText = "Trial Expired ${result[kData][kTrial][kExpiredDate]}";
+           trialText = 'Trial Expired ${result[kData][kTrial][kExpiredDate]}';
            subExpired = result[kData][kSubscription][kExpired];
            pinVerified = result[kData][kSubscription][kPinVerified].toString();
            orderId = result[kData][kSubscription][kOrderId].toString();
            if (subExpired == 0) {
              subText =
-             "${result[kData][kSubscription][kPackageName]} expires on ${result[kData][kSubscription][kExpiredDate]}";
+             '${result[kData][kSubscription][kPackageName]} expires on ${result[kData][kSubscription][kExpiredDate]}';
            } else {
-             subText = "1 Year Subscription";
+             subText = '1 Year Subscription';
            }
          } else {
-           subText = "1 Year Subscription";
+           subText = '1 Year Subscription';
            //Future.delayed(const Duration(microseconds: 1000),() => navigationPurchasePage(user[kId].toString(),false));
          }
 
          if (trialActive == 0 && subActive == 0) {
            callPurchaseView();
          } else if (subActive == 1) {
-           if(pinVerified == "0") {
-             navigationLoginScreen(orderId);
+           if(pinVerified == '0') {
+             await navigationLoginScreen(orderId);
            }
          }
        } else {
-         showToast(context, result!=null?result[kDataMessage]:"Server Error");
+         showToast(context, result[kDataMessage]);
        }
        if (mounted) {
          setState(() {});
@@ -233,22 +221,22 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   Future navigationPurchasePage(String userId, bool isTrial) async {
-    Navigator.push(
+    await Navigator.push(
         context,
         PageTransition(
             type: PageTransitionType.rightToLeft,
-            child: LoginPurchaseSubscription(userId: userId,trialText: trialText,subText: subText,isTrialClicked: isTrialClicked,)));
+            child: LoginPurchaseSubscription(userId: userId,trialText: trialText,subText: subText,isTrialClicked: isTrialClicked,),),);
   }
 
 
   Future navigationLoginScreen(String orderId) async {
-    Navigator.push(
+    await Navigator.push(
         context,
         PageTransition(
             type: PageTransitionType.rightToLeft,
             child: LoginPinPage(
               orderId: orderId,
-            )));
+            ),),);
   }
 
   void callPurchaseView(){
@@ -267,43 +255,11 @@ class _AppDrawerState extends State<AppDrawer> {
     );
   }
 
-  Future<void> _onLogoutPressed() async {
-    final result = await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Alert!'),
-        content: const Text('Are you sure want to Logout?'),
-        actions: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              GestureDetector(
-                onTap: () => Navigator.pop(context, false),
-                child: roundedButton(" NO "),
-              ),
-              GestureDetector(
-                onTap: () {
-                  final authProvider = Provider.of<AuthProvider>(context, listen: false);
-                  authProvider.logout();
-                  Navigator.pop(context, true);
-                },
-                child: roundedButton(" YES "),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-    if (result == true) {
-      removeSharedPreference(context);
-    }
-  }
 
   void _onLoginPressed() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => LoginPage()),
+      MaterialPageRoute(builder: (context) => const LoginPage()),
     );
   }
 
@@ -355,13 +311,13 @@ class _AppDrawerState extends State<AppDrawer> {
                       children: [
                         ListTile(
                           title: const Align(
+                            alignment: Alignment(-1.3, 0),
                             child: Text(
                               'Home',
                               style: TextStyle(
                                 color: Colors.black,
                               ),
                             ),
-                            alignment: Alignment(-1.3, 0),
                           ),
                           leading: SizedBox(
                             height: 20,
@@ -383,13 +339,13 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),
                         ListTile(
                           title: const Align(
+                            alignment: Alignment(-1.3, 0),
                             child: Text(
                               'Purchase',
                               style: TextStyle(
                                 color: Colors.black,
                               ),
                             ),
-                            alignment: Alignment(-1.3, 0),
                           ),
                           leading: Padding(
                             padding: const EdgeInsets.only(left: 5),
@@ -408,7 +364,7 @@ class _AppDrawerState extends State<AppDrawer> {
                             if(trialActive == 1 && trialExpired==0){
                               callPurchaseView();
                             }else if(subActive == 1 && subExpired==0){
-                              if(pinVerified == "0") {
+                              if(pinVerified == '0') {
                                 navigationLoginScreen(orderId);
                               }else{
                                 callPurchaseView();
@@ -421,13 +377,13 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),
                         ListTile(
                           title: const Align(
+                            alignment: Alignment(-1.3, 0),
                             child: Text(
                               'My Offer\'s',
                               style: TextStyle(
                                 color: Colors.black,
                               ),
                             ),
-                            alignment: Alignment(-1.3, 0),
                           ),
                           leading: const Padding(
                             padding: EdgeInsets.only(left: 3),
@@ -442,7 +398,7 @@ class _AppDrawerState extends State<AppDrawer> {
                             if(trialActive == 1 && trialExpired==0){
                               widgetForBody = MyOfferListScreen(drawerCall: drawerCall,);
                             }else if(subActive == 1 && subExpired==0){
-                              if(pinVerified == "0") {
+                              if(pinVerified == '0') {
                                 navigationLoginScreen(orderId);
                               }else{
                                 widgetForBody = MyOfferListScreen(drawerCall: drawerCall,);
@@ -455,13 +411,13 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),
                         ListTile(
                           title: const Align(
+                            alignment: Alignment(-1.2, 0),
                             child: Text(
                               'Discounts',
                               style: TextStyle(
                                 color: Colors.black,
                               ),
                             ),
-                            alignment: Alignment(-1.2, 0),
                           ),
                           leading: Padding(
                             padding: const EdgeInsets.only(left: 5),
@@ -484,7 +440,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                 openViewCall: openViewCall,
                               );
                             }else if(subActive == 1 && subExpired==0){
-                              if(pinVerified == "0") {
+                              if(pinVerified == '0') {
                                 navigationLoginScreen(orderId);
                               }else{
                                 isHome = true;
@@ -501,13 +457,13 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),
                         ListTile(
                           title: const Align(
+                            alignment: Alignment(-1.2, 0),
                             child: Text(
                               'Categories',
                               style: TextStyle(
                                 color: Colors.black,
                               ),
                             ),
-                            alignment: Alignment(-1.2, 0),
                           ),
                           leading: Padding(
                             padding: const EdgeInsets.only(left: 7),
@@ -524,7 +480,7 @@ class _AppDrawerState extends State<AppDrawer> {
                             Navigator.pop(context);
                             isHome = false;
                             var data={
-                              kSearchType:"NA",
+                              kSearchType:'NA',
                             };
                             widgetForBody = CategoriesListScreen(
                               drawerCall: drawerCall,
@@ -543,13 +499,13 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),
                         if (!isGuest)ListTile(
                           title: const Align(
+                            alignment: Alignment(-1.2, 0),
                             child: Text(
                               "Notification's",
                               style: TextStyle(
                                 color: Colors.black,
                               ),
                             ),
-                            alignment: Alignment(-1.2, 0),
                           ),
                           leading: const Padding(
                             padding: EdgeInsets.only(left: 7),
@@ -598,13 +554,13 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),*/
                         ListTile(
                           title: const Align(
+                            alignment: Alignment(-1.2, 0),
                             child: Text(
                               'Business Owner Registration',
                               style: TextStyle(
                                 color: Colors.black,
                               ),
                             ),
-                            alignment: Alignment(-1.2, 0),
                           ),
                           leading: const Padding(
                             padding: EdgeInsets.only(left: 7),
@@ -618,8 +574,8 @@ class _AppDrawerState extends State<AppDrawer> {
                             isHome = false;
                             widgetForBody = OwnerRegisterPage(
                               drawerCall: drawerCall,
-                              title: "",
-                              url: "",
+                              title: '',
+                              url: '',
                             );
                             setState(() {});
                           },
@@ -633,13 +589,13 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),
                         ListTile(
                           title: const Align(
+                            alignment: Alignment(-1.1, 0),
                             child: Text(
                               'Fundraising Registration',
                               style: TextStyle(
                                 color: Colors.black,
                               ),
                             ),
-                            alignment: Alignment(-1.1, 0),
                           ),
                           leading: Padding(
                             padding: const EdgeInsets.only(left: 7),
@@ -657,8 +613,8 @@ class _AppDrawerState extends State<AppDrawer> {
                             isHome = false;
                             widgetForBody = NGORegisterPage(
                               drawerCall: drawerCall,
-                              url: "",
-                              title: "",
+                              url: '',
+                              title: '',
                             );
                             setState(() {});
                           },
@@ -697,13 +653,13 @@ class _AppDrawerState extends State<AppDrawer> {
                         ),
                         ListTile(
                           title: const Align(
+                            alignment: Alignment(-1.0, 0),
                             child: Text(
                               'About Us',
                               style: TextStyle(
                                 color: Colors.black,
                               ),
                             ),
-                            alignment: Alignment(-1.0, 0),
                           ),
                           leading: Padding(
                             padding: const EdgeInsets.only(left: 8),
@@ -792,7 +748,7 @@ class _AppDrawerState extends State<AppDrawer> {
                               ),
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -810,7 +766,7 @@ class _AppDrawerState extends State<AppDrawer> {
             onBackPress(context, drawerCall, openViewCall);
             return false;
           }
-        });
+        },);
   }
 
    checkSub()  {

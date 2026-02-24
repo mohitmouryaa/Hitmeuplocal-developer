@@ -6,8 +6,7 @@ class ApplyFundraisingPage extends StatefulWidget {
   final Function drawerCall, openViewCall;
 
   const ApplyFundraisingPage(
-      {Key? key, required this.drawerCall, required this.openViewCall})
-      : super(key: key);
+      {super.key, required this.drawerCall, required this.openViewCall,});
 
   @override
   State<ApplyFundraisingPage> createState() => _ApplyFundraisingPageState();
@@ -61,16 +60,16 @@ class _ApplyFundraisingPageState extends State<ApplyFundraisingPage> {
                 padding: const EdgeInsets.only(top: 5, bottom: 5),
                 alignment: Alignment.center,
                 child: const Text(
-                  "Apply",
+                  'Apply',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
-                      fontWeight: FontWeight.w500),
+                      fontWeight: FontWeight.w500,),
                 ),
               ),
             ),
           ),
-        )
+        ),
       ],
       body: SingleChildScrollView(
         child: Column(
@@ -79,22 +78,22 @@ class _ApplyFundraisingPageState extends State<ApplyFundraisingPage> {
               padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
               alignment: Alignment.center,
               child: const Text(
-                "It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts. It is a long established fact that a Your Source For Local Discounts.nnIt is a long established fact that a Your Source For Local Discounts English.",
+                'It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts. It is a long established fact that a Your Source For Local Discounts.nnIt is a long established fact that a Your Source For Local Discounts English.',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 17,
-                    fontStyle: FontStyle.normal),
+                    fontStyle: FontStyle.normal,),
               ),
             ),
             Container(
               padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
               alignment: Alignment.center,
               child: const Text(
-                "It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts. It is a long established fact that a Your Source For Local Discounts.nnIt is a long established fact that a Your Source For Local Discounts English.",
+                'It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts. It is a long established fact that a Your Source For Local Discounts.nnIt is a long established fact that a Your Source For Local Discounts English.',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 17,
-                    fontStyle: FontStyle.normal),
+                    fontStyle: FontStyle.normal,),
               ),
             ),
           ],

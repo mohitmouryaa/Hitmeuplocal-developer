@@ -2,9 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hit_me_up/UI/login_screen.dart';
-import 'package:hit_me_up/UI/select_country.dart';
-import 'package:hit_me_up/UI/select_phone_code.dart';
 import 'package:hit_me_up/UI/select_state.dart';
 import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
@@ -12,7 +9,7 @@ import 'package:hit_me_up/model/country_list_data.dart';
 import 'package:hit_me_up/model/phone_code_list_data.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -32,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _countryController = TextEditingController();
   final _stateController = TextEditingController();
   final _referenceController = TextEditingController();
-  late String _countryId="", _stateId="",_phoneCodeId="",_phoneCode="";
+  late String _countryId='', _stateId='',_phoneCodeId='',_phoneCode='';
   late List<CountryListData> countryData = [];
   late List<PhoneCodeListData> countryCodeData = [];
 
@@ -44,44 +41,13 @@ class _RegisterPageState extends State<RegisterPage> {
     super.initState();
     showLoader(context);
     getCountry();
-    _countryController.text = "Country";
-    _stateController.text = "State";
-    _phoneCode = "+Code";
+    _countryController.text = 'Country';
+    _stateController.text = 'State';
+    _phoneCode = '+Code';
   }
 
 
-  void _awaitSelectedPhoneCode() async {
-    final result = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SelectPhoneCode(),
-        ));
-    if (result != null) {
-      setState(() {
-        String jsonData = result;
-        _phoneCodeId = jsonData.split('@')[0];
-        _phoneCode = "+"+jsonData.split('@')[1];
-      });
-    }
-  }
 
-  void _awaitReturnValueFromSelectedCountry() async {
-    FocusScope.of(context).unfocus();
-    final result = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SelectCountry(),
-        ));
-    if (result != null) {
-      setState(() {
-        String jsonData = result;
-        _countryId = jsonData.split('@')[0];
-        _countryController.text = jsonData.split('@')[1];
-        _stateId = "";
-        _stateController.text = "Click To Select State";
-      });
-    }
-  }
 
   void _awaitReturnValueFromSelectedState() async {
     FocusScope.of(context).unfocus();
@@ -91,7 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
           builder: (context) => SelectState(
             countryId: _countryId,
           ),
-        ));
+        ),);
     if (result != null) {
       setState(() {
         String jsonData = result;
@@ -121,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             onPressed: () => Navigator.pop(context),
           ),
-          backgroundColor: Colors.white),
+          backgroundColor: Colors.white,),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -131,7 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: 210,
                 child: Center(
                   child: Image.asset(
-                    "assets/logo.png", height: 200,
+                    'assets/logo.png', height: 200,
                     fit: BoxFit.fitWidth,
                     // color: Colors.orangeAccent,
                   ),
@@ -203,7 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
               decoration: BoxDecoration(
                   border: Border.all(color: greyBorder, width: 0.0),
                   color: greyFilled,
-                  borderRadius: const BorderRadius.all(Radius.circular(25))),
+                  borderRadius: const BorderRadius.all(Radius.circular(25)),),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -242,7 +208,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: _phoneController,
                       textAlign: TextAlign.left,
                       //keyboardType: TextInputType.number,
-                      keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
+                      keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,
                       ],
@@ -308,7 +274,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 decoration: BoxDecoration(
                     border: Border.all(color: greyBorder, width: 0.0),
                     color: greyFilled,
-                    borderRadius: const BorderRadius.all(Radius.circular(25))),
+                    borderRadius: const BorderRadius.all(Radius.circular(25)),),
                 child: Text(
                   _countryController.text,
                   style: const TextStyle(fontSize: 16),
@@ -333,7 +299,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 decoration: BoxDecoration(
                     border: Border.all(color: greyBorder, width: 0.0),
                     color: greyFilled,
-                    borderRadius: const BorderRadius.all(Radius.circular(25))),
+                    borderRadius: const BorderRadius.all(Radius.circular(25)),),
                 child: Text(
                   _stateController.text,
                   style: const TextStyle(fontSize: 16),
@@ -411,7 +377,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   FilteringTextInputFormatter.digitsOnly,
                 ],
                 //keyboardType: TextInputType.number,
-                keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(left: 10),
                   hintText: 'ZipCode',
@@ -577,17 +543,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     padding: const EdgeInsets.only(top: 5, bottom: 5),
                     alignment: Alignment.center,
                     child: const Text(
-                      "Register",
+                      'Register',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                           letterSpacing: 1,
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold,),
                     ),
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -610,7 +576,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,
-                      fontWeight: FontWeight.w700),
+                      fontWeight: FontWeight.w700,),
                 ),
                 onPressed: () {
                   Navigator.pop(context, true);
@@ -620,15 +586,15 @@ class _RegisterPageState extends State<RegisterPage> {
             title: Text(
               title,
               style: const TextStyle(
-                  color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                  color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold,),
             ),
             content: Text(
               message,
               style: const TextStyle(
-                  color: Colors.black, fontSize: 15, fontWeight: FontWeight.w700),
+                  color: Colors.black, fontSize: 15, fontWeight: FontWeight.w700,),
             ),
           );
-        });
+        },);
     if(res!=null){
       Navigator.pop(context);
     }
@@ -636,27 +602,26 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void apiRegisterUser(BuildContext context) async {
     if(_phoneController.text.isEmpty){
-      _phoneCode = "";
+      _phoneCode = '';
     }
     var param = {
-      "name": _nameController.text.toString().trim() +' '+ _lastNameController.text.toString().trim(),
-      "email": _emailController.text.toString().trim(),
-      "mobile": _phoneController.text.toString().trim(),
-      "address": _addressController.text.toString().trim(),
-      "password": _passwordController.text.toString().trim(),
-      "phonecode": _phoneCode,
-      "country_id": _countryId,
-      "state_id": _stateId,
-      "city": _cityController.text.toString().trim(),
-      "pincode": _pinCodeController.text.toString().trim(),
-      "reference_code": _referenceController.text.toString().trim(),
+      'name': '${_nameController.text.toString().trim()} ${_lastNameController.text.toString().trim()}',
+      'email': _emailController.text.toString().trim(),
+      'mobile': _phoneController.text.toString().trim(),
+      'address': _addressController.text.toString().trim(),
+      'password': _passwordController.text.toString().trim(),
+      'phonecode': _phoneCode,
+      'country_id': _countryId,
+      'state_id': _stateId,
+      'city': _cityController.text.toString().trim(),
+      'pincode': _pinCodeController.text.toString().trim(),
+      'reference_code': _referenceController.text.toString().trim(),
     };
-    print(param);
-    const url = "$baseUrl/signup";
-    var result = await callApi("POST", param, url);
+    const url = '$baseUrl/signup';
+    var result = await callApi('POST', param, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      showMessagePopUp(kAlert,result[kDataMessage]);
+      await showMessagePopUp(kAlert,result[kDataMessage]);
     } else {
       showToast(context, result[kDataMessage]);
     }
@@ -664,30 +629,30 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void getCountry() async {
     int countryCodeId = 0;
-    const url = "$baseUrl/countries-list";
-    var result = await callApi("GET", null, url);
+    const url = '$baseUrl/countries-list';
+    var result = await callApi('GET', null, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
       setState(() {
-        var restCountries = result["data"]["countries"] as List;
-        var restPhoneCodes = result["data"]["phonecodesList"] as List;
+        var restCountries = result['data']['countries'] as List;
+        var restPhoneCodes = result['data']['phonecodesList'] as List;
 
         countryData = restCountries.map<CountryListData>((json) => CountryListData.fromJson(json)).toList();
         countryCodeData = restPhoneCodes.map<PhoneCodeListData>((json) => PhoneCodeListData.fromJson(json)).toList();
 
         for(int i = 0 ; i < countryCodeData.length ; i++){
-          if(countryCodeData[i].phonecode == "1"){
+          if(countryCodeData[i].phonecode == '1'){
             countryCodeId = i;
           }
         }
 
         _countryId = countryData[0].id.toString();
         _countryController.text = countryData[0].name;
-        _stateId = "";
-        _stateController.text = "Click To Select State";
+        _stateId = '';
+        _stateController.text = 'Click To Select State';
 
         _phoneCodeId = countryCodeData[countryCodeId].id.toString();
-        _phoneCode = "+"+countryCodeData[countryCodeId].phonecode.toString();
+        _phoneCode = '+${countryCodeData[countryCodeId].phonecode}';
         setState(() {
 
         });

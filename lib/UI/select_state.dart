@@ -1,5 +1,4 @@
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
@@ -8,7 +7,7 @@ import 'package:hit_me_up/model/state_data.dart';
 class SelectState extends StatefulWidget {
   final countryId;
 
-  const SelectState({Key? key,this.countryId}) : super(key: key);
+  const SelectState({super.key,this.countryId});
 
   @override
   _SelectStateState createState() => _SelectStateState();
@@ -24,12 +23,12 @@ class _SelectStateState extends State<SelectState> {
   // Get json result and convert it to model. Then add
 
   void getCountriesData() async {
-    final url = "$baseUrl/states-list/${widget.countryId}";
-    var result = await callApi("GET", null, url);
+    final url = '$baseUrl/states-list/${widget.countryId}';
+    var result = await callApi('GET', null, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
       setState(() {
-        var rest = result["data"] as List;
+        var rest = result['data'] as List;
         stateList = rest
             .map<StateListData>((json) => StateListData.fromJson(json))
             .toList();
@@ -47,7 +46,7 @@ class _SelectStateState extends State<SelectState> {
   }
 
   void _sendDataBack(String id, String value) {
-    String values = id + "@" + value;
+    String values = '$id@$value';
     Navigator.pop(context, values);
   }
 
@@ -80,7 +79,7 @@ class _SelectStateState extends State<SelectState> {
                 fontWeight: FontWeight.w600,
                 fontSize: 18,
                 color: Colors.white,
-                fontStyle: FontStyle.normal),
+                fontStyle: FontStyle.normal,),
           ),
         ),
         leading: IconButton(
@@ -103,7 +102,7 @@ class _SelectStateState extends State<SelectState> {
                 title: TextField(
                   controller: controller,
                   decoration: const InputDecoration(
-                      hintText: 'Search', border: InputBorder.none),
+                      hintText: 'Search', border: InputBorder.none,),
                   onChanged: onSearchTextChanged,
                 ),
                 trailing: IconButton(
@@ -116,45 +115,45 @@ class _SelectStateState extends State<SelectState> {
               ),
             ),
           ),
-          if (stateList!=null) stateList.isNotEmpty
-              ? Expanded(
-                  child: _searchResult.isNotEmpty || controller.text.isNotEmpty
-                      ? ListView.builder(
-                          itemCount: _searchResult.length,
-                          itemBuilder: (context, i) {
-                            return Card(
-                              child: ListTile(
-                                onTap: () => _sendDataBack(
-                                    _searchResult[i].id.toString(),
-                                    _searchResult[i].name),
-                                leading: const CircleAvatar(
-                                  backgroundColor: buttonParrotColor,
-                                ),
-                                title: Text(_searchResult[i].name),
+          stateList.isNotEmpty
+            ? Expanded(
+                child: _searchResult.isNotEmpty || controller.text.isNotEmpty
+                    ? ListView.builder(
+                        itemCount: _searchResult.length,
+                        itemBuilder: (context, i) {
+                          return Card(
+                            margin: const EdgeInsets.all(0.0),
+                            child: ListTile(
+                              onTap: () => _sendDataBack(
+                                  _searchResult[i].id.toString(),
+                                  _searchResult[i].name,),
+                              leading: const CircleAvatar(
+                                backgroundColor: buttonParrotColor,
                               ),
-                              margin: const EdgeInsets.all(0.0),
-                            );
-                          },
-                        )
-                      : ListView.builder(
-                          itemCount: stateList.length,
-                          itemBuilder: (context, index) {
-                            return Card(
-                              child: ListTile(
-                                onTap: () => _sendDataBack(
-                                    stateList[index].id.toString(),
-                                    stateList[index].name),
-                                leading: const CircleAvatar(
-                                  backgroundColor: buttonParrotColor,
-                                ),
-                                title: Text(stateList[index].name),
+                              title: Text(_searchResult[i].name),
+                            ),
+                          );
+                        },
+                      )
+                    : ListView.builder(
+                        itemCount: stateList.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            margin: const EdgeInsets.all(0.0),
+                            child: ListTile(
+                              onTap: () => _sendDataBack(
+                                  stateList[index].id.toString(),
+                                  stateList[index].name,),
+                              leading: const CircleAvatar(
+                                backgroundColor: buttonParrotColor,
                               ),
-                              margin: const EdgeInsets.all(0.0),
-                            );
-                          },
-                        ),
-                )
-              : noDataFound("No State List Found!") else noDataFound("Please wait while processing..."),
+                              title: Text(stateList[index].name),
+                            ),
+                          );
+                        },
+                      ),
+              )
+            : noDataFound('No State List Found!'),
         ],
       ),
     );

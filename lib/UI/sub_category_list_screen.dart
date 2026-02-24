@@ -11,9 +11,8 @@ class SubCategoriesListScreen extends StatefulWidget {
   final dynamic data,searchType;
 
   const SubCategoriesListScreen(
-      {Key? key,
-        required this.id,required this.title,required this.searchType,required this.data})
-      : super(key: key);
+      {super.key,
+        required this.id,required this.title,required this.searchType,required this.data,});
 
   @override
   State<SubCategoriesListScreen> createState() =>
@@ -34,17 +33,17 @@ class _SubCategoriesListScreenState extends State<SubCategoriesListScreen> {
   }
 
   void getSubCategoryData() async {
-    String url = "$baseUrl/categories-list/${widget.id}";
-    var result= await callApi("GET", null, url);
+    String url = '$baseUrl/categories-list/${widget.id}';
+    var result= await callApi('GET', null, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      rest = result["data"] as List;
+      rest = result['data'] as List;
       _categoryList = rest
           .map<CategoryListData>((json) => CategoryListData.fromJson(json))
           .toList();
       setState(() {});
       if(_categoryList.isEmpty) {
-        navigationPromotionEmpty(widget.id);
+        await navigationPromotionEmpty(widget.id);
       }
     } else {
       showToast(context, result[kDataMessage]);
@@ -52,14 +51,14 @@ class _SubCategoriesListScreenState extends State<SubCategoriesListScreen> {
   }
 
   Future navigationPromotionEmpty(String id) async {
-    Navigator.pushReplacement(
+    await Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => PromotionListScreen(id: id,searchType: widget.searchType,data: widget.data,subData: rest,)),
     );
   }
 
   Future navigationPromotionPage(String id) async {
-    Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => PromotionListScreen(id: id,searchType: widget.searchType,data: widget.data,subData: rest,)),
     );
@@ -111,8 +110,8 @@ class _SubCategoriesListScreenState extends State<SubCategoriesListScreen> {
                                             blurRadius: 4.0,
                                             color: Colors.black45,
                                           ),
-                                        ]),
-                                  )))
+                                        ],),
+                                  ),),),
                         ],
                       ),
                       Align(
@@ -158,34 +157,34 @@ class _SubCategoriesListScreenState extends State<SubCategoriesListScreen> {
                                                 textAlign: TextAlign.center,
                                                 maxLines: 2,
                                                 style: const TextStyle(
-                                                    fontSize: 12, color: Colors.white),
+                                                    fontSize: 12, color: Colors.white,),
                                               ),
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ),
                                   );
                                 }),
-                              ))):Expanded(
+                              ),),):Expanded(
                         child: Center(
                           child: Text(
                             noPromotionsAvailable,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.bold,shadows: <Shadow>[
+                            style: const TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.bold,shadows: <Shadow>[
                               Shadow(
                                 offset: Offset(0.0, 4.0),
                                 blurRadius: 4.0,
                                 color: Colors.black45,
                               ),
-                            ]),
+                            ],),
                           ),
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
-              )),
+              ),),
         ],
       ),
     );
@@ -193,13 +192,10 @@ class _SubCategoriesListScreenState extends State<SubCategoriesListScreen> {
 
   void getSubCategoryList() {
     var listData = widget.data;
-    print('sub cat data - '+widget.data.toString());
     // int index = listData.indexWhere((data) => data["id"] == widget.id);
     //int index = listData.indexWhere((listData) => listData["id"] == widget.id);
     //int index = 0;
-    print("Widget id -"+widget.id);
-    int index = listData.indexWhere((item) => item["id"] == int.parse(widget.id));
-    print('Sub cat index - '+index.toString());
+    int index = listData.indexWhere((item) => item['id'] == int.parse(widget.id));
     var data = listData[index];
     var rest = data['children'] as List;
     _categoryList = rest.map<CategoryListData>((json) => CategoryListData.fromJson(json)).toList();

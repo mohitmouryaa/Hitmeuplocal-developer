@@ -1,20 +1,13 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hit_me_up/UI/login_screen.dart';
-import 'package:hit_me_up/UI/select_country.dart';
-import 'package:hit_me_up/UI/select_phone_code.dart';
-import 'package:hit_me_up/UI/select_state.dart';
 import 'package:hit_me_up/common/common.dart';
-import 'package:hit_me_up/common/service_api.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class OwnerRegisterPage extends StatefulWidget {
   final Function drawerCall;
   final url,title;
 
-  const OwnerRegisterPage({Key? key,required this.drawerCall,required this.url,required this.title}) : super(key: key);
+  const OwnerRegisterPage({super.key,required this.drawerCall,required this.url,required this.title});
 
   @override
   State<OwnerRegisterPage> createState() => _OwnerRegisterPageState();
@@ -44,11 +37,10 @@ class _OwnerRegisterPageState extends State<OwnerRegisterPage> {
             });
           },
           onWebResourceError: (error) {
-            print('Error loading web resource: $error');
           },
         ),
       )
-      ..loadRequest(Uri.parse("https://dev.01s.in/hitmeup/public/signup?role_id=2")); // Load the URL passed from the widget
+      ..loadRequest(Uri.parse('https://dev.01s.in/hitmeup/public/signup?role_id=2')); // Load the URL passed from the widget
   }
 
   @override

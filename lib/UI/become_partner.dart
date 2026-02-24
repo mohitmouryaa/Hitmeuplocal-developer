@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hit_me_up/UI/app_drawer.dart';
-import 'package:hit_me_up/UI/login_screen.dart';
 import 'package:hit_me_up/common/common.dart';
 
 class BecomePartner extends StatefulWidget {
 
-  const BecomePartner({Key? key}) : super(key: key);
+  const BecomePartner({super.key});
 
 
   @override
@@ -30,7 +28,7 @@ class _BecomePartnerState extends State<BecomePartner> {
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
           ),
-          backgroundColor: Colors.white),
+          backgroundColor: Colors.white,),
       persistentFooterButtons: [
         Center(
           child: Card(
@@ -49,14 +47,14 @@ class _BecomePartnerState extends State<BecomePartner> {
                 padding: const EdgeInsets.only(top: 5, bottom: 5),
                 alignment: Alignment.center,
                 child: const Text(
-                  "Email Us",
+                  'Email Us',
                   style: TextStyle(
-                      color: Colors.white, fontSize: 16,fontWeight: FontWeight.w500),
+                      color: Colors.white, fontSize: 16,fontWeight: FontWeight.w500,),
                 ),
               ),
             ),
           ),
-        )
+        ),
       ],
       body: SingleChildScrollView(
          child: Column(
@@ -65,18 +63,18 @@ class _BecomePartnerState extends State<BecomePartner> {
                padding: const EdgeInsets.only(left: 10,right: 10,top: 15),
                alignment: Alignment.center,
                child: const Text(
-                 "It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts. It is a long established fact that a Your Source For Local Discounts.nnIt is a long established fact that a Your Source For Local Discounts English.",
+                 'It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts. It is a long established fact that a Your Source For Local Discounts.nnIt is a long established fact that a Your Source For Local Discounts English.',
                  style: TextStyle(
-                     color: Colors.black, fontSize: 17,fontStyle: FontStyle.normal),
+                     color: Colors.black, fontSize: 17,fontStyle: FontStyle.normal,),
                ),
              ),
              Container(
                padding: const EdgeInsets.only(left: 10,right: 10,top: 15),
                alignment: Alignment.center,
                child: const Text(
-                 "It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts. It is a long established fact that a Your Source For Local Discounts.nnIt is a long established fact that a Your Source For Local Discounts English.",
+                 'It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts.It is a long established fact that a Your Source For Local Discounts. It is a long established fact that a Your Source For Local Discounts.nnIt is a long established fact that a Your Source For Local Discounts English.',
                  style: TextStyle(
-                     color: Colors.black, fontSize: 17,fontStyle: FontStyle.normal),
+                     color: Colors.black, fontSize: 17,fontStyle: FontStyle.normal,),
                ),
              ),
            ],

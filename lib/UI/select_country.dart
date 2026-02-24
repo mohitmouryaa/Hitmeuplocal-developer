@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
-import 'dart:convert' as convert;
 import 'package:hit_me_up/model/country_list_data.dart';
 
 class SelectCountry extends StatefulWidget {
-  const SelectCountry({Key? key,}) : super(key: key);
+  const SelectCountry({super.key});
 
   @override
   _SelectCountryState createState() => _SelectCountryState();
@@ -24,12 +23,12 @@ class _SelectCountryState extends State<SelectCountry> {
   }
 
   void getCountriesData() async {
-    const url = "$baseUrl/countries-list";
-    var result = await callApi("GET", null, url);
+    const url = '$baseUrl/countries-list';
+    var result = await callApi('GET', null, url);
     hideLoader(context);
     if (result[kDataCode] == 200) {
 
-        var rest = result["data"]["countries"] as List;
+        var rest = result['data']['countries'] as List;
         countryData = rest
             .map<CountryListData>((json) => CountryListData.fromJson(json))
             .toList();
@@ -40,7 +39,7 @@ class _SelectCountryState extends State<SelectCountry> {
   }
 
   void _sendDataBack(String id, String value) {
-    String values = id + "@" + value;
+    String values = id + '@' + value;
     Navigator.pop(context, values);
   }
 
@@ -73,7 +72,7 @@ class _SelectCountryState extends State<SelectCountry> {
                 fontWeight: FontWeight.w600,
                 fontSize: 18,
                 color: Colors.white,
-                fontStyle: FontStyle.normal),
+                fontStyle: FontStyle.normal,),
           ),
         ),
         leading: IconButton(
@@ -96,7 +95,7 @@ class _SelectCountryState extends State<SelectCountry> {
                 title: TextField(
                   controller: controller,
                   decoration: const InputDecoration(
-                      hintText: 'Search', border: InputBorder.none),
+                      hintText: 'Search', border: InputBorder.none,),
                   onChanged: onSearchTextChanged,
                 ),
                 trailing: IconButton(
@@ -115,16 +114,16 @@ class _SelectCountryState extends State<SelectCountry> {
                     itemCount: _searchResult.length,
                     itemBuilder: (context, i) {
                       return Card(
+                        margin: const EdgeInsets.all(0.0),
                         child: ListTile(
                           onTap: () => _sendDataBack(
                               _searchResult[i].id.toString(),
-                              _searchResult[i].name),
+                              _searchResult[i].name,),
                           leading: const CircleAvatar(
                             backgroundColor: buttonParrotColor,
                           ),
                           title: Text(_searchResult[i].name),
                         ),
-                        margin: const EdgeInsets.all(0.0),
                       );
                     },
                   )
@@ -132,16 +131,16 @@ class _SelectCountryState extends State<SelectCountry> {
                     itemCount: countryData.length,
                     itemBuilder: (context, index) {
                       return Card(
+                        margin: const EdgeInsets.all(0.0),
                         child: ListTile(
                           onTap: () => _sendDataBack(
                               countryData[index].id.toString(),
-                              countryData[index].name),
+                              countryData[index].name,),
                           leading: const CircleAvatar(
                             backgroundColor: buttonParrotColor,
                           ),
                           title: Text(countryData[index].name,style: const TextStyle(color: Colors.black),),
                         ),
-                        margin: const EdgeInsets.all(0.0),
                       );
                     },
                   ),

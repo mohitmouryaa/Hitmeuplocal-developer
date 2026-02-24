@@ -7,7 +7,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 
 class LoginOfferPage extends StatefulWidget {
-  const LoginOfferPage({Key? key}) : super(key: key);
+  const LoginOfferPage({super.key});
 
   @override
   State<LoginOfferPage> createState() => _LoginOfferPageState();
@@ -27,10 +27,10 @@ class _LoginOfferPageState extends State<LoginOfferPage> {
   }
 
   Future navigationPage() async {
-    Navigator.push(
+    await Navigator.push(
       context,
       PageTransition(
-          type: PageTransitionType.rightToLeft, child: const LoginPage()),
+          type: PageTransitionType.rightToLeft, child: const LoginPage(),),
     );
   }
 
@@ -57,19 +57,19 @@ class _LoginOfferPageState extends State<LoginOfferPage> {
             height: 270,
             child: Center(
               child: Image.asset(
-                "assets/polygon.png", height: 270,
+                'assets/polygon.png', height: 270,
                 fit: BoxFit.fitWidth,
                 // color: Colors.orangeAccent,
               ),
             ),
-          )),
+          ),),
           const Center(
             child: SizedBox(
               height: 200,
               width: 200,
               child: Center(
                 child: Text(
-                  "View an example of our amazing discounts!",
+                  'View an example of our amazing discounts!',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 25,wordSpacing: 4),
                 ),
@@ -84,13 +84,13 @@ class _LoginOfferPageState extends State<LoginOfferPage> {
   String pageNumber() {
     switch (pos) {
       case 0:
-        return "contact_us_bg.png";
+        return 'contact_us_bg.png';
       case 1:
-        return "owner_image.png";
+        return 'owner_image.png';
       case 2:
-        return "logo.png";
+        return 'logo.png';
     }
-    return "contact_us_bg.png";
+    return 'contact_us_bg.png';
   }
 
   void onPageChanged(int index) {
@@ -147,7 +147,7 @@ class _LoginOfferPageState extends State<LoginOfferPage> {
                   'assets/discount_bg.png',
                   fit: BoxFit.fill,
                 ),
-              )
+              ),
             ],
           ),
           SingleChildScrollView(
@@ -170,8 +170,8 @@ class _LoginOfferPageState extends State<LoginOfferPage> {
                               blurRadius: 4.0,
                               color: Colors.black45,
                             ),
-                          ]),
-                    )),
+                          ],),
+                    ),),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
@@ -197,7 +197,7 @@ class _LoginOfferPageState extends State<LoginOfferPage> {
                           },
                         ),
                       ],
-                    )),
+                    ),),
                 _buildCircleIndicator(),
                 Center(
                   child: InkWell(
@@ -221,7 +221,7 @@ class _LoginOfferPageState extends State<LoginOfferPage> {
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
-                              fontWeight: FontWeight.bold),
+                              fontWeight: FontWeight.bold,),
                         ),
                       ),
                     ),
@@ -229,7 +229,7 @@ class _LoginOfferPageState extends State<LoginOfferPage> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

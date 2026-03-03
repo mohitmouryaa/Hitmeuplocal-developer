@@ -16,7 +16,6 @@ import 'package:provider/provider.dart';
 import 'package:hit_me_up/providers/auth_provider.dart';
 
 class LoginPage extends StatefulWidget {
-
   const LoginPage({super.key});
 
   @override
@@ -36,28 +35,29 @@ class _LoginPageState extends State<LoginPage> {
   String orderId = '';
   bool isTrialClicked = false;
   late FirebaseMessaging messaging;
-  String _token='';
+  String _token = '';
   late FToast fToast;
 
   @override
   void initState() {
     super.initState();
-      fToast = FToast();
-      fToast.init(context);
-      messaging = FirebaseMessaging.instance;
-      messaging.getToken().then((value) {
-        _token = value.toString();
-      }).catchError((e) {
-        // FCM token unavailable on simulators / devices without APNs support
-      });
-
+    fToast = FToast();
+    fToast.init(context);
+    messaging = FirebaseMessaging.instance;
+    messaging.getToken().then((value) {
+      _token = value.toString();
+    }).catchError((e) {
+      // FCM token unavailable on simulators / devices without APNs support
+    });
   }
 
   Future navigationRegisterPage() async {
     await Navigator.push(
       context,
       PageTransition(
-          type: PageTransitionType.rightToLeft, child: const RegisterPage(),),
+        type: PageTransitionType.rightToLeft,
+        child: const RegisterPage(),
+      ),
     );
   }
 
@@ -65,24 +65,36 @@ class _LoginPageState extends State<LoginPage> {
     await Navigator.push(
       context,
       PageTransition(
-          type: PageTransitionType.rightToLeft, child: const ForgotPasswordPage(),),
+        type: PageTransitionType.rightToLeft,
+        child: const ForgotPasswordPage(),
+      ),
     );
   }
 
   Future navigationPurchasePage(String userId, bool isTrial) async {
     await Navigator.push(
-        context,
-        PageTransition(
-            type: PageTransitionType.rightToLeft,
-            child: LoginPurchaseSubscription(userId: userId,trialText: trialText,subText: subText,isTrialClicked: isTrialClicked,),),);
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: LoginPurchaseSubscription(
+          userId: userId,
+          trialText: trialText,
+          subText: subText,
+          isTrialClicked: isTrialClicked,
+        ),
+      ),
+    );
   }
 
   Future navigationHomePage() async {
-    await Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-    await Navigator.pushReplacement(
-        context,
-        PageTransition(
-            type: PageTransitionType.rightToLeft, child: const AppDrawer(isNotification: false),),);
+    await Navigator.pushAndRemoveUntil(
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: const AppDrawer(isNotification: false),
+      ),
+      (_) => false,
+    );
   }
 
   @override
@@ -185,13 +197,16 @@ class _LoginPageState extends State<LoginPage> {
                       contentPadding: const EdgeInsets.only(left: 10),
                       hintText: 'Email*',
                       hintStyle: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold,),
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                          borderSide: const BorderSide(
-                            width: 0,
-                            style: BorderStyle.none,
-                          ),),
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide: const BorderSide(
+                          width: 0,
+                          style: BorderStyle.none,
+                        ),
+                      ),
                       fillColor: editField,
                       filled: true,
                     ),
@@ -213,13 +228,16 @@ class _LoginPageState extends State<LoginPage> {
                       contentPadding: const EdgeInsets.only(left: 10),
                       hintText: 'Password*',
                       hintStyle: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold,),
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                          borderSide: const BorderSide(
-                            width: 0,
-                            style: BorderStyle.none,
-                          ),),
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide: const BorderSide(
+                          width: 0,
+                          style: BorderStyle.none,
+                        ),
+                      ),
                       fillColor: editField,
                       filled: true,
                     ),
@@ -253,9 +271,10 @@ class _LoginPageState extends State<LoginPage> {
                         child: const Text(
                           'Login',
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,),
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -265,19 +284,21 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.fromLTRB(30, 10, 40, 10),
                   width: double.infinity,
                   alignment: Alignment.center,
-                  child: const Text('OR',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.white,
-                        shadows: <Shadow>[
-                          Shadow(
-                            offset: Offset(0.0, 4.0),
-                            blurRadius: 4.0,
-                            color: Colors.black45,
-                          ),
-                        ],
-                      ),),
+                  child: const Text(
+                    'OR',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.white,
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(0.0, 4.0),
+                          blurRadius: 4.0,
+                          color: Colors.black45,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Center(
                   child: InkWell(
@@ -298,9 +319,10 @@ class _LoginPageState extends State<LoginPage> {
                         child: const Text(
                           'Skip',
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,),
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -314,19 +336,21 @@ class _LoginPageState extends State<LoginPage> {
                     padding: const EdgeInsets.fromLTRB(30, 20, 40, 10),
                     width: double.infinity,
                     alignment: Alignment.center,
-                    child: const Text('New user? Create an account',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.white,
-                          shadows: <Shadow>[
-                            Shadow(
-                              offset: Offset(0.0, 4.0),
-                              blurRadius: 4.0,
-                              color: Colors.black45,
-                            ),
-                          ],
-                        ),),
+                    child: const Text(
+                      'New user? Create an account',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.white,
+                        shadows: <Shadow>[
+                          Shadow(
+                            offset: Offset(0.0, 4.0),
+                            blurRadius: 4.0,
+                            color: Colors.black45,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 GestureDetector(
@@ -337,19 +361,21 @@ class _LoginPageState extends State<LoginPage> {
                     padding: const EdgeInsets.fromLTRB(30, 0, 40, 40),
                     width: double.infinity,
                     alignment: Alignment.center,
-                    child: const Text('Forgot password',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.white,
-                          shadows: <Shadow>[
-                            Shadow(
-                              offset: Offset(0.0, 4.0),
-                              blurRadius: 4.0,
-                              color: Colors.black45,
-                            ),
-                          ],
-                        ),),
+                    child: const Text(
+                      'Forgot password',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.white,
+                        shadows: <Shadow>[
+                          Shadow(
+                            offset: Offset(0.0, 4.0),
+                            blurRadius: 4.0,
+                            color: Colors.black45,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -362,12 +388,14 @@ class _LoginPageState extends State<LoginPage> {
 
   Future navigationLoginScreen(String orderId) async {
     await Navigator.pushReplacement(
-        context,
-        PageTransition(
-            type: PageTransitionType.rightToLeft,
-            child: LoginPinPage(
-              orderId: orderId,
-            ),),);
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: LoginPinPage(
+          orderId: orderId,
+        ),
+      ),
+    );
   }
 
   /*"sub_active":1(Subscribed),"showTrial":0(Trial version expired)*/
@@ -376,9 +404,9 @@ class _LoginPageState extends State<LoginPage> {
       'login_type': '1',
       'email': _emailController.text.toString().trim(),
       'password': _passwordController.text.toString().trim(),
-      'device_token': _token.isNotEmpty?_token:'NoDeviceTokenFound',
-     // "device_token": 'example',
-      'device_type': Platform.isAndroid?'android':'ios',
+      'device_token': _token.isNotEmpty ? _token : 'NoDeviceTokenFound',
+      // "device_token": 'example',
+      'device_type': Platform.isAndroid ? 'android' : 'ios',
     };
     const url = '$baseUrl/login';
     var result = await callApi('POST', param, url);
@@ -393,15 +421,16 @@ class _LoginPageState extends State<LoginPage> {
         isTrialClicked = false;
         trialExpired = result[kData][kSubscription][kTrial][kExpired];
         if (trialExpired == 0) {
-          trialText = '${result[kData][kSubscription][kTrial][kPackageName]} expired on ${result[kData][kSubscription][kTrial][kExpiredDate]}';
+          trialText =
+              '${result[kData][kSubscription][kTrial][kPackageName]} expired on ${result[kData][kSubscription][kTrial][kExpiredDate]}';
         } else {
           isTrialClicked = true;
           trialText = 'Trial Expired';
         }
       } else {
-        if(trialExpired==0){
+        if (trialExpired == 0) {
           isTrialClicked = true;
-        }else{
+        } else {
           isTrialClicked = false;
           trialText = 'Trial Expired';
         }
@@ -409,11 +438,13 @@ class _LoginPageState extends State<LoginPage> {
       subActive = result[kData][kSubscription][kSubscription][kActive];
       if (subActive == 1) {
         subExpired = result[kData][kSubscription][kSubscription][kExpired];
-        pinVerified = result[kData][kSubscription][kSubscription][kPinVerified].toString();
-        orderId = result[kData][kSubscription][kSubscription][kOrderId].toString();
+        pinVerified = result[kData][kSubscription][kSubscription][kPinVerified]
+            .toString();
+        orderId =
+            result[kData][kSubscription][kSubscription][kOrderId].toString();
         if (subExpired == 0) {
           subText =
-          '${result[kData][kSubscription][kSubscription][kPackageName]} expired on ${result[kData][kSubscription][kSubscription][kExpiredDate]}';
+              '${result[kData][kSubscription][kSubscription][kPackageName]} expired on ${result[kData][kSubscription][kSubscription][kExpiredDate]}';
         } else {
           subText = '1 Year Subscription';
         }
@@ -421,22 +452,23 @@ class _LoginPageState extends State<LoginPage> {
         subText = '1 Year Subscription';
       }
 
-      if(trialActive == 1 && trialExpired==0){
+      if (trialActive == 1 && trialExpired == 0) {
         await navigationHomePage();
-      }else if(subActive == 1 && subExpired==0){
-        if(pinVerified == '0') {
+      } else if (subActive == 1 && subExpired == 0) {
+        if (pinVerified == '0') {
           await navigationLoginScreen(orderId);
-        }else{
+        } else {
           await navigationHomePage();
         }
-      }else{
+      } else {
         /*navigationPurchasePage(result[kData][kId].toString(),
             result[kData][kSubscription][kShowTrial] == 1);*/
         await Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const AppDrawer(isNotification: false),
-            ),);
+          context,
+          MaterialPageRoute(
+            builder: (context) => const AppDrawer(isNotification: false),
+          ),
+        );
       }
     } else {
       //showToast(context, result[kDataMessage]);

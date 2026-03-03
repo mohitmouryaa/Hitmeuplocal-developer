@@ -7,7 +7,7 @@ import 'package:page_transition/page_transition.dart';
 
 class LoginPinPage extends StatefulWidget {
   final String orderId;
-  const LoginPinPage({super.key,required this.orderId});
+  const LoginPinPage({super.key, required this.orderId});
 
   @override
   State<LoginPinPage> createState() => _LoginPinPageState();
@@ -15,7 +15,6 @@ class LoginPinPage extends StatefulWidget {
 
 class _LoginPinPageState extends State<LoginPinPage> {
   final _pinController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,22 +40,24 @@ class _LoginPinPageState extends State<LoginPinPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 const Padding(
-                    padding: EdgeInsets.only(top: 40),
-                    child: Text(
-                      'Verify Your Account',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          shadows: <Shadow>[
-                            Shadow(
-                              offset: Offset(0.0, 4.0),
-                              blurRadius: 4.0,
-                              color: Colors.black45,
-                            ),
-                          ],),
-                    ),),
+                  padding: EdgeInsets.only(top: 40),
+                  child: Text(
+                    'Verify Your Account',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(0.0, 4.0),
+                          blurRadius: 4.0,
+                          color: Colors.black45,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
@@ -64,7 +65,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
                     alignment: Alignment.topLeft,
                     color: Colors.white,
                     margin:
-                    const EdgeInsets.only(left: 0.0, top: 15, right: 0.0),
+                        const EdgeInsets.only(left: 0.0, top: 15, right: 0.0),
                   ),
                 ),
                 Padding(
@@ -80,7 +81,6 @@ class _LoginPinPageState extends State<LoginPinPage> {
                     ),
                   ),
                 ),
-
                 Container(
                   margin: const EdgeInsets.only(top: 50, bottom: 15),
                   alignment: Alignment.center,
@@ -97,13 +97,16 @@ class _LoginPinPageState extends State<LoginPinPage> {
                       //hintText: 'Pin #',
                       hintText: 'Check mail for pin.',
                       hintStyle: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold,),
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                          borderSide: const BorderSide(
-                            width: 0,
-                            style: BorderStyle.none,
-                          ),),
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide: const BorderSide(
+                          width: 0,
+                          style: BorderStyle.none,
+                        ),
+                      ),
                       fillColor: editField,
                       filled: true,
                     ),
@@ -114,7 +117,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
                     onTap: () {
                       if (_pinController.text.isEmpty) {
                         showToast(context, kEmptyRegisterPinError);
-                      }  else {
+                      } else {
                         showLoader(context);
                         apiRegisterUsingPin(context);
                       }
@@ -133,9 +136,10 @@ class _LoginPinPageState extends State<LoginPinPage> {
                         child: const Text(
                           'Subscribe',
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,),
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -148,12 +152,16 @@ class _LoginPinPageState extends State<LoginPinPage> {
       ),
     );
   }
+
   Future navigationHomePage() async {
-    await Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-    await Navigator.pushReplacement(
-        context,
-        PageTransition(
-            type: PageTransitionType.rightToLeft, child: const CongratulationScreen(),),);
+    await Navigator.pushAndRemoveUntil(
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: const CongratulationScreen(),
+      ),
+      (_) => false,
+    );
   }
 
   /*"sub_active":1(Subscribed),"showTrial":0(Trial version expired)*/

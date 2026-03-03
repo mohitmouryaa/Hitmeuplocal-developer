@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hit_me_up/UI/app_drawer.dart';
 
-
 class CongratulationScreen extends StatefulWidget {
-
   const CongratulationScreen({super.key});
 
   @override
@@ -28,15 +26,17 @@ class _CongratulationScreenState extends State<CongratulationScreen> {
   }
 
   startTime() async {
-    var _duration = const Duration(seconds: 4);
-    test=Timer(_duration, navigationPage);
+    var duration = const Duration(seconds: 4);
+    test = Timer(duration, navigationPage);
   }
 
   Future navigationPage() async {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-    Navigator.pushReplacement(
+    if (!mounted) return;
+    await Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => const AppDrawer(isNotification: false)),
+      MaterialPageRoute(
+          builder: (context) => const AppDrawer(isNotification: false)),
+      (_) => false,
     );
   }
 
@@ -70,9 +70,10 @@ class _CongratulationScreenState extends State<CongratulationScreen> {
                   child: const Text(
                     'Thanks for purchasing our package',
                     style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontStyle: FontStyle.italic,),
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ),
                 Container(
@@ -81,9 +82,10 @@ class _CongratulationScreenState extends State<CongratulationScreen> {
                   child: const Text(
                     'and',
                     style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontStyle: FontStyle.italic,),
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ),
                 Container(
@@ -93,9 +95,10 @@ class _CongratulationScreenState extends State<CongratulationScreen> {
                     //"Your package is valid upto",
                     'Your package is Activated',
                     style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontStyle: FontStyle.italic,),
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ),
               ],

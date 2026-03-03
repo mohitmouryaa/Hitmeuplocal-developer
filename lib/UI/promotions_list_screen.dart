@@ -680,7 +680,7 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
                                               ),
                                               decoration: const InputDecoration
                                                   .collapsed(hintText: ''),
-                                              value: stateData['name'],
+                                              initialValue: stateData['name'],
                                               hint: const Text('Select State'),
                                               isExpanded: true,
                                               items: stateList
@@ -955,7 +955,7 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
                                     decoration: const InputDecoration.collapsed(
                                       hintText: '',
                                     ),
-                                    value: categoryData['category_name'],
+                                    initialValue: categoryData['category_name'],
                                     hint: const Text('Select category'),
                                     isExpanded: true,
                                     items: categoryList

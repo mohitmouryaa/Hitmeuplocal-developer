@@ -16,12 +16,13 @@ class LoginPurchaseSubscription extends StatefulWidget {
   final String subText, trialText;
   final bool isTrialClicked;
 
-  const LoginPurchaseSubscription(
-      {super.key,
-      required this.userId,
-      required this.subText,
-      required this.trialText,
-      required this.isTrialClicked,});
+  const LoginPurchaseSubscription({
+    super.key,
+    required this.userId,
+    required this.subText,
+    required this.trialText,
+    required this.isTrialClicked,
+  });
 
   @override
   State<LoginPurchaseSubscription> createState() =>
@@ -29,7 +30,6 @@ class LoginPurchaseSubscription extends StatefulWidget {
 }
 
 class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
-
   bool isGuest = false;
 
   @override
@@ -39,10 +39,11 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     isGuest = authProvider.isGuest;
   }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
         return false;
       },
       child: Scaffold(
@@ -52,49 +53,54 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Expanded(
-                flex: 55,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Image.asset(
-                      'assets/trial_bg.png',
-                      fit: BoxFit.fill,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(top: 45, bottom: 10),
-                          child: const Center(
-                              child: Text(
+              flex: 55,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(
+                    'assets/trial_bg.png',
+                    fit: BoxFit.fill,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(top: 45, bottom: 10),
+                        child: const Center(
+                          child: Text(
                             'Purchase',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                shadows: <Shadow>[
-                                  Shadow(
-                                    offset: Offset(0.0, 4.0),
-                                    blurRadius: 4.0,
-                                    color: Colors.black45,
-                                  ),
-                                ],),
-                          ),),
-                        ),
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Container(
-                            height: .2,
-                            alignment: Alignment.topLeft,
-                            color: Colors.white,
-                            margin: const EdgeInsets.only(
-                                left: 0.0, top: 10, right: 0.0,),
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              shadows: <Shadow>[
+                                Shadow(
+                                  offset: Offset(0.0, 4.0),
+                                  blurRadius: 4.0,
+                                  color: Colors.black45,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        Expanded(
-                            child: Center(
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Container(
+                          height: .2,
+                          alignment: Alignment.topLeft,
+                          color: Colors.white,
+                          margin: const EdgeInsets.only(
+                            left: 0.0,
+                            top: 10,
+                            right: 0.0,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Center(
                           child: Card(
                             color: Colors.white,
                             elevation: 20,
@@ -103,21 +109,26 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
                             ),
                             child: InkWell(
                               onTap: () {
-                                if(isGuest){
+                                if (isGuest) {
                                   _loginRequired();
-                                }else {
+                                } else {
                                   if (widget.isTrialClicked) {
                                     showLoader(context);
                                     apiTrialPurchase();
                                   } else {
-                                    if (widget.trialText.contains('expired on')) {
+                                    if (widget.trialText
+                                        .contains('expired on')) {
                                       showMessage(
-                                          kAlert, widget.trialText, context,);
+                                        kAlert,
+                                        widget.trialText,
+                                        context,
+                                      );
                                     } else {
                                       showMessage(
-                                          kAlert,
-                                          'Your trial period has been expired',
-                                          context,);
+                                        kAlert,
+                                        'Your trial period has been expired',
+                                        context,
+                                      );
                                     }
                                   }
                                   // widget.openViewCall("home");
@@ -128,70 +139,79 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
                                 width: widget.trialText.contains('expired on')
                                     ? 270
                                     : 200,
-                                padding: const EdgeInsets.only(top: 5, bottom: 5),
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
                                 alignment: Alignment.center,
                                 child: Text(
                                   widget.trialText,
                                   style: const TextStyle(
-                                      color: buttonColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.normal,),
+                                    color: buttonColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),),
-                      ],
-                    ),
-                  ],
-                ),),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
             Expanded(
-                flex: 45,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Image.asset(
-                      'assets/subscription_bg.png',
-                      fit: BoxFit.fill,
-                    ),
-                    Center(
-                      child: InkWell(
-                        onTap: () {
-                          if(isGuest){
-                            _loginRequired();
-                          }else{
-                            if (widget.subText.contains('expired on')) {
-                              showMessage(
-                                  kAlert, 'Your current plan is Active.', context,);
-                            } else {
-                              navigationSubscriptionPage(widget.userId);
-                            }
+              flex: 45,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(
+                    'assets/subscription_bg.png',
+                    fit: BoxFit.fill,
+                  ),
+                  Center(
+                    child: InkWell(
+                      onTap: () {
+                        if (isGuest) {
+                          _loginRequired();
+                        } else {
+                          if (widget.subText.contains('expired on')) {
+                            showMessage(
+                              kAlert,
+                              'Your current plan is Active.',
+                              context,
+                            );
+                          } else {
+                            navigationSubscriptionPage(widget.userId);
                           }
-                        },
-                        child: Card(
-                          color: Colors.white,
-                          elevation: 20,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                          ),
-                          child: Container(
-                            height: 40,
-                            width: 200,
-                            padding: const EdgeInsets.only(top: 5, bottom: 5),
-                            alignment: Alignment.center,
-                            child: const Text(
-                              '1 Year Subscription',
-                              style: TextStyle(
-                                  color: buttonParrotColor,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.normal,),
+                        }
+                      },
+                      child: Card(
+                        color: Colors.white,
+                        elevation: 20,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
+                        child: Container(
+                          height: 40,
+                          width: 200,
+                          padding: const EdgeInsets.only(top: 5, bottom: 5),
+                          alignment: Alignment.center,
+                          child: const Text(
+                            '1 Year Subscription',
+                            style: TextStyle(
+                              color: buttonParrotColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -199,11 +219,14 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
   }
 
   Future navigationHomePage() async {
-    await Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-    await Navigator.pushReplacement(
-        context,
-        PageTransition(
-            type: PageTransitionType.rightToLeft, child: const AppDrawer(isNotification: false),),);
+    await Navigator.pushAndRemoveUntil(
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: const AppDrawer(isNotification: false),
+      ),
+      (_) => false,
+    );
   }
 
   void _loginRequired() {
@@ -215,12 +238,14 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
 
   Future navigationSubscriptionPage(String userId) async {
     await Navigator.push(
-        context,
-        PageTransition(
-            type: PageTransitionType.rightToLeft,
-            child: SubscriptionPlanList(
-              userId: userId,
-            ),),);
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: SubscriptionPlanList(
+          userId: userId,
+        ),
+      ),
+    );
   }
 
   void apiTrialPurchase() async {

@@ -128,13 +128,13 @@ class _MySplashPageState extends State<MySplashPage> {
           await FirebaseMessaging.instance.getInitialMessage();
       if (!mounted) return;
 
-      await Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-      await Navigator.pushReplacement(
+      await Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (context) =>
               AppDrawer(isNotification: initialMessage != null),
         ),
+        (_) => false,
       );
     } else {
       if (!mounted) return;

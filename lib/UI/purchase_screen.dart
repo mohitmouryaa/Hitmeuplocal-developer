@@ -13,17 +13,21 @@ import 'package:hit_me_up/UI/login_screen.dart';
 
 class PurchaseSubscription extends StatefulWidget {
   final Function drawerCall;
-  final String subText,trialText;
+  final String subText, trialText;
   final bool isTrialClicked;
-  const PurchaseSubscription({super.key,required this.drawerCall,required this.subText,required this.trialText
-    ,required this.isTrialClicked,});
+  const PurchaseSubscription({
+    super.key,
+    required this.drawerCall,
+    required this.subText,
+    required this.trialText,
+    required this.isTrialClicked,
+  });
 
   @override
   State<PurchaseSubscription> createState() => _PurchaseSubscriptionState();
 }
 
 class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
-
   bool isGuest = false;
 
   @override
@@ -41,11 +45,14 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
   }
 
   Future navigationHomePage() async {
-    await Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-    await Navigator.pushReplacement(
-        context,
-        PageTransition(
-            type: PageTransitionType.rightToLeft, child: const AppDrawer(isNotification: false),),);
+    await Navigator.pushAndRemoveUntil(
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: const AppDrawer(isNotification: false),
+      ),
+      (_) => false,
+    );
   }
 
   @override
@@ -56,143 +63,186 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.max,
         children: [
-          Expanded(flex: 55,child: Stack(
-            fit: StackFit.expand,
-            children: [
-              Image.asset('assets/trial_bg.png',fit: BoxFit.fill,),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Row(
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(top: 35,left: 10),
+          Expanded(
+            flex: 55,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Image.asset(
+                  'assets/trial_bg.png',
+                  fit: BoxFit.fill,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 35, left: 10),
                           child: InkWell(
-                            onTap: (){
-                               widget.drawerCall();
+                            onTap: () {
+                              widget.drawerCall();
                             },
                             child: const Icon(
                               Icons.menu,
                               color: Colors.white,
                               size: 35,
                             ),
-                          ),),
-                      const Expanded(child: Padding(
-                          padding: EdgeInsets.only(top: 35,right: 50),
-                          child: Text(
-                            'Purchase',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white, fontSize: 18,fontWeight: FontWeight.bold,shadows: <Shadow>[
-                              Shadow(
-                                offset: Offset(0.0, 4.0),
-                                blurRadius: 4.0,
-                                color: Colors.black45,
-                              ),
-                            ],),
-                          ),),),
-                    ],
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      height: .2,
-                      alignment: Alignment.topLeft,
-                      color: Colors.white,
-                      margin: const EdgeInsets.only(left: 0.0, top: 10, right: 0.0),
-                    ),
-                  ),
-                  Expanded(child: Center(
-                    child: Center(
-                      child: Card(
-                        color: Colors.white,
-                        elevation: 20,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
+                          ),
                         ),
-                        child: InkWell(
-                          onTap: () {
-                            if(isGuest){
-                              _loginRequired('Please login to get Free Trial');
-                            }else{
-                              if(widget.isTrialClicked){
-                                showLoader(context);
-                                apiTrialPurchase();
-                              }else{
-                                if(widget.trialText.contains('expired on')){
-                                  showMessage(kAlert, widget.trialText, context);
-                                }else{
-                                  showMessage(kAlert, 'Your trial period has been expired', context);
-                                }
-                              }
-                            }
-                          },
-                          child: Container(
-                            height: 50,
-                            width: widget.trialText.contains('expired on')?270:260,
-                            padding: const EdgeInsets.only(top: 5, bottom: 5),
-                            alignment: Alignment.center,
+                        const Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 35, right: 50),
                             child: Text(
-                              widget.trialText,
+                              'Purchase',
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  color: buttonColor, fontSize: 16,fontWeight: FontWeight.normal,),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                shadows: <Shadow>[
+                                  Shadow(
+                                    offset: Offset(0.0, 4.0),
+                                    blurRadius: 4.0,
+                                    color: Colors.black45,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        height: .2,
+                        alignment: Alignment.topLeft,
+                        color: Colors.white,
+                        margin: const EdgeInsets.only(
+                            left: 0.0, top: 10, right: 0.0),
+                      ),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: Center(
+                          child: Card(
+                            color: Colors.white,
+                            elevation: 20,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                if (isGuest) {
+                                  _loginRequired(
+                                      'Please login to get Free Trial');
+                                } else {
+                                  if (widget.isTrialClicked) {
+                                    showLoader(context);
+                                    apiTrialPurchase();
+                                  } else {
+                                    if (widget.trialText
+                                        .contains('expired on')) {
+                                      showMessage(
+                                          kAlert, widget.trialText, context);
+                                    } else {
+                                      showMessage(
+                                          kAlert,
+                                          'Your trial period has been expired',
+                                          context);
+                                    }
+                                  }
+                                }
+                              },
+                              child: Container(
+                                height: 50,
+                                width: widget.trialText.contains('expired on')
+                                    ? 270
+                                    : 260,
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  widget.trialText,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    color: buttonColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),),
-                ],
-              ),
-            ],
-          ),),
-          Expanded(flex: 45,child:  Stack(
-            fit: StackFit.expand,
-            children: [
-              Image.asset('assets/subscription_bg.png',fit: BoxFit.fill,),
-              Center(
-                child: Card(
-                  color: Colors.white,
-                  elevation: 20,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      if(isGuest){
-                        _loginRequired('Please login to buy subscription');
-                      }else{
-                        navigationSubscriptionPage();
-                      }
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 45,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Image.asset(
+                  'assets/subscription_bg.png',
+                  fit: BoxFit.fill,
+                ),
+                Center(
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 20,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        if (isGuest) {
+                          _loginRequired('Please login to buy subscription');
+                        } else {
+                          navigationSubscriptionPage();
+                        }
 
-               /*       if(widget.subText.contains("expired on")) {
+                        /*       if(widget.subText.contains("expired on")) {
                         showMessage(kAlert, "Your current plan is active.", context);
                       }else{
                         navigationSubscriptionPage();
                       }*/
-                    },
-                    child:
-                    Container(
-                      height: 50,
-                      width: widget.subText.contains('expires on')?300:200,
-                      padding: const EdgeInsets.only(top: 5, bottom: 5,left: 7,right: 7),
-                      alignment: Alignment.center,
-                      child: Center(
-                        child: Text(
-                          widget.subText,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          style: TextStyle(
-                              color: buttonParrotColor, fontSize: widget.subText.contains('expires on')?13:16,fontWeight: FontWeight.normal, overflow: TextOverflow.ellipsis,),
+                      },
+                      child: Container(
+                        height: 50,
+                        width:
+                            widget.subText.contains('expires on') ? 300 : 200,
+                        padding: const EdgeInsets.only(
+                            top: 5, bottom: 5, left: 7, right: 7),
+                        alignment: Alignment.center,
+                        child: Center(
+                          child: Text(
+                            widget.subText,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            style: TextStyle(
+                              color: buttonParrotColor,
+                              fontSize: widget.subText.contains('expires on')
+                                  ? 13
+                                  : 16,
+                              fontWeight: FontWeight.normal,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -201,9 +251,14 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
   Future navigationSubscriptionPage() async {
     dynamic user = await getSharedPreference(kDataLoginUser);
     await Navigator.push(
-        context,
-        PageTransition(
-            type: PageTransitionType.rightToLeft, child: SubscriptionPlanList(userId: user[kId].toString(),),),);
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: SubscriptionPlanList(
+          userId: user[kId].toString(),
+        ),
+      ),
+    );
   }
 
   void apiTrialPurchase() async {
@@ -236,6 +291,5 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
         MaterialPageRoute(builder: (context) => const LoginPage()),
       );
     });
-
   }
 }

@@ -14,7 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 const greyColor = Color(0xffaeaeae);
 const greyColor2 = Color(0xffE8E8E8);
 const greyCol = Color(0xffede9e9);
-const greyBorder = Color(0xffD3DBE1);
+const greyBorder = Color.fromARGB(255, 2, 3, 4);
 const greyFilled = Color(0xffF7F7F9);
 
 const buttonColor = Color(0xFF1B9CEA);
@@ -98,14 +98,14 @@ void onBackPress(
   Function drawerCall,
   Function openViewCall,
 ) {
-  Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-  Navigator.pushReplacement(
+  Navigator.pushAndRemoveUntil(
     context,
     MaterialPageRoute(
       builder: (BuildContext context) => const AppDrawer(
         isNotification: false,
       ),
     ),
+    (_) => false,
   );
 }
 

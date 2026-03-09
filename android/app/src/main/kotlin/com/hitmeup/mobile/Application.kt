@@ -1,4 +1,4 @@
-package com.hitme.up.local
+package com.hitmeup.mobile
 
 import io.flutter.app.FlutterApplication
 

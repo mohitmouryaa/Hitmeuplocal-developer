@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hitme.up.local">
+    package="com.hitmeup.mobile">
     <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
    <application
-       android:name="com.hitme.up.local.Application"
+       android:name="com.hitmeup.mobile.Application"
         android:label="Hit Me Up"
         android:icon="@mipmap/launcher_icon"
        android:roundIcon="@mipmap/ic_launcher_new_round"
@@ -21,7 +21,7 @@
            android:name="com.google.firebase.messaging.default_notification_color"
            android:resource="@android:color/darker_gray" />
         <activity
-            android:name="com.hitme.up.local.MainActivity"
+            android:name="com.hitmeup.mobile.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

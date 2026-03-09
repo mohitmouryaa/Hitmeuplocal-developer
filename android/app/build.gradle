@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace 'com.hitme.up.local'
+    namespace 'com.hitmeup.mobile'
     compileSdk 36
 
     compileOptions {
@@ -42,7 +42,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.hitme.up.local"
+        applicationId "com.hitmeup.mobile"
         minSdkVersion flutter.minSdkVersion
         targetSdk 36
         versionCode flutterVersionCode.toInteger()

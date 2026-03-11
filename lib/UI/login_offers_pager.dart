@@ -34,7 +34,7 @@ class _LoginOfferPageState extends State<LoginOfferPage> {
     );
   }
 
-  imageSlider(int index, BuildContext context) {
+  AnimatedBuilder imageSlider(int index, BuildContext context) {
     if (index == offersList.length - 1) {
       pos = 0;
     } else {
@@ -100,7 +100,7 @@ class _LoginOfferPageState extends State<LoginOfferPage> {
     });
   }
 
-  _autoScroll() {
+  void _autoScroll() {
     Timer.periodic(const Duration(seconds: 10), (Timer timer) {
       if (pos < offersList.length) {
         pos++;
@@ -115,7 +115,7 @@ class _LoginOfferPageState extends State<LoginOfferPage> {
     });
   }
 
-  _buildCircleIndicator() {
+  Positioned _buildCircleIndicator() {
     return Positioned(
       left: 0.0,
       right: 0.0,

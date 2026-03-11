@@ -53,7 +53,7 @@ class _SelectStateState extends State<SelectState> {
     Navigator.pop(context, values);
   }
 
-  onSearchTextChanged(String text) async {
+  Future<void> onSearchTextChanged(String text) async {
     _searchResult.clear();
     if (text.isEmpty) {
       setState(() {});

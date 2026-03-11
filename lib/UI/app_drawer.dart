@@ -86,10 +86,10 @@ class _AppDrawerState extends State<AppDrawer> {
 
       if (notification != null && android != null) {
         flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
+            id: notification.hashCode,
+            title: notification.title,
+            body: notification.body,
+            notificationDetails: NotificationDetails(
               android: AndroidNotificationDetails(
                 channel.id,
                 channel.name,
@@ -145,7 +145,7 @@ class _AppDrawerState extends State<AppDrawer> {
     setState(() {});
   }
 
-   checkSubscription() async {
+  Future<void> checkSubscription() async {
      final authProvider = Provider.of<AuthProvider>(context, listen: false);
      if (authProvider.isGuest) {
        //callPurchaseView();
@@ -770,12 +770,10 @@ class _AppDrawerState extends State<AppDrawer> {
     );
   }
 
-   checkSub()  {
-     showLoader(context);
+  void checkSub() {
+    showLoader(context);
     Future.delayed(const Duration(milliseconds: 500), () async {
-
-      checkSubscription();
-
+      await checkSubscription();
     });
   }
 

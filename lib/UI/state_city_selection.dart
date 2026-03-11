@@ -259,7 +259,7 @@ class _StateCitySelectionState extends State<StateCitySelection> {
     }
   }
 
-  _onLayoutDone(_) {
+  void _onLayoutDone(Duration _) {
     _scaffoldKey.currentState!.openEndDrawer();
   }
 }

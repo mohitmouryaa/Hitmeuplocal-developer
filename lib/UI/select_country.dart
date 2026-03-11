@@ -47,7 +47,7 @@ class _SelectCountryState extends State<SelectCountry> {
     Navigator.pop(context, values);
   }
 
-  onSearchTextChanged(String text) async {
+  Future<void> onSearchTextChanged(String text) async {
     _searchResult.clear();
     if (text.isEmpty) {
       setState(() {});

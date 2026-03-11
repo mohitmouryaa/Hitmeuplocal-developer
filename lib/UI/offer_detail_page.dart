@@ -485,7 +485,7 @@ class _OfferDetailPageState extends State<OfferDetailPage> {
     return miles;
   }
 
-  sendMail() async {
+  Future<void> sendMail() async {
     final Uri params = Uri(
       scheme: 'mailto',
       path: widget.email,
@@ -496,7 +496,7 @@ class _OfferDetailPageState extends State<OfferDetailPage> {
     await launchUrl(url);
   }
 
-  navigateToMaps(String lat , String lng) async {
+  Future<void> navigateToMaps(String lat , String lng) async {
     await MapsLauncher.launchCoordinates(double.parse(lat), double.parse(lng));
       /*if(Platform.isAndroid){
         uri = Uri.parse("google.navigation:q=$lat,$lng&mode=d");

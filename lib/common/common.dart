@@ -261,7 +261,8 @@ void showSuccessMessage(String message, BuildContext context) {
 
 Future<String> getTimeZone() async {
   try {
-    String timeZone = await FlutterTimezone.getLocalTimezone();
+    final timezoneInfo = await FlutterTimezone.getLocalTimezone();
+    final String timeZone = timezoneInfo.identifier;
     if (timeZone.isEmpty) {
       return 'Timezone not detected or returned empty.';
     }

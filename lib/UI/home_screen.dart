@@ -313,7 +313,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
     );
   }
 
-  _showBottomSheet(
+  void _showBottomSheet(
     BuildContext context,
   ) {
     showModalBottomSheet<void>(

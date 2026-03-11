@@ -361,7 +361,7 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
     });
   }
 
-  onSearchTextChanged(String text) async {
+  Future<void> onSearchTextChanged(String text) async {
     _searchResult.clear();
     if (text.isEmpty) {
       for (var productDetail in _items) {
@@ -803,7 +803,7 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
     );
   }
 
-  void onGooglePayResult(paymentResult) {
+  void onGooglePayResult(dynamic paymentResult) {
     // Send the resulting Google Pay token to your server / PSP
   }
 

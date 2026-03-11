@@ -101,11 +101,11 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
     callMark(false);
   }
 
-  callMark(bool isCall) {
+  void callMark(bool isCall) {
     getCurrentLocation(isCall);
   }
 
-  getCurrentLocation(bool isCall) async {
+  Future<void> getCurrentLocation(bool isCall) async {
     // Check permission status
     await Permission.locationWhenInUse.request();
 
@@ -392,7 +392,7 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
     );
   }
 
-  Future navigationPromotionPage(id, index) async {
+  Future<void> navigationPromotionPage(dynamic id, int index) async {
     await Navigator.push(
       context,
       PageTransition(

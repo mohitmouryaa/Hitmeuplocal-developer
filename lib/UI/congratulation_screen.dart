@@ -25,7 +25,7 @@ class _CongratulationScreenState extends State<CongratulationScreen> {
     super.dispose();
   }
 
-  startTime() async {
+  Future<void> startTime() async {
     var duration = const Duration(seconds: 4);
     test = Timer(duration, navigationPage);
   }

@@ -68,36 +68,36 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     isGuest = authProvider.isGuest;
 
-    if (widget.searchType[kSearchType] == 'NA') {
+    final searchType = widget.searchType as Map<String, dynamic>;
+    if (searchType[kSearchType] == 'NA') {
       _radioType = 'Manual Search';
-      //if(_stateId.isNotEmpty && _cityController.text.isNotEmpty && _zipCodeController.text.isEmpty)
-    } else if (widget.searchType[kSearchType] != 'NA') {
-      _radioType = widget.searchType[kSearchType] == 'GPS'
+    } else if (searchType[kSearchType] != 'NA') {
+      _radioType = searchType[kSearchType] == 'GPS'
           ? 'Location Search'
           : 'Manual Search';
 
-      if (widget.searchType['type'] == 2) {
-        if (widget.searchType['zip_code'].isNotEmpty) {
-          _zipCodeController.text = widget.searchType['zip_code'];
+      if (searchType['type'] == 2) {
+        if ((searchType['zip_code'] as String).isNotEmpty) {
+          _zipCodeController.text = searchType['zip_code'] as String;
         }
-      } else if (widget.searchType['type'] == 1) {
-        if (widget.searchType['state'].isNotEmpty &&
-            widget.searchType['city'].isNotEmpty) {
-          _stateId = widget.searchType['state'];
-          _cityController.text = widget.searchType['city'];
+      } else if (searchType['type'] == 1) {
+        if ((searchType['state'] as String).isNotEmpty &&
+            (searchType['city'] as String).isNotEmpty) {
+          _stateId = searchType['state'] as String;
+          _cityController.text = searchType['city'] as String;
         }
       }
     }
     //getCategories();
     if (widget.data != null) {
-      categoryList = widget.data as List;
+      categoryList = widget.data as List<dynamic>;
     }
     if (widget.subData != null) {
-      subCategoryList = widget.subData as List;
+      subCategoryList = widget.subData as List<dynamic>;
     }
     requestLocationPermission();
     showLoader(context);
-    getPromotionList(widget.searchType[kSearchType], '', true);
+    getPromotionList(searchType[kSearchType] as String, '', true);
     callMark(false);
   }
 
@@ -109,15 +109,18 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
     // Check permission status
     await Permission.locationWhenInUse.request();
 
-    bool agb = await Geolocator.isLocationServiceEnabled();
+    final bool agb = await Geolocator.isLocationServiceEnabled();
     if (agb) {
       position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best,
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.best,
+        ),
       );
       if (isCall) {
         getPromotionList('Location Search', '', false);
       }
     } else {
+      if (!mounted) return;
       if (isCall) {
         hideLoader(context);
       }
@@ -138,12 +141,10 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
   }
 
   void getPromotionList(String type, String stateId, bool isFirstTime) async {
-    //dynamic user = await getSharedPreference(kDataLoginUser);
+    final searchType = widget.searchType as Map<String, dynamic>;
+    Map<String, dynamic>? param;
 
-    //Map<String, dynamic> param;
-    var param;
-
-    if (widget.searchType[kSearchType] == 'NA' && isFirstTime) {
+    if (searchType[kSearchType] == 'NA' && isFirstTime) {
       param = {
         //"user_id": user[kId].toString(),
         'category_id': widget.id,
@@ -169,8 +170,8 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
       param = {
         //"user_id": user[kId].toString(),
         'category_id': _categoryId.isNotEmpty ? _categoryId : widget.id,
-        'latitude': widget.searchType['lat'] ?? position.latitude.toString(),
-        'longitude': widget.searchType['long'] ?? position.longitude.toString(),
+        'latitude': (searchType['lat'] as String?) ?? position.latitude.toString(),
+        'longitude': (searchType['long'] as String?) ?? position.longitude.toString(),
         //"latitude": "36.8431034",
         //"longitude": "-76.0722054",
       };
@@ -212,11 +213,14 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
       }*/
     }
     const url = '$baseUrl/promotions-list';
-    var result = await callApi('POST', param, url);
+    final result = await callApi('POST', param, url);
+    if (!mounted) return;
     if (result[kDataCode] == 200) {
-      var rest = result['data'] as List;
+      final List<dynamic> rest = result['data'] as List<dynamic>;
       _offerList = rest
-          .map<PromotionListData>((json) => PromotionListData.fromJson(json))
+          .map<PromotionListData>(
+            (json) => PromotionListData.fromJson(json as Map<String, dynamic>),
+          )
           .toList();
       noPromotionsAvailable = 'No Business available around you.';
       setState(() {});
@@ -224,7 +228,6 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
         final authProvider = Provider.of<AuthProvider>(context, listen: false);
         if (authProvider.isGuest) {
           setState(() {});
-          //hideLoader(context);
           getStateListData();
         } else {
           checkSubscription();
@@ -235,42 +238,48 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
       }
     } else {
       hideLoader(context);
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 
   void getSubCategoryData(String id) async {
     String url = '$baseUrl/categories-list/$id';
-    var result = await callApi('GET', null, url);
+    final result = await callApi('GET', null, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      subCategoryList = result['data'] as List;
+      subCategoryList = result['data'] as List<dynamic>;
       if (subCategoryList.isNotEmpty) {
         subCategoryData = subCategoryList[0];
       }
       setState(() {});
     } else {
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 
   void checkSubscription() async {
-    dynamic user = await getSharedPreference(kDataLoginUser);
-    var param = {
+    final dynamic rawUser = await getSharedPreference(kDataLoginUser);
+    final user = rawUser as Map<String, dynamic>;
+    final param = {
       'user_id': user[kId].toString(),
     };
     const url = '$baseUrl/check-subscriptions';
-    var result = await callApi('POST', param, url);
+    final result = await callApi('POST', param, url);
+    if (!mounted) return;
 
     if (result[kDataCode] == 200) {
-      trialActive = result[kData][kTrial][kActive];
-      trialExpired = result[kData][kTrial][kExpired];
+      final appData = result[kData] as Map<String, dynamic>;
+      final trialData = appData[kTrial] as Map<String, dynamic>;
+      final subData = appData[kSubscription] as Map<String, dynamic>;
+      trialActive = trialData[kActive] as int;
+      trialExpired = trialData[kExpired] as int;
       if (trialActive == 1) {
         isTrialClicked = false;
 
         if (trialExpired == 0) {
           trialText =
-              '${result[kData][kTrial][kPackageName]} expired on ${result[kData][kTrial][kExpiredDate]}';
+              '${trialData[kPackageName]} expired on ${trialData[kExpiredDate]}';
         } else {
           isTrialClicked = true;
           trialText = 'Trial Expired';
@@ -284,17 +293,17 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
         }
       }
 
-      subActive = result[kData][kSubscription][kActive];
+      subActive = subData[kActive] as int;
 
       if (subActive == 1) {
         isTrialClicked = false;
         trialText = 'Trial Expired';
-        subExpired = result[kData][kSubscription][kExpired];
-        pinVerified = result[kData][kSubscription][kPinVerified].toString();
-        orderId = result[kData][kSubscription][kOrderId].toString();
+        subExpired = subData[kExpired] as int;
+        pinVerified = subData[kPinVerified].toString();
+        orderId = subData[kOrderId].toString();
         if (subExpired == 0) {
           subText =
-              '${result[kData][kSubscription][kPackageName]} expired on ${result[kData][kSubscription][kExpiredDate]}';
+              '${subData[kPackageName]} expired on ${subData[kExpiredDate]}';
         } else {
           subText = '1 Year Subscription';
         }
@@ -304,43 +313,42 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
       getStateListData();
     } else {
       hideLoader(context);
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 
   void getStateListData() async {
     String url = '';
     if (!isGuest) {
-      dynamic user = await getSharedPreference(kDataLoginUser);
-      //print("Country ID - "+user["country"]["id"].toString());
-      url = "$baseUrl/states-list/${user["country"]["id"]}";
+      final dynamic rawUser = await getSharedPreference(kDataLoginUser);
+      final user = rawUser as Map<String, dynamic>;
+      final country = user['country'] as Map<String, dynamic>;
+      url = '$baseUrl/states-list/${country['id']}';
     } else {
-      int countryId = 231;
+      const int countryId = 231;
       url = '$baseUrl/states-list/$countryId';
     }
 
-    //dynamic user = await getSharedPreference(kDataLoginUser);
-    //url = "$baseUrl/states-list/${user["country"]["id"]}";
-    var result = await callApi('GET', null, url);
+    final result = await callApi('GET', null, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      stateList = result['data'] as List;
+      stateList = result['data'] as List<dynamic>;
       if (stateList.isNotEmpty) {
         if (_stateId.isNotEmpty) {
-          int index =
-              stateList.indexWhere((data) => data['id'].toString() == _stateId);
-          stateData = stateList[index];
-          //_stateId = stateList[index]["id"].toString();
+          final int index = stateList.indexWhere(
+            (data) => (data as Map<String, dynamic>)['id'].toString() == _stateId,
+          );
+          stateData = stateList[index] as Map<String, dynamic>;
         } else {
-          stateData = stateList[1];
-          _stateId = stateData['id'].toString();
+          stateData = stateList[1] as Map<String, dynamic>;
+          _stateId = (stateData['id']).toString();
         }
         setState(() {});
       }
-      // WidgetsBinding.instance!.addPostFrameCallback(_onLayoutDone);
       setState(() {});
     } else {
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 
@@ -363,18 +371,8 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
 
   void callPurchaseView() async {
     await getSharedPreference(kDataLoginUser);
-    /*Navigator.push(
-        context,
-        PageTransition(
-            type: PageTransitionType.rightToLeft,
-            child: LoginPurchaseSubscription(
-              userId: user[kId].toString(),
-              subText: subText,
-              isTrialClicked: isTrialClicked,
-              trialText: trialText,
-            )));*/
-
-    Navigator.pushReplacement(
+    if (!mounted) return;
+    await Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => const AppDrawer(isNotification: false),
@@ -410,36 +408,42 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
     );
   }
 
-  Future navigationPromotionDetail(int index) async {
+  Future<void> navigationPromotionDetail(int index) async {
+    final st = widget.searchType as Map<String, dynamic>;
     String type = '';
-    if (widget.searchType[kSearchType] == 'NA') {
+    if (st[kSearchType] == 'NA') {
       type = '1';
     } else if (_radioType == 'Location Search') {
       type = '0';
     } else {
       type = '1';
     }
+    final offer = _offerList[index];
+    final bd = offer.businessDetail as Map<String, dynamic>;
+    final country = bd['country'] as Map<String, dynamic>;
+    final state = bd['state'] as Map<String, dynamic>;
     final result = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => OfferDetailPage(
           requestType: type,
-          businessId: _offerList[index].business_id ?? '',
-          promotionId: _offerList[index].promotion_id ?? '',
-          name: _offerList[index].business_detail['name'] ?? '',
-          title: _offerList[index].title,
+          businessId: offer.businessId?.toString() ?? '',
+          promotionId: offer.promotionId?.toString() ?? '',
+          name: bd['name'] as String? ?? '',
+          title: offer.title,
           address:
-              "${_offerList[index].business_detail['country']['name'] ?? ""}, ${_offerList[index].business_detail['state']['name'] ?? ""}, ${_offerList[index].business_detail['city'] ?? ""}, ${_offerList[index].business_detail['address'] ?? ""}, ${_offerList[index].business_detail['pincode'] ?? ""}",
-          description: _offerList[index].description,
-          distance: _offerList[index].distance ?? '',
-          email: _offerList[index].business_detail['email'] ?? '',
-          mobile: _offerList[index].business_detail['mobile'] ?? '',
-          webUrl: _offerList[index].business_detail['website_url'] ?? '',
-          lat: _offerList[index].business_detail['latitude'] ?? '',
-          lng: _offerList[index].business_detail['longitude'] ?? '',
+              '${country['name'] ?? ''}, ${state['name'] ?? ''}, ${bd['city'] ?? ''}, ${bd['address'] ?? ''}, ${bd['pincode'] ?? ''}',
+          description: offer.description,
+          distance: offer.distance?.toString() ?? '',
+          email: bd['email'] as String? ?? '',
+          mobile: bd['mobile'] as String? ?? '',
+          webUrl: bd['website_url'] as String? ?? '',
+          lat: bd['latitude'] as String? ?? '',
+          lng: bd['longitude'] as String? ?? '',
         ),
       ),
     );
+    if (!mounted) return;
     if (result == true) {
       showLoader(context);
       if (_radioType.isEmpty) {
@@ -687,30 +691,32 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
                                                   .toSet()
                                                   .toList()
                                                   .map(
-                                                    (label) => DropdownMenuItem(
-                                                      value: label['name'],
-                                                      child: Text(
-                                                        label['name'],
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
+                                                    (label) {
+                                                      final item = label as Map<String, dynamic>;
+                                                      return DropdownMenuItem<String>(
+                                                        value: item['name'] as String?,
+                                                        child: Text(
+                                                          item['name'] as String? ?? '',
+                                                          style: const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                          maxLines: 1,
+                                                          overflow:
+                                                              TextOverflow.clip,
                                                         ),
-                                                        maxLines: 1,
-                                                        overflow:
-                                                            TextOverflow.clip,
-                                                      ),
-                                                    ),
+                                                      );
+                                                    },
                                                   )
                                                   .toList(),
                                               onChanged: (value) {
-                                                int index =
+                                                final int index =
                                                     stateList.indexWhere(
                                                   (data) =>
-                                                      data['name'] == value,
+                                                      (data as Map<String, dynamic>)['name'] == value,
                                                 );
-                                                stateData = stateList[index];
-                                                _stateId = stateList[index]
-                                                        ['id']
+                                                stateData = stateList[index] as Map<String, dynamic>;
+                                                _stateId = (stateList[index] as Map<String, dynamic>)['id']
                                                     .toString();
                                                 setState(() {});
                                               },
@@ -962,30 +968,31 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
                                         .toSet()
                                         .toList()
                                         .map(
-                                          (label) => DropdownMenuItem(
-                                            value: label['category_name'],
-                                            child: Text(
-                                              label['category_name'],
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.w400,
+                                          (label) {
+                                            final item = label as Map<String, dynamic>;
+                                            return DropdownMenuItem<String>(
+                                              value: item['category_name'] as String?,
+                                              child: Text(
+                                                item['category_name'] as String? ?? '',
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
+                                            );
+                                          },
                                         )
                                         .toList(),
                                     onChanged: (value) {
-                                      int index = categoryList.indexWhere(
+                                      final int index = categoryList.indexWhere(
                                         (data) =>
-                                            data['category_name'] == value,
+                                            (data as Map<String, dynamic>)['category_name'] == value,
                                       );
-                                      categoryData = categoryList[index];
+                                      categoryData = categoryList[index] as Map<String, dynamic>;
                                       _categoryId =
-                                          categoryList[index]['id'].toString();
+                                          (categoryList[index] as Map<String, dynamic>)['id'].toString();
                                       addSubcategories(index);
-                                      //showLoader(context);
-                                      //getSubCategoryData(_categoryId);
                                     },
                                   ),
                                 ),
@@ -1075,26 +1082,29 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
                                         .toSet()
                                         .toList()
                                         .map(
-                                          (label) => DropdownMenuItem(
-                                            value: label['category_name'],
-                                            child: Text(
-                                              label['category_name'] ?? 'NA',
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.w400,
+                                          (label) {
+                                            final item = label as Map<String, dynamic>;
+                                            return DropdownMenuItem<String>(
+                                              value: item['category_name'] as String?,
+                                              child: Text(
+                                                item['category_name'] as String? ?? 'NA',
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
+                                            );
+                                          },
                                         )
                                         .toList(),
                                     onChanged: (value) {
-                                      int index = subCategoryList.indexWhere(
+                                      final int index = subCategoryList.indexWhere(
                                         (data) =>
-                                            data['category_name'] == value,
+                                            (data as Map<String, dynamic>)['category_name'] == value,
                                       );
-                                      subCategoryData = subCategoryList[index];
-                                      _categoryId = subCategoryList[index]['id']
+                                      subCategoryData = subCategoryList[index] as Map<String, dynamic>;
+                                      _categoryId = (subCategoryList[index] as Map<String, dynamic>)['id']
                                           .toString();
                                       setState(() {});
                                     },
@@ -1349,10 +1359,13 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
+                                  // ignore: deprecated_member_use
                                   Radio(
                                     activeColor: Colors.white,
                                     value: 'Location Search',
+                                    // ignore: deprecated_member_use
                                     groupValue: _radioType,
+                                    // ignore: deprecated_member_use
                                     onChanged: (value) async {
                                       _radioType = 'Location Search';
                                       _categoryId = '';
@@ -1406,10 +1419,13 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
+                                  // ignore: deprecated_member_use
                                   Radio(
                                     activeColor: Colors.white,
                                     value: 'Manual Search',
+                                    // ignore: deprecated_member_use
                                     groupValue: _radioType,
+                                    // ignore: deprecated_member_use
                                     onChanged: (value) {
                                       _radioType = value.toString();
                                       _categoryId = '';
@@ -1459,7 +1475,7 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
                                               trialExpired == 0) {
                                             //navigationPromotionDetail(index);
                                             navigationPromotionPage(
-                                              _offerList[index].business_id,
+                                              _offerList[index].businessId,
                                               index,
                                             );
                                           } else if (subActive == 1 &&
@@ -1468,7 +1484,7 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
                                               navigationLoginScreen();
                                             } else {
                                               navigationPromotionPage(
-                                                _offerList[index].business_id,
+                                                _offerList[index].businessId,
                                                 index,
                                               );
                                               //navigationPromotionDetail(index);
@@ -1500,8 +1516,7 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
                                                 padding:
                                                     const EdgeInsets.all(9.0),
                                                 child: Text(
-                                                  _offerList[index]
-                                                      .business_detail['name'],
+                                                  (_offerList[index].businessDetail as Map<String, dynamic>)['name'] as String? ?? '',
                                                   textAlign: TextAlign.center,
                                                   maxLines: 3,
                                                   style: const TextStyle(
@@ -1577,44 +1592,37 @@ class _PromotionListScreenState extends State<PromotionListScreen> {
         subCategoryList.clear();
       });
     }
-    var subCat = categoryList[index];
-    var data = subCat['children'];
+    final subCat = categoryList[index] as Map<String, dynamic>;
+    final data = subCat['children'] as List<dynamic>;
     subCategoryList.addAll(data);
     setState(() {});
   }
 
   Future<void> updateCategories({required String type}) async {
-    var param;
+    Map<String, dynamic>? param;
     if (type == 'city') {
       param = {
         kState: _stateId,
-        kCity: _cityController.text.toString().trim(),
+        kCity: _cityController.text.trim(),
       };
     } else if (type == 'zip') {
       param = {
-        'pincode': _zipCodeController.text.toString().trim(),
+        'pincode': _zipCodeController.text.trim(),
       };
     }
     const url = '$baseUrl/categories-list';
-    var result = await callApi('POST', param, url);
+    final result = await callApi('POST', param, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
+      final List<dynamic> rest = result['data'] as List<dynamic>;
       setState(() {
-        var rest = result['data'] as List;
-        //categoryList = rest.map<CategoryListData>((json) => CategoryListData.fromJson(json)).toList();
-        if (categoryList.isNotEmpty) {
-          categoryList.clear();
-          setState(() {
-            categoryList = rest;
-          });
-        } else {
-          setState(() {
-            categoryList = rest;
-          });
-        }
+        categoryList
+          ..clear()
+          ..addAll(rest);
       });
     } else {
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 

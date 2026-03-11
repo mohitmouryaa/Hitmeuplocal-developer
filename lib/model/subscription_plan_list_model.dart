@@ -1,20 +1,31 @@
 class SubscriptionPlanListData {
-  var id;
-  String subscriptionId;
+  final dynamic id;
+  final String subscriptionId;
   final String name;
-  var price;
-  var validity;
-  final String validity_unit;
-  var planActive;
+  final dynamic price;
+  final dynamic validity;
+  final String validityUnit;
+  final dynamic planActive;
 
-
-  SubscriptionPlanListData({required this.id,required this.subscriptionId,required this.name
-    , required this.price, required this.validity, required this.validity_unit , required this.planActive,});
+  SubscriptionPlanListData({
+    required this.id,
+    required this.subscriptionId,
+    required this.name,
+    required this.price,
+    required this.validity,
+    required this.validityUnit,
+    required this.planActive,
+  });
 
   factory SubscriptionPlanListData.fromJson(Map<String, dynamic> json) {
     return SubscriptionPlanListData(
-        id: json['id'],subscriptionId : json['subscription_id'] as String ,name: json['name'] as String
-        , price: json['price'],
-        validity: json['validity'], validity_unit: json['validity_unit'] as String , planActive: json['plan_active'],);
+      id: json['id'],
+      subscriptionId: json['subscription_id'] as String,
+      name: json['name'] as String,
+      price: json['price'],
+      validity: json['validity'],
+      validityUnit: json['validity_unit'] as String,
+      planActive: json['plan_active'],
+    );
   }
 }

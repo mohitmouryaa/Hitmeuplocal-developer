@@ -1,5 +1,5 @@
 class CountryListData {
-  var id;
+  final dynamic id;
   final String shortname;
   final String name;
 
@@ -7,6 +7,6 @@ class CountryListData {
 
   factory CountryListData.fromJson(Map<String, dynamic> json) {
     return CountryListData(
-        id: json['id'], shortname: json['shortname'] as String, name: json['name'] as String);
+        id: json['id'], shortname: json['shortname'] as String, name: json['name'] as String,);
   }
 }

@@ -4,7 +4,7 @@ import 'package:hit_me_up/common/common.dart';
 import 'package:hit_me_up/common/service_api.dart';
 
 class ContactUsPage extends StatefulWidget {
-  final Function drawerCall;
+  final void Function() drawerCall;
   const ContactUsPage({super.key,required this.drawerCall});
 
   @override
@@ -231,9 +231,10 @@ class _ContactUsPageState extends State<ContactUsPage> {
     };
     const url = '$baseUrl/contact-us';
     var result = await callApi('POST', param, url);
+    if (!context.mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      showToast(context,result[kDataMessage].toString());
+      showToast(context, result[kDataMessage].toString());
       setState(() {
         _nameController.text = '';
         _phoneController.text = '';

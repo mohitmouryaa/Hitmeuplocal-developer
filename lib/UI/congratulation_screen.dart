@@ -11,7 +11,7 @@ class CongratulationScreen extends StatefulWidget {
 }
 
 class _CongratulationScreenState extends State<CongratulationScreen> {
-  var test;
+  Timer? test;
 
   @override
   void initState() {
@@ -21,7 +21,7 @@ class _CongratulationScreenState extends State<CongratulationScreen> {
 
   @override
   void dispose() {
-    test.cancel();
+    test?.cancel();
     super.dispose();
   }
 
@@ -35,7 +35,7 @@ class _CongratulationScreenState extends State<CongratulationScreen> {
     await Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
-          builder: (context) => const AppDrawer(isNotification: false)),
+          builder: (context) => const AppDrawer(isNotification: false),),
       (_) => false,
     );
   }

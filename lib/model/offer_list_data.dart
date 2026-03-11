@@ -1,12 +1,13 @@
 class OfferListData {
-  var discount_type;
-  var discount;
+  final dynamic discountType;
+  final dynamic discount;
 
-
-  OfferListData({required this.discount_type,required this.discount});
+  OfferListData({required this.discountType, required this.discount});
 
   factory OfferListData.fromJson(Map<String, dynamic> json) {
     return OfferListData(
-        discount_type: json['discount_type'] , discount: json['discount'],);
+      discountType: json['discount_type'],
+      discount: json['discount'],
+    );
   }
 }

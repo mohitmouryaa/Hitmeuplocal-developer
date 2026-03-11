@@ -15,7 +15,7 @@ class BusinessListScreen extends StatefulWidget {
 
 class _BusinessListScreenState extends State<BusinessListScreen> {
   List<PromotionListData> _offerList = [];
-  var rest;
+  dynamic rest;
 
   @override
   void initState() {
@@ -36,6 +36,7 @@ class _BusinessListScreenState extends State<BusinessListScreen> {
       'category_id': '4',
     };
     var result = await callApi('POST', param, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
       var rest = result['data'] as List;
@@ -156,7 +157,7 @@ class _BusinessListScreenState extends State<BusinessListScreen> {
                                             width: 100,
                                             child: Center(
                                               child: Text(
-                                                  _offerList[index].business_detail['name'],
+                                                  (_offerList[index].businessDetail as Map<String, dynamic>)['name'] as String? ?? '',
                                                 textAlign: TextAlign.center,
                                                 maxLines: 2,
                                                 style: const TextStyle(

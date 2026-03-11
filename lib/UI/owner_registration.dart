@@ -4,10 +4,11 @@ import 'package:hit_me_up/common/common.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class OwnerRegisterPage extends StatefulWidget {
-  final Function drawerCall;
-  final url,title;
+  final void Function() drawerCall;
+  final String url;
+  final String title;
 
-  const OwnerRegisterPage({super.key,required this.drawerCall,required this.url,required this.title});
+  const OwnerRegisterPage({super.key, required this.drawerCall, required this.url, required this.title});
 
   @override
   State<OwnerRegisterPage> createState() => _OwnerRegisterPageState();

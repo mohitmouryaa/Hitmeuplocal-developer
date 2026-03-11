@@ -400,29 +400,33 @@ class _LoginPageState extends State<LoginPage> {
 
   /*"sub_active":1(Subscribed),"showTrial":0(Trial version expired)*/
   void apiLoginUser(BuildContext context) async {
-    var param = {
+    final param = {
       'login_type': '1',
-      'email': _emailController.text.toString().trim(),
-      'password': _passwordController.text.toString().trim(),
+      'email': _emailController.text.trim(),
+      'password': _passwordController.text.trim(),
       'device_token': _token.isNotEmpty ? _token : 'NoDeviceTokenFound',
-      // "device_token": 'example',
       'device_type': Platform.isAndroid ? 'android' : 'ios',
     };
     const url = '$baseUrl/login';
-    var result = await callApi('POST', param, url);
+    final result = await callApi('POST', param, url);
+    if (!context.mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      showToast(context, result[kDataMessage]);
-      setSharedPreference(kDataLoginUser, result[kData]);
+      showToast(context, result[kDataMessage] as String);
+      final loginData = result[kData] as Map<String, dynamic>;
+      setSharedPreference(kDataLoginUser, loginData);
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
       authProvider.login();
-      trialActive = result[kData][kSubscription][kTrial][kActive];
+      final sub = loginData[kSubscription] as Map<String, dynamic>;
+      final trial = sub[kTrial] as Map<String, dynamic>;
+      final subscription = sub[kSubscription] as Map<String, dynamic>;
+      trialActive = trial[kActive] as int;
       if (trialActive == 1) {
         isTrialClicked = false;
-        trialExpired = result[kData][kSubscription][kTrial][kExpired];
+        trialExpired = trial[kExpired] as int;
         if (trialExpired == 0) {
           trialText =
-              '${result[kData][kSubscription][kTrial][kPackageName]} expired on ${result[kData][kSubscription][kTrial][kExpiredDate]}';
+              '${trial[kPackageName]} expired on ${trial[kExpiredDate]}';
         } else {
           isTrialClicked = true;
           trialText = 'Trial Expired';
@@ -435,16 +439,14 @@ class _LoginPageState extends State<LoginPage> {
           trialText = 'Trial Expired';
         }
       }
-      subActive = result[kData][kSubscription][kSubscription][kActive];
+      subActive = subscription[kActive] as int;
       if (subActive == 1) {
-        subExpired = result[kData][kSubscription][kSubscription][kExpired];
-        pinVerified = result[kData][kSubscription][kSubscription][kPinVerified]
-            .toString();
-        orderId =
-            result[kData][kSubscription][kSubscription][kOrderId].toString();
+        subExpired = subscription[kExpired] as int;
+        pinVerified = subscription[kPinVerified].toString();
+        orderId = subscription[kOrderId].toString();
         if (subExpired == 0) {
           subText =
-              '${result[kData][kSubscription][kSubscription][kPackageName]} expired on ${result[kData][kSubscription][kSubscription][kExpiredDate]}';
+              '${subscription[kPackageName]} expired on ${subscription[kExpiredDate]}';
         } else {
           subText = '1 Year Subscription';
         }
@@ -461,8 +463,7 @@ class _LoginPageState extends State<LoginPage> {
           await navigationHomePage();
         }
       } else {
-        /*navigationPurchasePage(result[kData][kId].toString(),
-            result[kData][kSubscription][kShowTrial] == 1);*/
+        if (!context.mounted) return;
         await Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -471,9 +472,9 @@ class _LoginPageState extends State<LoginPage> {
         );
       }
     } else {
-      //showToast(context, result[kDataMessage]);
+      if (!context.mounted) return;
       fToast.showToast(
-        child: showCustomToast(context, result[kDataMessage]),
+        child: showCustomToast(context, result[kDataMessage] as String),
         toastDuration: const Duration(seconds: 5),
         gravity: ToastGravity.CENTER,
       );

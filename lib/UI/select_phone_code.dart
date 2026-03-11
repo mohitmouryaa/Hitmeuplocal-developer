@@ -19,17 +19,21 @@ class _SelectPhoneCodeState extends State<SelectPhoneCode> {
   @override
   void initState() {
     super.initState();
-    showLoader(context);
-    getPhoneCodeData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showLoader(context);
+      getPhoneCodeData();
+    });
   }
 
   void getPhoneCodeData() async {
     const url = '$baseUrl/countries-list';
     var result = await callApi('GET', null, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
       setState(() {
-        var rest = result['data']['phonecodesList'] as List;
+        final data = result['data'] as Map<String, dynamic>;
+        var rest = data['phonecodesList'] as List;
         countryCodeData = rest
             .map<PhoneCodeListData>((json) => PhoneCodeListData.fromJson(json))
             .toList();

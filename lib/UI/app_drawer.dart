@@ -152,36 +152,39 @@ class _AppDrawerState extends State<AppDrawer> {
        callHomeView();
      } else{
        showLoader(context);
-       String deviceTimeZone = await getTimeZone();
-       dynamic user = await getSharedPreference(kDataLoginUser);
-       var param = {
+       final String deviceTimeZone = await getTimeZone();
+       final dynamic rawUser = await getSharedPreference(kDataLoginUser);
+       final user = rawUser as Map<String, dynamic>;
+       final param = {
          'user_id': user[kId].toString(),
          'user_timezone': deviceTimeZone,
-         // "device_type": Platform.isAndroid?'2':'1',
        };
        const url = '$baseUrl/check-subscriptions';
-       var result = await callApi('POST', param, url);
-       // hideLoader(context);
-       if(mounted) {
+       final result = await callApi('POST', param, url);
+       if (mounted) {
          hideLoader(context);
        }
+       if (!mounted) return;
        if (result[kDataCode] == 200) {
-         trialActive = result[kData][kTrial][kActive];
-         trialExpired = result[kData][kTrial][kExpired];
-         subActive = result[kData][kSubscription][kActive];
+         final appData = result[kData] as Map<String, dynamic>;
+         final trialData = appData[kTrial] as Map<String, dynamic>;
+         final subData = appData[kSubscription] as Map<String, dynamic>;
+         trialActive = trialData[kActive] as int;
+         trialExpired = trialData[kExpired] as int;
+         subActive = subData[kActive] as int;
          if (trialActive == 1) {
            isTrialClicked = false;
            if (trialExpired == 0) {
              trialText =
-             '${result[kData][kTrial][kPackageName]} expired on ${result[kData][kTrial][kExpiredDate]}';
+             '${trialData[kPackageName]} expired on ${trialData[kExpiredDate]}';
            } else {
              isTrialClicked = false;
              trialText = 'Trial Expired';
            }
          } else {
-           if(trialExpired==0){
+           if (trialExpired == 0) {
              isTrialClicked = true;
-           }else{
+           } else {
              isTrialClicked = false;
              trialText = 'Trial Expired';
            }
@@ -189,30 +192,29 @@ class _AppDrawerState extends State<AppDrawer> {
 
          if (subActive == 1) {
            isTrialClicked = false;
-           trialText = 'Trial Expired ${result[kData][kTrial][kExpiredDate]}';
-           subExpired = result[kData][kSubscription][kExpired];
-           pinVerified = result[kData][kSubscription][kPinVerified].toString();
-           orderId = result[kData][kSubscription][kOrderId].toString();
+           trialText = 'Trial Expired ${trialData[kExpiredDate]}';
+           subExpired = subData[kExpired] as int;
+           pinVerified = subData[kPinVerified].toString();
+           orderId = subData[kOrderId].toString();
            if (subExpired == 0) {
              subText =
-             '${result[kData][kSubscription][kPackageName]} expires on ${result[kData][kSubscription][kExpiredDate]}';
+             '${subData[kPackageName]} expires on ${subData[kExpiredDate]}';
            } else {
              subText = '1 Year Subscription';
            }
          } else {
            subText = '1 Year Subscription';
-           //Future.delayed(const Duration(microseconds: 1000),() => navigationPurchasePage(user[kId].toString(),false));
          }
 
          if (trialActive == 0 && subActive == 0) {
            callPurchaseView();
          } else if (subActive == 1) {
-           if(pinVerified == '0') {
+           if (pinVerified == '0') {
              await navigationLoginScreen(orderId);
            }
          }
        } else {
-         showToast(context, result[kDataMessage]);
+         showToast(context, result[kDataMessage] as String);
        }
        if (mounted) {
          setState(() {});
@@ -273,14 +275,15 @@ class _AppDrawerState extends State<AppDrawer> {
     }
   }
 
-  Future<void> openViewCall(var data) async {
-    switch (data[kScreen]) {
+  Future<void> openViewCall(dynamic data) async {
+    final screenData = data as Map<String, dynamic>;
+    switch (screenData[kScreen]) {
       case kSubCategory:
         isHome = false;
         widgetForBody = CategoriesListScreen(
           drawerCall: drawerCall,
           openViewCall: openViewCall,
-          data: data,
+          data: screenData,
         );
         break;
     }
@@ -289,7 +292,14 @@ class _AppDrawerState extends State<AppDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+    return PopScope(
+        canPop: isHome,
+        onPopInvokedWithResult: (bool didPop, _) {
+          if (!didPop) {
+            isHome = true;
+            onBackPress(context, drawerCall, openViewCall);
+          }
+        },
         child: Scaffold(
           backgroundColor: Colors.transparent,
           key: _scaffoldKey,
@@ -305,7 +315,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFFFFF).withOpacity(0.7),
+                      color: const Color(0xFFFFFFFF).withValues(alpha: 0.7),
                     ),
                     child: Column(
                       children: [
@@ -757,16 +767,7 @@ class _AppDrawerState extends State<AppDrawer> {
             ),
           ),
         ),
-        onWillPop: () async {
-          if (isHome) {
-            return true;
-          } else {
-
-            isHome = true;
-            onBackPress(context, drawerCall, openViewCall);
-            return false;
-          }
-        },);
+    );
   }
 
    checkSub()  {

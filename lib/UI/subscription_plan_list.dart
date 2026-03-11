@@ -77,6 +77,7 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
           if (mounted) setState(() => isLoading = false);
           if (purchase.status == PurchaseStatus.error ||
               purchase.status == PurchaseStatus.canceled) {
+            if (!mounted) return;
             hideLoader(context);
             if (purchase.status == PurchaseStatus.error) {
               showToast(context, 'Purchase failed. Please try again.');
@@ -90,19 +91,19 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
       },
       onError: (dynamic error) {
         if (mounted) setState(() => isLoading = false);
-        hideLoader(context);
+        if (mounted) hideLoader(context);
       },
     );
     await getInAppSubscriptions();
   }
 
   void getSubscriptionData() async {
-    dynamic user = await getSharedPreference(kDataLoginUser);
-    String userId = user[kId].toString();
-    //const url = "$baseUrl/subscriptions-list";
+    final dynamic rawUser = await getSharedPreference(kDataLoginUser);
+    final user = rawUser as Map<String, dynamic>;
+    final String userId = user[kId].toString();
     final url = '$baseUrl/subscriptions-list/$userId';
-    var result = await callApi('GET', null, url);
-    //hideLoader(context);
+    final result = await callApi('GET', null, url);
+    if (!mounted) return;
     if (result[kDataCode] == 200) {
       setState(() {
         var rest = result['data'] as List;
@@ -122,7 +123,7 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
         initPlatformState();
       });
     } else {
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 
@@ -340,6 +341,7 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
         .buyNonConsumable(purchaseParam: purchaseParam)
         .then((success) {
       if (!success) {
+        if (!mounted) return;
         setState(() => isLoading = false);
         showToast(
           context,
@@ -349,6 +351,7 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
       }
       // Actual purchase result arrives via purchaseStream (_purchaseUpdatedSubscription)
     }).catchError((dynamic error) {
+      if (!mounted) return null;
       setState(() => isLoading = false);
       if (error.toString().toLowerCase().contains('cancel')) {
       } else {
@@ -676,7 +679,7 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
                                 Container(padding: const EdgeInsets.only(
                                     right: 0, top: 5, bottom: 5),
                                     child: Text(
-                                      "\$${subscriptionListData[index].price.toString().isNotEmpty?subscriptionListData[index].price.toString():"0"} valid upto ${subscriptionListData[index].validity.toString().isNotEmpty?subscriptionListData[index].validity.toString():""} ${subscriptionListData[index].validity_unit.isNotEmpty?subscriptionListData[index].validity_unit:""}",
+                                      "\$${subscriptionListData[index].price.toString().isNotEmpty?subscriptionListData[index].price.toString():"0"} valid upto ${subscriptionListData[index].validity.toString().isNotEmpty?subscriptionListData[index].validity.toString():""} ${subscriptionListData[index].validityUnit.isNotEmpty?subscriptionListData[index].validityUnit:""}",
                                       style: TextStyle(
                                           fontSize: 16,
                                           color: Colors.grey.shade500),
@@ -883,8 +886,9 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
   Future<void> _verifyAndFinishTransaction(
     PurchaseDetails purchaseDetails,
   ) async {
-    final dynamic user = await getSharedPreference(kDataLoginUser);
+    final dynamic rawUser = await getSharedPreference(kDataLoginUser);
     if (!mounted) return;
+    final user = rawUser as Map<String, dynamic>;
     final param = {
       'user_id': user[kId].toString(),
       'type': '1',
@@ -907,6 +911,7 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
       debugPrint('Error completing purchase: $error');
     }
 
+    if (!mounted) return;
     if (result[kDataCode] == 200 && result['result'] == true) {
       showToast(context, 'Subscription activated successfully.');
       if (!mounted) return;

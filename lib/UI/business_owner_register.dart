@@ -5,7 +5,7 @@ import 'package:hit_me_up/common/service_api.dart';
 import 'package:page_transition/page_transition.dart';
 
 class BusinessOwnerRegister extends StatefulWidget {
-  final Function drawerCall;
+  final void Function() drawerCall;
   const BusinessOwnerRegister({super.key,required this.drawerCall});
 
   @override
@@ -16,8 +16,8 @@ class _BusinessOwnerRegisterState extends State<BusinessOwnerRegister> {
   final _addressController = TextEditingController();
   final _phoneController = TextEditingController();
   String _id='';
-  Map childString={};
-  List<dynamic> responseList=[];
+  Map<String, dynamic> childString={};
+  List<Map<String, dynamic>> responseList=[];
 
   @override
   void initState() {
@@ -29,9 +29,10 @@ class _BusinessOwnerRegisterState extends State<BusinessOwnerRegister> {
   void getBusinessList() async {
     String url = '$baseUrl/business-list';
     var result = await callApi('GET', null, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      responseList= result['data'] as List;
+      responseList = (result['data'] as List).cast<Map<String, dynamic>>();
       if(responseList.isNotEmpty) {
         childString = responseList[0];
         _addressController.text=childString['address'];

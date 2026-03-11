@@ -18,17 +18,21 @@ class _SelectCountryState extends State<SelectCountry> {
   @override
   void initState() {
     super.initState();
-    showLoader(context);
-    getCountriesData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showLoader(context);
+      getCountriesData();
+    });
   }
 
   void getCountriesData() async {
     const url = '$baseUrl/countries-list';
     var result = await callApi('GET', null, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
 
-        var rest = result['data']['countries'] as List;
+        final data = result['data'] as Map<String, dynamic>;
+        var rest = data['countries'] as List;
         countryData = rest
             .map<CountryListData>((json) => CountryListData.fromJson(json))
             .toList();
@@ -39,7 +43,7 @@ class _SelectCountryState extends State<SelectCountry> {
   }
 
   void _sendDataBack(String id, String value) {
-    String values = id + '@' + value;
+    String values = '$id@$value';
     Navigator.pop(context, values);
   }
 

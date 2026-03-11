@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AboutUsScreen extends StatefulWidget {
-  final Function drawerCall;
-  const AboutUsScreen({super.key,required this.drawerCall});
+  final void Function() drawerCall;
+  const AboutUsScreen({super.key, required this.drawerCall});
 
   @override
   State<AboutUsScreen> createState() => _AboutUsScreenState();

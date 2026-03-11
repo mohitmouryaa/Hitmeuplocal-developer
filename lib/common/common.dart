@@ -318,6 +318,7 @@ void removeSharedPreference(BuildContext context) async {
   if (user != null) {
     removePreference(kDataLoginUser);
   }
+  if (!context.mounted) return;
   await Navigator.pushReplacement(
     context,
     MaterialPageRoute(builder: (context) => const LoginPage()),

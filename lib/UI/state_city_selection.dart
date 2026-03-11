@@ -12,14 +12,13 @@ class StateCitySelection extends StatefulWidget {
 
 class _StateCitySelectionState extends State<StateCitySelection> {
   List<dynamic> stateList = [];
-  Map stateData={};
+  Map<String, dynamic> stateData={};
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final _cityController = TextEditingController();
   final _zipCodeController = TextEditingController();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     showLoader(context);
     getStateListData();
@@ -106,12 +105,13 @@ class _StateCitySelectionState extends State<StateCitySelection> {
                           hint: const Text('Select State'),
                           isExpanded: true,
                           items: stateList
+                              .cast<Map<String, dynamic>>()
                               .toSet()
                               .toList()
                               .map((label) => DropdownMenuItem(
-                            value: label['name'],
+                            value: label['name'] as String?,
                             child: Text(
-                              label['name'],
+                              label['name'] as String? ?? '',
                               style: const TextStyle(
                                   fontWeight: FontWeight.w400,),
                               maxLines: 1,
@@ -121,8 +121,8 @@ class _StateCitySelectionState extends State<StateCitySelection> {
                               .toList(),
                           onChanged: (value) {
                             int index = stateList
-                                .indexWhere((data) => data['name'] == value);
-                            stateData=stateList[index];
+                                .indexWhere((data) => (data as Map<String, dynamic>)['name'] == value);
+                            stateData = stateList[index] as Map<String, dynamic>;
                             setState(() {});
                           },
                         ),
@@ -239,20 +239,23 @@ class _StateCitySelectionState extends State<StateCitySelection> {
   }
 
   void getStateListData() async {
-    dynamic user = await getSharedPreference(kDataLoginUser);
-    final url = "$baseUrl/states-list/${user["country"]["id"]}";
+    final rawUser = await getSharedPreference(kDataLoginUser);
+    final user = rawUser as Map<String, dynamic>;
+    final country = user['country'] as Map<String, dynamic>;
+    final url = '$baseUrl/states-list/${country['id']}';
     var result = await callApi('GET', null, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
       stateList = result['data'] as List;
       if (stateList.isNotEmpty) {
         // stateData = stateList[1];
-        // _stateId = stateData["id"];
+        // _stateId = stateData['id'];
       }
       WidgetsBinding.instance.addPostFrameCallback(_onLayoutDone);
       setState(() {});
     } else {
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 

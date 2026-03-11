@@ -326,7 +326,7 @@ class _OfferDetailPageState extends State<OfferDetailPage> {
                             ),
                           ),
                           InkWell(
-                            onTap: () => {launch('tel:+1${widget.mobile}')},
+                            onTap: () => launchUrl(Uri(scheme: 'tel', path: '+1${widget.mobile}')),
                             child: Container(
                               padding: const EdgeInsets.only(left: 20, top: 25),
                               child: Text(
@@ -449,13 +449,15 @@ class _OfferDetailPageState extends State<OfferDetailPage> {
             ),
           );
         },);
+    if (!mounted) return;
     if(res!=null){
       Navigator.pop(context, true);
     }
   }
 
   void apiRedeemUser() async {
-    dynamic user = await getSharedPreference(kDataLoginUser);
+    final rawUser = await getSharedPreference(kDataLoginUser);
+    final user = rawUser as Map<String, dynamic>;
     var param = {
       'user_id': user[kId].toString(),
       'promotion_id': widget.promotionId,
@@ -464,17 +466,12 @@ class _OfferDetailPageState extends State<OfferDetailPage> {
     };
     const url = '$baseUrl/avail-offer';
     var result = await callApi('POST', param, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      await showMessagePopUp(kAlert, result[kDataMessage]);
+      await showMessagePopUp(kAlert, result[kDataMessage] as String);
     } else {
-      //showToast(context, result[kDataMessage]);
-      /*fToast.showToast(
-        child: showCustomToast(context, result[kDataMessage]),
-        toastDuration: Duration(seconds: 5),
-        gravity: ToastGravity.CENTER,
-      );*/
-      await showMessagePopUp(kAlert, result[kDataMessage]);
+      await showMessagePopUp(kAlert, result[kDataMessage] as String);
     }
   }
 

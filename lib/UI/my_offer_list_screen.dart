@@ -4,7 +4,7 @@ import 'package:hit_me_up/common/service_api.dart';
 import 'package:hit_me_up/model/promotion_list_data.dart';
 
 class MyOfferListScreen extends StatefulWidget {
-  final Function drawerCall;
+  final void Function() drawerCall;
 
   const MyOfferListScreen({
     super.key,
@@ -26,18 +26,20 @@ class _MyOfferListScreenState extends State<MyOfferListScreen> {
   }
 
   void getOfferListData() async {
-    dynamic user = await getSharedPreference(kDataLoginUser);
-    String url = '$baseUrl/my-offers/${user[kId].toString()}';
-    var result = await callApi('GET', null, url);
+    final rawUser = await getSharedPreference(kDataLoginUser);
+    final user = rawUser as Map<String, dynamic>;
+    final url = '$baseUrl/my-offers/${user[kId]}';
+    final result = await callApi('GET', null, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      var rest = result['data'] as List;
+      final rest = result['data'] as List<dynamic>;
       _offerList = rest
-          .map<PromotionListData>((json) => PromotionListData.fromJson(json))
+          .map<PromotionListData>((json) => PromotionListData.fromJson(json as Map<String, dynamic>))
           .toList();
       setState(() {});
     } else {
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 
@@ -225,9 +227,7 @@ class _MyOfferListScreenState extends State<MyOfferListScreen> {
                                                         const EdgeInsets.only(
                                                             left: 25, top: 5,),
                                                     child: Text(
-                                                      _offerList[index]
-                                                              .business_detail[
-                                                          'name'],
+                                                      (_offerList[index].businessDetail as Map<String, dynamic>)['name'] as String? ?? '',
                                                       style: const TextStyle(
                                                         fontSize: 11,
                                                         fontWeight:
@@ -243,9 +243,7 @@ class _MyOfferListScreenState extends State<MyOfferListScreen> {
                                                         const EdgeInsets.only(
                                                             left: 25, top: 5,),
                                                     child: Text(
-                                                      _offerList[index]
-                                                              .business_detail[
-                                                          'mobile'],
+                                                      (_offerList[index].businessDetail as Map<String, dynamic>)['mobile'] as String? ?? '',
                                                       style: const TextStyle(
                                                         fontSize: 11,
                                                         fontWeight:
@@ -261,9 +259,7 @@ class _MyOfferListScreenState extends State<MyOfferListScreen> {
                                                         const EdgeInsets.only(
                                                             left: 25, top: 5,),
                                                     child: Text(
-                                                      _offerList[index]
-                                                              .business_detail[
-                                                          'email'],
+                                                      (_offerList[index].businessDetail as Map<String, dynamic>)['email'] as String? ?? '',
                                                       style: const TextStyle(
                                                         fontSize: 11,
                                                         fontWeight:
@@ -279,7 +275,12 @@ class _MyOfferListScreenState extends State<MyOfferListScreen> {
                                                         const EdgeInsets.only(
                                                             left: 25, top: 5,),
                                                     child: Text(
-                                                      "${_offerList[index].business_detail['country']['name']}, ${_offerList[index].business_detail['state']['name']}, ${_offerList[index].business_detail['city']}, ${_offerList[index].business_detail['address']}, ${_offerList[index].business_detail['pincode']}",
+                                                      () {
+                                                        final bd = _offerList[index].businessDetail as Map<String, dynamic>;
+                                                        final c = bd['country'] as Map<String, dynamic>;
+                                                        final s = bd['state'] as Map<String, dynamic>;
+                                                        return '${c['name'] ?? ''}, ${s['name'] ?? ''}, ${bd['city'] ?? ''}, ${bd['address'] ?? ''}, ${bd['pincode'] ?? ''}';
+                                                      }(),
                                                       style: const TextStyle(
                                                         fontSize: 11,
                                                         fontWeight:

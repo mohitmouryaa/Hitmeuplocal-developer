@@ -34,7 +34,6 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     isGuest = authProvider.isGuest;
@@ -42,10 +41,8 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -257,12 +254,13 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
     //const url = "$baseUrl/buy-subscriptions";
     const url = '$baseUrl/pay-subscriptions';
     var result = await callApi('POST', param, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
       showToast(context, kTrialPeriodStart);
       await navigationHomePage();
     } else {
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 }

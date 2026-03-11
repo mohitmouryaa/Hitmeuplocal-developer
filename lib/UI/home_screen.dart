@@ -10,7 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:hit_me_up/providers/auth_provider.dart';
 
 class HomeScreenPage extends StatefulWidget {
-  final Function drawerCall, openViewCall;
+  final void Function() drawerCall;
+  final void Function(dynamic) openViewCall;
 
   const HomeScreenPage({
     super.key,
@@ -24,7 +25,7 @@ class HomeScreenPage extends StatefulWidget {
 
 class _HomeScreenPageState extends State<HomeScreenPage> {
   List<dynamic> stateList = [];
-  Map stateData = {};
+  Map<String, dynamic> stateData = {};
   String _stateId = '';
   final _cityController = TextEditingController();
   final _zipCodeController = TextEditingController();
@@ -50,14 +51,15 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
     }
   }
 
-  callMark() {
+  void callMark() {
     getCurrentLocation();
   }
 
-  getCurrentLocation() async {
+  Future<void> getCurrentLocation() async {
     try {
       final bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
+        if (!mounted) return;
         hideLoader(context);
         if (mounted) {
           Timer(const Duration(seconds: 3), () {
@@ -75,6 +77,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
       }
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
+        if (!mounted) return;
         hideLoader(context);
         if (mounted) {
           Timer(const Duration(seconds: 3), () {
@@ -90,7 +93,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
       }
 
       position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best,
+        locationSettings: const LocationSettings(accuracy: LocationAccuracy.best),
       );
       if (!mounted) return;
       final data = {
@@ -114,33 +117,31 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
     }
   }
 
-  getStateListData(BuildContext context) async {
+  Future<void> getStateListData(BuildContext context) async {
     String url = '';
     if (!isGuest) {
-      dynamic user = await getSharedPreference(kDataLoginUser);
-      //print("Country ID - "+user["country"]["id"].toString());
-      url = "$baseUrl/states-list/${user["country"]["id"]}";
+      final dynamic rawUser = await getSharedPreference(kDataLoginUser);
+      final user = rawUser as Map<String, dynamic>;
+      final country = user['country'] as Map<String, dynamic>;
+      url = '$baseUrl/states-list/${country['id']}';
     } else {
       int countryId = 231;
       url = '$baseUrl/states-list/$countryId';
     }
 
-    var result = await callApi('GET', null, url);
-    if (mounted) {
-      hideLoader(context);
-    }
+    final result = await callApi('GET', null, url);
+    if (!context.mounted) return;
+    hideLoader(context);
     if (result[kDataCode] == 200) {
       stateList = result['data'] as List;
       if (stateList.isNotEmpty) {
-        stateData = stateList[1];
+        stateData = stateList[1] as Map<String, dynamic>;
         _stateId = stateData['id'].toString();
       }
     } else {
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
-    if (mounted) {
-      setState(() {});
-    }
+    setState(() {});
   }
 
   @override
@@ -274,6 +275,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                       widget.openViewCall(data);*/
                     showLoader(context);
                     await getStateListData(context);
+                    if (!context.mounted) return;
                     _showBottomSheet(context);
                   },
                   child: Column(
@@ -410,27 +412,35 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                   items: stateList
                                       .toSet()
                                       .toList()
-                                      .map(
-                                        (label) => DropdownMenuItem(
-                                          value: label['name'],
+                                      .map((label) {
+                                        final item =
+                                            label as Map<String, dynamic>;
+                                        return DropdownMenuItem<String>(
+                                          value: item['name'] as String?,
                                           child: Text(
-                                            label['name'],
+                                            item['name'] as String? ?? '',
                                             style: const TextStyle(
                                               fontWeight: FontWeight.w400,
                                             ),
                                             maxLines: 1,
                                             overflow: TextOverflow.clip,
                                           ),
-                                        ),
-                                      )
+                                        );
+                                      })
                                       .toList(),
                                   onChanged: (value) {
-                                    int index = stateList.indexWhere(
-                                      (data) => data['name'] == value,
+                                    final int index = stateList.indexWhere(
+                                      (data) =>
+                                          (data as Map<String, dynamic>)[
+                                              'name'] ==
+                                          value,
                                     );
-                                    stateData = stateList[index];
+                                    stateData = stateList[index]
+                                        as Map<String, dynamic>;
                                     _stateId =
-                                        stateList[index]['id'].toString();
+                                        (stateList[index]
+                                                as Map<String, dynamic>)['id']
+                                            .toString();
                                     setState(() {});
                                   },
                                 ),
@@ -545,7 +555,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
                                           kScreen:kSubCategory,
 
                                         };*/
-                                      var data;
+                                      Map<String, dynamic>? data;
                                       //type = 1 for State and city wise search
                                       //type = 2 for search with zip code
                                       if (_stateId.isNotEmpty &&

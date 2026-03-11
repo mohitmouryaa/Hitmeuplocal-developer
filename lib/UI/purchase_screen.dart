@@ -12,7 +12,7 @@ import 'package:hit_me_up/providers/auth_provider.dart';
 import 'package:hit_me_up/UI/login_screen.dart';
 
 class PurchaseSubscription extends StatefulWidget {
-  final Function drawerCall;
+  final void Function() drawerCall;
   final String subText, trialText;
   final bool isTrialClicked;
   const PurchaseSubscription({
@@ -121,7 +121,7 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
                         alignment: Alignment.topLeft,
                         color: Colors.white,
                         margin: const EdgeInsets.only(
-                            left: 0.0, top: 10, right: 0.0),
+                            left: 0.0, top: 10, right: 0.0,),
                       ),
                     ),
                     Expanded(
@@ -137,7 +137,7 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
                               onTap: () {
                                 if (isGuest) {
                                   _loginRequired(
-                                      'Please login to get Free Trial');
+                                      'Please login to get Free Trial',);
                                 } else {
                                   if (widget.isTrialClicked) {
                                     showLoader(context);
@@ -146,12 +146,12 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
                                     if (widget.trialText
                                         .contains('expired on')) {
                                       showMessage(
-                                          kAlert, widget.trialText, context);
+                                          kAlert, widget.trialText, context,);
                                     } else {
                                       showMessage(
                                           kAlert,
                                           'Your trial period has been expired',
-                                          context);
+                                          context,);
                                     }
                                   }
                                 }
@@ -219,7 +219,7 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
                         width:
                             widget.subText.contains('expires on') ? 300 : 200,
                         padding: const EdgeInsets.only(
-                            top: 5, bottom: 5, left: 7, right: 7),
+                            top: 5, bottom: 5, left: 7, right: 7,),
                         alignment: Alignment.center,
                         child: Center(
                           child: Text(
@@ -248,8 +248,10 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
     );
   }
 
-  Future navigationSubscriptionPage() async {
-    dynamic user = await getSharedPreference(kDataLoginUser);
+  Future<void> navigationSubscriptionPage() async {
+    final dynamic rawUser = await getSharedPreference(kDataLoginUser);
+    final user = rawUser as Map<String, dynamic>;
+    if (!mounted) return;
     await Navigator.push(
       context,
       PageTransition(
@@ -262,30 +264,31 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
   }
 
   void apiTrialPurchase() async {
-    dynamic user = await getSharedPreference(kDataLoginUser);
-    var param = {
+    final dynamic rawUser = await getSharedPreference(kDataLoginUser);
+    final user = rawUser as Map<String, dynamic>;
+    final param = {
       'sub_id': '0',
       'user_id': user[kId].toString(),
       'type': '0',
     };
     const url = '$baseUrl/buy-subscriptions';
-    var result = await callApi('POST', param, url);
+    final result = await callApi('POST', param, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
       showToast(context, kTrialPeriodStart);
       Timer(const Duration(seconds: 1), () {
         navigationHomePage();
       });
-
-      //Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => AppDrawer(isNotification: false)));
     } else {
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 
   void _loginRequired(String message) {
     showToast(context, message);
     Future.delayed(const Duration(seconds: 1), () {
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const LoginPage()),

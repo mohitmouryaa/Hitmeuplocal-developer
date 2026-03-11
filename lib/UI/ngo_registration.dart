@@ -4,10 +4,11 @@ import 'package:hit_me_up/common/common.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class NGORegisterPage extends StatefulWidget {
-  final Function drawerCall;
-  final url,title;
+  final void Function() drawerCall;
+  final String url;
+  final String title;
 
-  const NGORegisterPage({super.key, required this.drawerCall,required this.url,required this.title});
+  const NGORegisterPage({super.key, required this.drawerCall, required this.url, required this.title});
 
   @override
   State<NGORegisterPage> createState() => _NGORegisterPageState();

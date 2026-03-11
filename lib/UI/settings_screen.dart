@@ -10,7 +10,7 @@ import 'package:hit_me_up/common/service_api.dart';
 import 'package:hit_me_up/providers/auth_provider.dart';
 
 class SettingsScreen extends StatefulWidget {
-  final Function drawerCall;
+  final void Function() drawerCall;
   const SettingsScreen({super.key,required this.drawerCall});
 
   @override
@@ -135,6 +135,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
     );
     if (result == true) {
+      if (!mounted) return;
       removeSharedPreference(context);
     }
   }
@@ -168,6 +169,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
     if (result == true) {
       bool autoRenewal = await checkSubscription();
+      if (!mounted) return;
       if(autoRenewal){
         // Show another alert: subscription not cancelled
         await showDialog(
@@ -188,6 +190,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   if (await canLaunchUrl(Uri.parse(url))) {
                     await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
                   }
+                  if (!context.mounted) return;
                   Navigator.pop(context);
                 },
                 child: roundedButton(' Proceed '),
@@ -229,50 +232,48 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<bool> checkSubscription() async {
     showLoader(context);
     bool autoRenewal = false;
-      String deviceTimeZone = await getTimeZone();
-      dynamic user = await getSharedPreference(kDataLoginUser);
-      var param = {
-        'user_id': user[kId].toString(),
-        'user_timezone': deviceTimeZone,
-        // "device_type": Platform.isAndroid?'2':'1',
-      };
-      const url = '$baseUrl/check-subscriptions';
-      var result = await callApi('POST', param, url);
-      // hideLoader(context);
-      if(mounted) {
-        hideLoader(context);
+    final String deviceTimeZone = await getTimeZone();
+    final dynamic rawUser = await getSharedPreference(kDataLoginUser);
+    final user = rawUser as Map<String, dynamic>;
+    final param = {
+      'user_id': user[kId].toString(),
+      'user_timezone': deviceTimeZone,
+    };
+    const url = '$baseUrl/check-subscriptions';
+    final result = await callApi('POST', param, url);
+    if (!mounted) return autoRenewal;
+    hideLoader(context);
+    if (result[kDataCode] == 200) {
+      final appData = result[kData] as Map<String, dynamic>;
+      final sub = appData[kSubscription] as Map<String, dynamic>;
+      if (sub[kActive] == 1 && sub[kRecurring] == 1) {
+        autoRenewal = true;
       }
-      if (result[kDataCode] == 200) {
-        if(result[kData][kSubscription][kActive] == 1 && result[kData][kSubscription][kRecurring] == 1){
-          autoRenewal = true;
-        }
-      } else {
-        showToast(context, result[kDataMessage]);
-      }
-    if(mounted) {
-      setState(() {});
+    } else {
+      showToast(context, result[kDataMessage] as String);
     }
-      return autoRenewal;
+    setState(() {});
+    return autoRenewal;
   }
 
   Future<void> deleteUserAccount() async {
     showLoader(context);
-    dynamic user = await getSharedPreference(kDataLoginUser);
-    String user_id =  user[kId].toString();
-    final url = '$baseUrl/delete-user/$user_id';
-    var result = await callApi('GET', null, url);
-    // hideLoader(context);
-    if(mounted) {
-      hideLoader(context);
-    }
+    final dynamic rawUser = await getSharedPreference(kDataLoginUser);
+    final user = rawUser as Map<String, dynamic>;
+    final userId = user[kId].toString();
+    final url = '$baseUrl/delete-user/$userId';
+    final result = await callApi('GET', null, url);
+    if (!mounted) return;
+    hideLoader(context);
     if (result[kDataCode] == 200) {
-      showToast(context, result[kData][kDataMessage]);
-      showToast(context, result[kDataMessage]);
+      final resultData = result[kData] as Map<String, dynamic>;
+      showToast(context, resultData[kDataMessage] as String? ?? '');
+      showToast(context, result[kDataMessage] as String);
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
       authProvider.logout();
       removeSharedPreference(context);
     } else {
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 

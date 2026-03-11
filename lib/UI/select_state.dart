@@ -5,9 +5,9 @@ import 'package:hit_me_up/common/service_api.dart';
 import 'package:hit_me_up/model/state_data.dart';
 
 class SelectState extends StatefulWidget {
-  final countryId;
+  final dynamic countryId;
 
-  const SelectState({super.key,this.countryId});
+  const SelectState({super.key, this.countryId});
 
   @override
   _SelectStateState createState() => _SelectStateState();
@@ -25,6 +25,7 @@ class _SelectStateState extends State<SelectState> {
   void getCountriesData() async {
     final url = '$baseUrl/states-list/${widget.countryId}';
     var result = await callApi('GET', null, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
       setState(() {
@@ -41,8 +42,10 @@ class _SelectStateState extends State<SelectState> {
   @override
   void initState() {
     super.initState();
-    showLoader(context);
-    getCountriesData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showLoader(context);
+      getCountriesData();
+    });
   }
 
   void _sendDataBack(String id, String value) {

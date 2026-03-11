@@ -3,7 +3,8 @@ import 'package:hit_me_up/UI/fundraising_request_form.dart';
 import 'package:hit_me_up/common/common.dart';
 
 class ApplyFundraisingPage extends StatefulWidget {
-  final Function drawerCall, openViewCall;
+  final void Function() drawerCall;
+  final void Function(String) openViewCall;
 
   const ApplyFundraisingPage(
       {super.key, required this.drawerCall, required this.openViewCall,});
@@ -14,7 +15,7 @@ class ApplyFundraisingPage extends StatefulWidget {
 
 class _ApplyFundraisingPageState extends State<ApplyFundraisingPage> {
   Future navigationPage() async {
-    Navigator.push(
+    await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const FundraisingRequestForm()),
     );

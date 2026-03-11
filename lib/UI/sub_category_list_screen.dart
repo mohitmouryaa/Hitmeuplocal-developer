@@ -21,7 +21,7 @@ class SubCategoriesListScreen extends StatefulWidget {
 
 class _SubCategoriesListScreenState extends State<SubCategoriesListScreen> {
   List<CategoryListData> _categoryList = [];
-  var rest;
+  dynamic rest;
   String noPromotionsAvailable = '';
 
   @override
@@ -35,18 +35,21 @@ class _SubCategoriesListScreenState extends State<SubCategoriesListScreen> {
   void getSubCategoryData() async {
     String url = '$baseUrl/categories-list/${widget.id}';
     var result= await callApi('GET', null, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      rest = result['data'] as List;
-      _categoryList = rest
-          .map<CategoryListData>((json) => CategoryListData.fromJson(json))
+      final restList = result['data'] as List<dynamic>;
+      rest = restList;
+      _categoryList = restList
+          .map<CategoryListData>((json) => CategoryListData.fromJson(json as Map<String, dynamic>))
           .toList();
       setState(() {});
       if(_categoryList.isEmpty) {
+        if (!mounted) return;
         await navigationPromotionEmpty(widget.id);
       }
     } else {
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 
@@ -153,7 +156,7 @@ class _SubCategoriesListScreenState extends State<SubCategoriesListScreen> {
                                             width: 100,
                                             child: Center(
                                               child: Text(
-                                                _categoryList[index].category_name,
+                                                _categoryList[index].categoryName,
                                                 textAlign: TextAlign.center,
                                                 maxLines: 2,
                                                 style: const TextStyle(
@@ -191,13 +194,13 @@ class _SubCategoriesListScreenState extends State<SubCategoriesListScreen> {
   }
 
   void getSubCategoryList() {
-    var listData = widget.data;
-    // int index = listData.indexWhere((data) => data["id"] == widget.id);
-    //int index = listData.indexWhere((listData) => listData["id"] == widget.id);
+    final listData = widget.data as List<dynamic>;
+    // int index = listData.indexWhere((data) => data['id'] == widget.id);
+    //int index = listData.indexWhere((listData) => listData['id'] == widget.id);
     //int index = 0;
-    int index = listData.indexWhere((item) => item['id'] == int.parse(widget.id));
-    var data = listData[index];
-    var rest = data['children'] as List;
+    int index = listData.indexWhere((item) => (item as Map<String, dynamic>)['id'] == int.parse(widget.id));
+    final data = listData[index] as Map<String, dynamic>;
+    final rest = data['children'] as List<dynamic>;
     _categoryList = rest.map<CategoryListData>((json) => CategoryListData.fromJson(json)).toList();
     noPromotionsAvailable = 'No Business available around you.';
     setState(() {

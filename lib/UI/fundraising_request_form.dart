@@ -294,6 +294,7 @@ class _FundraisingRequestFormState extends State<FundraisingRequestForm> {
     };
     const url = '$baseUrl/fund-rasing-request';
     var result = await callApi('POST', param, url);
+    if (!context.mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
       showToast(context,result[kDataMessage],);

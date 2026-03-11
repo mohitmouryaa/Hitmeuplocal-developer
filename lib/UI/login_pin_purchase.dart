@@ -173,6 +173,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
 
     const url = '$baseUrl/payment-pin-verification';
     var result = await callApi('POST', param, url);
+    if (!context.mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
       /*showToast(context, result[kDataMessage]);*/

@@ -158,6 +158,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     };
     const url = '$baseUrl/sendForgetPasswordLink';
     var result = await callApi('POST', param, url);
+    if (!context.mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
       showToast(context, result[kDataMessage]);

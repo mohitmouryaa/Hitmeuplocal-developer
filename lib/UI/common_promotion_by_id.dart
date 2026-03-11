@@ -8,13 +8,14 @@ import 'package:hit_me_up/model/promotion_list_data.dart';
 import 'package:page_transition/page_transition.dart';
 
 class CommonPromotionByIdList extends StatefulWidget {
-  final String id,url,distance;
+  final String id, url, distance;
 
-  const CommonPromotionByIdList(
-      {super.key,
-        required this.id,
-        required this.url,
-        required this.distance,});
+  const CommonPromotionByIdList({
+    super.key,
+    required this.id,
+    required this.url,
+    required this.distance,
+  });
 
   @override
   State<CommonPromotionByIdList> createState() =>
@@ -23,7 +24,7 @@ class CommonPromotionByIdList extends StatefulWidget {
 
 class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
   List<PromotionListData> _offerList = [];
-  int bannerCount=0;
+  int bannerCount = 0;
   int trialActive = 0;
   int trialExpired = 0;
   String subText = '1 Year Subscription';
@@ -41,76 +42,101 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
     getPromotionList();
   }
 
-  Future navigationHomePage(int index) async {
+  Future<void> navigationHomePage(int index) async {
+    final offer = _offerList[index];
+    final bd = offer.businessDetail as Map<String, dynamic>;
+    final country = bd['country'] as Map<String, dynamic>;
+    final state = bd['state'] as Map<String, dynamic>;
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (
-          context,) => OfferDetailPage(requestType: widget.url.contains('notification')?'2':'1',businessId: _offerList[index].business_id.toString(),promotionId: _offerList[index].promotion_id.toString(),
-          name: _offerList[index].business_detail['name'],title: _offerList[index].title,
-          address: "${_offerList[index].business_detail['country']['name']}, ${_offerList[index].business_detail['state']['name']}, ${_offerList[index].business_detail['city']}, ${_offerList[index].business_detail['address']}, ${_offerList[index].business_detail['pincode']}",description: _offerList[index].description,
-          distance: widget.distance.isEmpty ? '' : widget.distance.toString() ,email: _offerList[index].business_detail['email'],mobile: _offerList[index].business_detail['mobile'], webUrl : _offerList[index].business_detail['website_url'], lat : _offerList[index].business_detail['latitude'].toString(), lng : _offerList[index].business_detail['longitude'].toString(),),),
+      MaterialPageRoute(
+        builder: (context) => OfferDetailPage(
+          requestType: widget.url.contains('notification') ? '2' : '1',
+          businessId: offer.businessId?.toString() ?? '',
+          promotionId: offer.promotionId?.toString() ?? '',
+          name: bd['name'] as String? ?? '',
+          title: offer.title,
+          address:
+              '${country['name'] ?? ''}, ${state['name'] ?? ''}, ${bd['city'] ?? ''}, ${bd['address'] ?? ''}, ${bd['pincode'] ?? ''}',
+          description: offer.description,
+          distance: widget.distance.isEmpty ? '' : widget.distance.toString(),
+          email: bd['email'] as String? ?? '',
+          mobile: bd['mobile'] as String? ?? '',
+          webUrl: bd['website_url'] as String? ?? '',
+          lat: (bd['latitude'] ?? '').toString(),
+          lng: (bd['longitude'] ?? '').toString(),
+        ),
+      ),
     );
-    if(result== true){
+    if (result == true) {
+      if (!mounted) return;
       showLoader(context);
       getPromotionList();
     }
   }
 
   void getPromotionList() async {
-    dynamic user = await getSharedPreference(kDataLoginUser);
-    String url = '$baseUrl/${widget.url}/${widget.id}/${user[kId].toString()}';
-    var result = await callApi('GET', null, url);
+    final dynamic rawUser = await getSharedPreference(kDataLoginUser);
+    final user = rawUser as Map<String, dynamic>;
+    final String url = '$baseUrl/${widget.url}/${widget.id}/${user[kId]}';
+    final result = await callApi('GET', null, url);
+    if (!mounted) return;
     if (result[kDataCode] == 200) {
-      var rest = result['data'] as List;
+      final rest = result['data'] as List;
       _offerList = rest
           .map<PromotionListData>((json) => PromotionListData.fromJson(json))
           .toList();
       checkSubscription();
     } else {
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 
   void checkSubscription() async {
-    dynamic user = await getSharedPreference(kDataLoginUser);
-    var param = {
+    final dynamic rawUser = await getSharedPreference(kDataLoginUser);
+    final user = rawUser as Map<String, dynamic>;
+    final param = {
       'user_id': user[kId].toString(),
     };
     const url = '$baseUrl/check-subscriptions';
-    var result = await callApi('POST', param, url);
+    final result = await callApi('POST', param, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      trialActive = result[kData][kTrial][kActive];
+      final appData = result[kData] as Map<String, dynamic>;
+      final trial = appData[kTrial] as Map<String, dynamic>;
+      final subscription = appData[kSubscription] as Map<String, dynamic>;
+      trialActive = trial[kActive] as int;
       if (trialActive == 1) {
         isTrialClicked = false;
-        trialExpired = result[kData][kTrial][kExpired];
+        trialExpired = trial[kExpired] as int;
         if (trialExpired == 0) {
           trialText =
-          '${result[kData][kTrial][kPackageName]} expired on ${result[kData][kTrial][kExpiredDate]}';
+              '${trial[kPackageName]} expired on ${trial[kExpiredDate]}';
         } else {
           isTrialClicked = true;
           trialText = 'Trial Expired';
         }
       } else {
-        if(trialExpired==0){
+        if (trialExpired == 0) {
           isTrialClicked = true;
-        }else{
+        } else {
           isTrialClicked = false;
           trialText = 'Trial Expired';
         }
       }
 
-      subActive = result[kData][kSubscription][kActive];
+      subActive = subscription[kActive] as int;
 
       if (subActive == 1) {
         isTrialClicked = false;
         trialText = 'Trial Expired';
-        subExpired = result[kData][kSubscription][kExpired];
-        pinVerified = result[kData][kSubscription][kPinVerified].toString();
-        orderId = result[kData][kSubscription][kOrderId].toString();
+        subExpired = subscription[kExpired] as int;
+        pinVerified = subscription[kPinVerified].toString();
+        orderId = subscription[kOrderId].toString();
         if (subExpired == 0) {
           subText =
-          '${result[kData][kSubscription][kPackageName]} expired on ${result[kData][kSubscription][kExpiredDate]}';
+              '${subscription[kPackageName]} expired on ${subscription[kExpiredDate]}';
         } else {
           subText = '1 Year Subscription';
         }
@@ -120,36 +146,39 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
       setState(() {});
     } else {
       hideLoader(context);
-      showToast(context, result[kDataMessage]);
+      showToast(context, result[kDataMessage] as String);
     }
   }
 
   void callPurchaseView() async {
-    dynamic user = await getSharedPreference(kDataLoginUser);
-    Navigator.push(
-        context,
-        PageTransition(
-            type: PageTransitionType.rightToLeft,
-            child: LoginPurchaseSubscription(
-              userId: user[kId].toString(),
-              subText: subText,
-              isTrialClicked: isTrialClicked,
-              trialText: trialText,
-            ),),);
+    final dynamic rawUser = await getSharedPreference(kDataLoginUser);
+    final user = rawUser as Map<String, dynamic>;
+    if (!mounted) return;
+    await Navigator.push(
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: LoginPurchaseSubscription(
+          userId: user[kId].toString(),
+          subText: subText,
+          isTrialClicked: isTrialClicked,
+          trialText: trialText,
+        ),
+      ),
+    );
   }
-
 
   Future navigationLoginScreen() async {
     await Navigator.pushReplacement(
-        context,
-        PageTransition(
-            type: PageTransitionType.rightToLeft,
-            child: LoginPinPage(
-              orderId: orderId,
-            ),),);
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: LoginPinPage(
+          orderId: orderId,
+        ),
+      ),
+    );
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -160,114 +189,123 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Image.asset(
-                    'assets/category_bg.png',
-                    fit: BoxFit.fill,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 35, left: 10),
-                            child: IconButton(
-                              iconSize: 35,
-                              icon: const Icon(Icons.arrow_back_ios,color: Colors.white,),
-                              onPressed: () => Navigator.pop(context),
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Image.asset(
+                  'assets/category_bg.png',
+                  fit: BoxFit.fill,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 35, left: 10),
+                          child: IconButton(
+                            iconSize: 35,
+                            icon: const Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.white,
+                            ),
+                            onPressed: () => Navigator.pop(context),
+                          ),
+                        ),
+                        const Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 35, right: 50),
+                            child: Text(
+                              'Promotions',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                shadows: <Shadow>[
+                                  Shadow(
+                                    offset: Offset(0.0, 4.0),
+                                    blurRadius: 4.0,
+                                    color: Colors.black45,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                          const Expanded(
-                              child: Padding(
-                                  padding: EdgeInsets.only(top: 35, right: 50),
-                                  child: Text(
-                                    'Promotions',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        shadows: <Shadow>[
-                                          Shadow(
-                                            offset: Offset(0.0, 4.0),
-                                            blurRadius: 4.0,
-                                            color: Colors.black45,
-                                          ),
-                                        ],),
-                                  ),),),
-                        ],
-                      ),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                          height: .1,
-                          alignment: Alignment.topLeft,
-                          color: Colors.white,
-                          margin:
-                          const EdgeInsets.only(left: 0.0, top: 10, right: 0.0),
                         ),
+                      ],
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        height: .1,
+                        alignment: Alignment.topLeft,
+                        color: Colors.white,
+                        margin: const EdgeInsets.only(
+                            left: 0.0, top: 10, right: 0.0,),
                       ),
-                      Expanded(
-                          child: GridView.count(
-                            crossAxisCount: 3,
-                            children: List.generate(_offerList.length, (index) {
-                              return Center(
-                                child: InkWell(
-                                  onTap: (){
-                                    if(trialActive == 1 && trialExpired==0){
-                                      navigationHomePage(index);
-                                    }else if(subActive == 1 && subExpired==0){
-                                      if(pinVerified == '0') {
-                                        navigationLoginScreen();
-                                      }else{
-                                        navigationHomePage(index);
-                                      }
-                                    }else{
-                                      callPurchaseView();
-                                    }
-
-                                  },
-                                  child: Stack(
-                                    children: [
-                                      SizedBox(
-                                        height: 100,
+                    ),
+                    Expanded(
+                      child: GridView.count(
+                        crossAxisCount: 3,
+                        children: List.generate(_offerList.length, (index) {
+                          return Center(
+                            child: InkWell(
+                              onTap: () {
+                                if (trialActive == 1 && trialExpired == 0) {
+                                  navigationHomePage(index);
+                                } else if (subActive == 1 && subExpired == 0) {
+                                  if (pinVerified == '0') {
+                                    navigationLoginScreen();
+                                  } else {
+                                    navigationHomePage(index);
+                                  }
+                                } else {
+                                  callPurchaseView();
+                                }
+                              },
+                              child: Stack(
+                                children: [
+                                  SizedBox(
+                                    height: 100,
+                                    width: 100,
+                                    child: Center(
+                                      child: Image.asset(
+                                        'assets/polygon.png',
+                                        fit: BoxFit.fill,
                                         width: 100,
-                                        child: Center(
-                                          child: Image.asset(
-                                            'assets/polygon.png',
-                                            fit: BoxFit.fill,
-                                            width: 100,
-                                            height: 100,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
                                         height: 100,
-                                        width: 100,
-                                        child: Center(
-                                          child: Text(
-                                            _offerList[index].title,
-                                            textAlign: TextAlign.center,
-                                            maxLines: 2,
-                                            style: const TextStyle(
-                                                fontSize: 13, color: Colors.white,),
-                                          ),
-                                        ),
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            }),
-                          ),),
-                    ],
-                  ),
-                ],
-              ),),
+                                  SizedBox(
+                                    height: 100,
+                                    width: 100,
+                                    child: Center(
+                                      child: Text(
+                                        _offerList[index].title,
+                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
+                                        style: const TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

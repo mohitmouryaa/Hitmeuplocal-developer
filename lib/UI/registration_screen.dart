@@ -37,7 +37,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     showLoader(context);
     getCountry();
@@ -595,6 +594,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           );
         },);
+    if (!mounted) return;
     if(res!=null){
       Navigator.pop(context);
     }
@@ -619,6 +619,7 @@ class _RegisterPageState extends State<RegisterPage> {
     };
     const url = '$baseUrl/signup';
     var result = await callApi('POST', param, url);
+    if (!context.mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
       await showMessagePopUp(kAlert,result[kDataMessage]);
@@ -631,11 +632,13 @@ class _RegisterPageState extends State<RegisterPage> {
     int countryCodeId = 0;
     const url = '$baseUrl/countries-list';
     var result = await callApi('GET', null, url);
+    if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
+      final data = result['data'] as Map<String, dynamic>;
       setState(() {
-        var restCountries = result['data']['countries'] as List;
-        var restPhoneCodes = result['data']['phonecodesList'] as List;
+        var restCountries = data['countries'] as List;
+        var restPhoneCodes = data['phonecodesList'] as List;
 
         countryData = restCountries.map<CountryListData>((json) => CountryListData.fromJson(json)).toList();
         countryCodeData = restPhoneCodes.map<PhoneCodeListData>((json) => PhoneCodeListData.fromJson(json)).toList();

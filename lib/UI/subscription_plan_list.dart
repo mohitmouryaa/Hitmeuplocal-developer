@@ -320,6 +320,7 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
       showToast(context, 'Invalid product. Please try again.');
       return;
     }
+    debugPrint('Initiating purchase for ${item.productId}');
     showLoader(context);
     setState(() => isLoading = true);
 
@@ -329,6 +330,14 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
     final PurchaseParam purchaseParam;
     if (Platform.isAndroid) {
       final googleDetails = item.details as GooglePlayProductDetails;
+      debugPrint('Debugging Android Purchase Params:');
+      debugPrint('Product ID: ${googleDetails.id}');
+      debugPrint('Offer Token: ${googleDetails.offerToken}');
+      
+      if (googleDetails.offerToken?.isEmpty ?? true) {
+        debugPrint('WARNING: Offer token is empty. Purchase may fail.');
+      }
+
       purchaseParam = GooglePlayPurchaseParam(
         productDetails: item.details,
         offerToken: googleDetails.offerToken,
@@ -340,6 +349,7 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
     InAppPurchase.instance
         .buyNonConsumable(purchaseParam: purchaseParam)
         .then((success) {
+      debugPrint('Purchase request initiated. Success: $success');
       if (!success) {
         if (!mounted) return;
         setState(() => isLoading = false);
@@ -351,6 +361,7 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
       }
       // Actual purchase result arrives via purchaseStream (_purchaseUpdatedSubscription)
     }).catchError((dynamic error) {
+      debugPrint('Purchase request failed with error: $error');
       if (!mounted) return null;
       setState(() => isLoading = false);
       if (error.toString().toLowerCase().contains('cancel')) {

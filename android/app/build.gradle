@@ -21,6 +21,9 @@ if (keyPropertiesFile.exists()) {
     }
 }
 
+def releaseKeystoreFile = keyProperties['storeFile'] ? file(keyProperties['storeFile']) : null
+def hasReleaseKeystore = releaseKeystoreFile != null && releaseKeystoreFile.exists()
+
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
     flutterVersionCode = '1'
@@ -39,7 +42,7 @@ android {
         release {
             keyAlias keyProperties['keyAlias']
             keyPassword keyProperties['keyPassword']
-            storeFile keyProperties['storeFile'] ? file(keyProperties['storeFile']) : null
+            storeFile releaseKeystoreFile
             storePassword keyProperties['storePassword']
         }
     }
@@ -72,7 +75,7 @@ android {
             // Debug uses default debug signing
         }
         release {
-            signingConfig signingConfigs.release
+            signingConfig hasReleaseKeystore ? signingConfigs.release : signingConfigs.debug
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

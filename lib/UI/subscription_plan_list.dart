@@ -910,32 +910,54 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
       'token': purchaseDetails.verificationData.serverVerificationData,
     };
     const url = '$baseUrl/pay-subscriptions';
+
+    debugPrint('Verify Transaction URL: $url');
+    debugPrint('Verify Transaction Params: $param');
+
     final result = await callApi('POST', param, url);
+
+    debugPrint('Verify Transaction Result: $result');
+
     if (!mounted) return;
     hideLoader(context);
 
     // Always complete the purchase to remove the transaction from the store queue,
     // even if server validation fails. This prevents stuck/replayed transactions.
-    try {
-      await InAppPurchase.instance.completePurchase(purchaseDetails);
-    } catch (error) {
-      debugPrint('Error completing purchase: $error');
+    if (purchaseDetails.pendingCompletePurchase) {
+      try {
+        await InAppPurchase.instance.completePurchase(purchaseDetails);
+        debugPrint('Purchase completed (acknowledged) with store.');
+      } catch (error) {
+        debugPrint('Error completing purchase: $error');
+      }
     }
 
     if (!mounted) return;
-    if (result[kDataCode] == 200 && result['result'] == true) {
+
+    // Robust check for success
+    final isStatusCodeSuccess = result[kDataCode] == 200;
+    // Check if result is true, 'true', 1, or if code is 200 and result is missing/null (implies success)
+    final dynamic resVal = result['result'];
+    final isResultTruthy = resVal == true || resVal == 'true' || resVal == 1;
+    
+    // If strict compliance with API is needed:
+    // Some APIs return 200 but result: false for business logic failures.
+    // However, if we just Bought it, we usually want to let them in or show the error.
+    
+    if (isStatusCodeSuccess && (isResultTruthy || resVal == null)) {
       showToast(context, 'Subscription activated successfully.');
       if (!mounted) return;
-      await Navigator.pushReplacement(
-        context,
+      // Use pushAndRemoveUntil to clear the stack and ensure we land on the Home Screen cleanly
+      await Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) => const AppDrawer(isNotification: false),
         ),
+        (Route<dynamic> route) => false,
       );
     } else {
       showToast(
         context,
-        result[kDataMessage]?.toString() ?? 'Subscription activation failed.',
+        result[kDataMessage]?.toString() ?? 'Subscription activation failed. Please contact support.',
       );
     }
   }

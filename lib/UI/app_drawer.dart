@@ -25,8 +25,9 @@ import 'package:hit_me_up/UI/login_purchase_subscription.dart';
 
 class AppDrawer extends StatefulWidget {
   final bool isNotification;
+  final bool fromPurchase;
 
-  const AppDrawer({super.key,required this.isNotification});
+  const AppDrawer({super.key, required this.isNotification, this.fromPurchase = false});
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
@@ -172,7 +173,9 @@ class _AppDrawerState extends State<AppDrawer> {
          trialActive = trialData[kActive] as int;
          trialExpired = trialData[kExpired] as int;
          subActive = subData[kActive] as int;
-         if (trialActive == 1) {
+
+
+         if (trialActive == 1 || widget.fromPurchase) {
            isTrialClicked = false;
            if (trialExpired == 0) {
              trialText =
@@ -206,7 +209,8 @@ class _AppDrawerState extends State<AppDrawer> {
            subText = '1 Year Subscription';
          }
 
-         if (trialActive == 0 && subActive == 0) {
+         // If user just came from purchase, do not redirect back to purchase.
+         if (trialActive == 0 && subActive == 0 && !widget.fromPurchase) {
            callPurchaseView();
          } else if (subActive == 1) {
            if (pinVerified == '0') {

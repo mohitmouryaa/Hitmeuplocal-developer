@@ -49,7 +49,7 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
       context,
       PageTransition(
         type: PageTransitionType.rightToLeft,
-        child: const AppDrawer(isNotification: false),
+        child: const AppDrawer(isNotification: false, fromPurchase: true),
       ),
       (_) => false,
     );
@@ -271,15 +271,16 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
       'user_id': user[kId].toString(),
       'type': '0',
     };
-    const url = '$baseUrl/buy-subscriptions';
+    const url = '$baseUrl/pay-subscriptions';
     final result = await callApi('POST', param, url);
     if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
       showToast(context, kTrialPeriodStart);
-      Timer(const Duration(seconds: 1), () {
-        navigationHomePage();
-      });
+      await Future.delayed(const Duration(seconds: 1));
+      if (mounted) {
+        await navigationHomePage();
+      }
     } else {
       showToast(context, result[kDataMessage] as String);
     }

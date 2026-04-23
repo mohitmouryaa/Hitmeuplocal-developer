@@ -258,6 +258,7 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
     hideLoader(context);
     if (result[kDataCode] == 200) {
       showToast(context, kTrialPeriodStart);
+      await Future.delayed(const Duration(seconds: 1));
       await navigationHomePage();
     } else {
       showToast(context, result[kDataMessage] as String);

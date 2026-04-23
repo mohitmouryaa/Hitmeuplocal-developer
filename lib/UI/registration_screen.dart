@@ -408,7 +408,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(left: 10),
-                  hintText: 'Reference Number',
+                  hintText: 'Referral Code (Optional)',
                   hintStyle: const TextStyle(color: Colors.black),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25.0),
@@ -498,8 +498,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     showToast(context, kValidNumberError);
                   }else if (_phoneCodeId.isEmpty) {
                     showToast(context, kPhoneCodeError);
-                  }else if (_emailController.text.isEmpty) {
-                    showToast(context, kEmptyEmailError);
+                  } else if (_emailController.text.isEmpty) {
                   } else if (!isEmail(_emailController.text)) {
                     showToast(context, kValidEmailError);
                   }else if (_countryId.isEmpty) {

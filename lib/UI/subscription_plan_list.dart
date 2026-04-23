@@ -950,7 +950,7 @@ class _SubscriptionPlanListState extends State<SubscriptionPlanList> {
       // Use pushAndRemoveUntil to clear the stack and ensure we land on the Home Screen cleanly
       await Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
-          builder: (context) => const AppDrawer(isNotification: false),
+          builder: (context) => const AppDrawer(isNotification: false, fromPurchase: true),
         ),
         (Route<dynamic> route) => false,
       );

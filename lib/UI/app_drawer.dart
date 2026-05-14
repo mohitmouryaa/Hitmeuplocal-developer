@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hit_me_up/UI/about_us_screen.dart';
@@ -27,17 +26,23 @@ class AppDrawer extends StatefulWidget {
   final bool isNotification;
   final bool fromPurchase;
 
-  const AppDrawer({super.key, required this.isNotification, this.fromPurchase = false});
+  const AppDrawer({
+    super.key,
+    required this.isNotification,
+    this.fromPurchase = false,
+  });
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  late Widget widgetForBody = widget.isNotification?NotificationListScreen(drawerCall: drawerCall):HomeScreenPage(
-    drawerCall: drawerCall,
-    openViewCall: openViewCall,
-  );
+  late Widget widgetForBody = widget.isNotification
+      ? NotificationListScreen(drawerCall: drawerCall)
+      : HomeScreenPage(
+          drawerCall: drawerCall,
+          openViewCall: openViewCall,
+        );
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool isHome = true;
 
@@ -61,7 +66,6 @@ class _AppDrawerState extends State<AppDrawer> {
 
   @override
   void initState() {
-
     super.initState();
     //checkSub();
     //showLoader(context);
@@ -87,22 +91,22 @@ class _AppDrawerState extends State<AppDrawer> {
 
       if (notification != null && android != null) {
         flutterLocalNotificationsPlugin.show(
-            id: notification.hashCode,
-            title: notification.title,
-            body: notification.body,
-            notificationDetails: NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                icon: 'launch_background',
-              ),
-            ),);
+          id: notification.hashCode,
+          title: notification.title,
+          body: notification.body,
+          notificationDetails: NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel.id,
+              channel.name,
+              icon: 'launch_background',
+            ),
+          ),
+        );
         _onNotificationReceived(notification.body.toString());
-      }else if(notification != null && apple != null){
+      } else if (notification != null && apple != null) {
         _onNotificationReceived(notification.body.toString());
       }
-      if (message.notification != null) {
-      }
+      if (message.notification != null) {}
     });
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       widgetForBody = NotificationListScreen(drawerCall: drawerCall);
@@ -147,105 +151,147 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   Future<void> checkSubscription() async {
-     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-     if (authProvider.isGuest) {
-       //callPurchaseView();
-       callHomeView();
-     } else{
-       showLoader(context);
-       final String deviceTimeZone = await getTimeZone();
-       final dynamic rawUser = await getSharedPreference(kDataLoginUser);
-       final user = rawUser as Map<String, dynamic>;
-       final param = {
-         'user_id': user[kId].toString(),
-         'user_timezone': deviceTimeZone,
-       };
-       const url = '$baseUrl/check-subscriptions';
-       final result = await callApi('POST', param, url);
-       if (mounted) {
-         hideLoader(context);
-       }
-       if (!mounted) return;
-       if (result[kDataCode] == 200) {
-         final appData = result[kData] as Map<String, dynamic>;
-         final trialData = appData[kTrial] as Map<String, dynamic>;
-         final subData = appData[kSubscription] as Map<String, dynamic>;
-         trialActive = trialData[kActive] as int;
-         trialExpired = trialData[kExpired] as int;
-         subActive = subData[kActive] as int;
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    if (authProvider.isGuest) {
+      //callPurchaseView();
+      callHomeView();
+    } else {
+      showLoader(context);
+      final String deviceTimeZone = await getTimeZone();
+      final dynamic rawUser = await getSharedPreference(kDataLoginUser);
+      final user = rawUser as Map<String, dynamic>;
+      final param = {
+        'user_id': user[kId].toString(),
+        'user_timezone': deviceTimeZone,
+      };
+      const url = '$baseUrl/check-subscriptions';
+      final result = await callApi('POST', param, url);
+      if (mounted) {
+        hideLoader(context);
+      }
+      if (!mounted) return;
+      if (result[kDataCode] == 200) {
+        final appData = result[kData] as Map<String, dynamic>;
+        final trialData = appData[kTrial] as Map<String, dynamic>;
+        final subData = appData[kSubscription] as Map<String, dynamic>;
+        final String trialExpiryRaw =
+            (trialData[kExpiredDate] ?? '').toString().trim();
+        final DateTime? trialExpiryDate = _parseExpiryDate(trialExpiryRaw);
+        final bool hasTrialExpiry = trialExpiryDate != null;
+        final String trialPackageName =
+            (trialData[kPackageName] ?? '').toString().trim();
+        final bool hasTrialData = hasTrialExpiry || trialPackageName.isNotEmpty;
+        final String trialExpiryText =
+            hasTrialExpiry ? trialExpiryRaw : 'Date unavailable';
+        trialActive = trialData[kActive] as int;
+        trialExpired = trialData[kExpired] as int;
+        subActive = subData[kActive] as int;
+        if (trialExpiryDate != null && DateTime.now().isAfter(trialExpiryDate)) {
+          trialActive = 0;
+          trialExpired = 1;
+        }
 
+        if (!hasTrialData) {
+          if (trialActive == 0 && trialExpired == 0) {
+            isTrialClicked = true;
+            trialText = '3 Days Trial';
+          } else {
+            trialActive = 0;
+            trialExpired = 1;
+            isTrialClicked = false;
+            trialText = 'Trial Expired';
+          }
+        } else if (trialActive == 1 || widget.fromPurchase) {
+          isTrialClicked = false;
+          if (trialExpired == 0) {
+            trialText = hasTrialExpiry
+                ? 'Trial expires on\n$trialExpiryText'
+                : 'Trial active';
+          } else {
+            isTrialClicked = false;
+            trialText = 'Trial Expired';
+          }
+        } else {
+          if (trialExpired == 0) {
+            isTrialClicked = true;
+            trialText = '3 Days Trial';
+          } else {
+            isTrialClicked = false;
+            trialText = 'Trial Expired';
+          }
+        }
 
-         if (trialActive == 1 || widget.fromPurchase) {
-           isTrialClicked = false;
-           if (trialExpired == 0) {
-             trialText =
-             '${trialData[kPackageName]} expired on ${trialData[kExpiredDate]}';
-           } else {
-             isTrialClicked = false;
-             trialText = 'Trial Expired';
-           }
-         } else {
-           if (trialExpired == 0) {
-             isTrialClicked = true;
-           } else {
-             isTrialClicked = false;
-             trialText = 'Trial Expired';
-           }
-         }
+        if (subActive == 1) {
+          isTrialClicked = false;
+          trialText = hasTrialExpiry
+              ? 'Trial expired on\n$trialExpiryText'
+              : 'Trial Expired';
+          subExpired = subData[kExpired] as int;
+          pinVerified = subData[kPinVerified].toString();
+          orderId = subData[kOrderId].toString();
+          if (subExpired == 0) {
+            subText =
+                '${subData[kPackageName]} expires on ${subData[kExpiredDate]}';
+          } else {
+            subText = '1 Year Subscription';
+          }
+        } else {
+          subText = '1 Year Subscription';
+        }
 
-         if (subActive == 1) {
-           isTrialClicked = false;
-           trialText = 'Trial Expired ${trialData[kExpiredDate]}';
-           subExpired = subData[kExpired] as int;
-           pinVerified = subData[kPinVerified].toString();
-           orderId = subData[kOrderId].toString();
-           if (subExpired == 0) {
-             subText =
-             '${subData[kPackageName]} expires on ${subData[kExpiredDate]}';
-           } else {
-             subText = '1 Year Subscription';
-           }
-         } else {
-           subText = '1 Year Subscription';
-         }
+        // If user just came from purchase, do not redirect back to purchase.
+        if (trialActive == 0 && subActive == 0 && !widget.fromPurchase) {
+          callPurchaseView();
+        } else if (subActive == 1) {
+          if (pinVerified == '0') {
+            await navigationLoginScreen(orderId);
+          }
+        }
+      } else {
+        showToast(context, result[kDataMessage] as String);
+      }
+      if (mounted) {
+        setState(() {});
+      }
+    }
+  }
 
-         // If user just came from purchase, do not redirect back to purchase.
-         if (trialActive == 0 && subActive == 0 && !widget.fromPurchase) {
-           callPurchaseView();
-         } else if (subActive == 1) {
-           if (pinVerified == '0') {
-             await navigationLoginScreen(orderId);
-           }
-         }
-       } else {
-         showToast(context, result[kDataMessage] as String);
-       }
-       if (mounted) {
-         setState(() {});
-       }
-     }
+  DateTime? _parseExpiryDate(String raw) {
+    if (raw.isEmpty || raw.toLowerCase() == 'null') {
+      return null;
+    }
+    final String normalized = raw.contains('T') ? raw : raw.replaceFirst(' ', 'T');
+    return DateTime.tryParse(normalized);
   }
 
   Future navigationPurchasePage(String userId, bool isTrial) async {
     await Navigator.push(
-        context,
-        PageTransition(
-            type: PageTransitionType.rightToLeft,
-            child: LoginPurchaseSubscription(userId: userId,trialText: trialText,subText: subText,isTrialClicked: isTrialClicked,),),);
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: LoginPurchaseSubscription(
+          userId: userId,
+          trialText: trialText,
+          subText: subText,
+          isTrialClicked: isTrialClicked,
+        ),
+      ),
+    );
   }
-
 
   Future navigationLoginScreen(String orderId) async {
     await Navigator.push(
-        context,
-        PageTransition(
-            type: PageTransitionType.rightToLeft,
-            child: LoginPinPage(
-              orderId: orderId,
-            ),),);
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: LoginPinPage(
+          orderId: orderId,
+        ),
+      ),
+    );
   }
 
-  void callPurchaseView(){
+  void callPurchaseView() {
     widgetForBody = PurchaseSubscription(
       drawerCall: drawerCall,
       isTrialClicked: isTrialClicked,
@@ -254,13 +300,12 @@ class _AppDrawerState extends State<AppDrawer> {
     );
   }
 
-  void callHomeView(){
+  void callHomeView() {
     widgetForBody = HomeScreenPage(
       drawerCall: drawerCall,
       openViewCall: openViewCall,
     );
   }
-
 
   void _onLoginPressed() {
     Navigator.pushReplacement(
@@ -268,7 +313,6 @@ class _AppDrawerState extends State<AppDrawer> {
       MaterialPageRoute(builder: (context) => const LoginPage()),
     );
   }
-
 
   void drawerCall() {
     if (_scaffoldKey.currentState!.isDrawerOpen) {
@@ -297,221 +341,225 @@ class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-        canPop: isHome,
-        onPopInvokedWithResult: (bool didPop, _) {
-          if (!didPop) {
-            isHome = true;
-            onBackPress(context, drawerCall, openViewCall);
-          }
-        },
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          key: _scaffoldKey,
-          body: widgetForBody,
-          drawer: Drawer(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                const SizedBox(
-                  height: 40,
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFFFFFF).withValues(alpha: 0.7),
-                    ),
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: const Align(
-                            alignment: Alignment(-1.3, 0),
-                            child: Text(
-                              'Home',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
+      canPop: isHome,
+      onPopInvokedWithResult: (bool didPop, _) {
+        if (!didPop) {
+          isHome = true;
+          onBackPress(context, drawerCall, openViewCall);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        key: _scaffoldKey,
+        body: widgetForBody,
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              const SizedBox(
+                height: 40,
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFFFFF).withValues(alpha: 0.7),
+                  ),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: const Align(
+                          alignment: Alignment(-1.3, 0),
+                          child: Text(
+                            'Home',
+                            style: TextStyle(
+                              color: Colors.black,
                             ),
                           ),
-                          leading: SizedBox(
-                            height: 20,
-                            width: 20,
+                        ),
+                        leading: SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: Image.asset(
+                            'assets/home_icon.png',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          isHome = true;
+                          widgetForBody = HomeScreenPage(
+                            drawerCall: drawerCall,
+                            openViewCall: openViewCall,
+                          );
+                          setState(() {});
+                        },
+                      ),
+                      ListTile(
+                        title: const Align(
+                          alignment: Alignment(-1.3, 0),
+                          child: Text(
+                            'Purchase',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        leading: Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: SizedBox(
+                            height: 27,
+                            width: 18,
                             child: Image.asset(
-                              'assets/home_icon.png',
+                              'assets/purchase_icon.png',
                               fit: BoxFit.fill,
                             ),
                           ),
-                          onTap: () {
-                            Navigator.pop(context);
+                        ),
+                        onTap: () {
+                          isHome = false;
+                          Navigator.pop(context);
+                          if (trialActive == 1 && trialExpired == 0) {
+                            callPurchaseView();
+                          } else if (subActive == 1 && subExpired == 0) {
+                            if (pinVerified == '0') {
+                              navigationLoginScreen(orderId);
+                            } else {
+                              callPurchaseView();
+                            }
+                          } else {
+                            callPurchaseView();
+                          }
+                          setState(() {});
+                        },
+                      ),
+                      ListTile(
+                        title: const Align(
+                          alignment: Alignment(-1.3, 0),
+                          child: Text(
+                            'My Offer\'s',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        leading: const Padding(
+                          padding: EdgeInsets.only(left: 3),
+                          child: Icon(
+                            Icons.monetization_on_rounded,
+                            color: Colors.black,
+                          ),
+                        ),
+                        onTap: () {
+                          isHome = false;
+                          Navigator.pop(context);
+                          if (trialActive == 1 && trialExpired == 0) {
+                            widgetForBody = MyOfferListScreen(
+                              drawerCall: drawerCall,
+                            );
+                          } else if (subActive == 1 && subExpired == 0) {
+                            if (pinVerified == '0') {
+                              navigationLoginScreen(orderId);
+                            } else {
+                              widgetForBody = MyOfferListScreen(
+                                drawerCall: drawerCall,
+                              );
+                            }
+                          } else {
+                            callPurchaseView();
+                          }
+                          setState(() {});
+                        },
+                      ),
+                      ListTile(
+                        title: const Align(
+                          alignment: Alignment(-1.2, 0),
+                          child: Text(
+                            'Discounts',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        leading: Padding(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: Image.asset(
+                              'assets/discount_menu_icon.png',
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          isHome = false;
+                          Navigator.pop(context);
+                          if (trialActive == 1 && trialExpired == 0) {
                             isHome = true;
                             widgetForBody = HomeScreenPage(
                               drawerCall: drawerCall,
                               openViewCall: openViewCall,
                             );
-                            setState(() {});
-                          },
-                        ),
-                        ListTile(
-                          title: const Align(
-                            alignment: Alignment(-1.3, 0),
-                            child: Text(
-                              'Purchase',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          leading: Padding(
-                            padding: const EdgeInsets.only(left: 5),
-                            child: SizedBox(
-                              height: 27,
-                              width: 18,
-                              child: Image.asset(
-                                'assets/purchase_icon.png',
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                          onTap: () {
-                            isHome = false;
-                            Navigator.pop(context);
-                            if(trialActive == 1 && trialExpired==0){
-                              callPurchaseView();
-                            }else if(subActive == 1 && subExpired==0){
-                              if(pinVerified == '0') {
-                                navigationLoginScreen(orderId);
-                              }else{
-                                callPurchaseView();
-                              }
-                            }else{
-                              callPurchaseView();
-                            }
-                            setState(() {});
-                          },
-                        ),
-                        ListTile(
-                          title: const Align(
-                            alignment: Alignment(-1.3, 0),
-                            child: Text(
-                              'My Offer\'s',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          leading: const Padding(
-                            padding: EdgeInsets.only(left: 3),
-                            child: Icon(
-                              Icons.monetization_on_rounded,
-                              color: Colors.black,
-                            ),
-                          ),
-                          onTap: () {
-                            isHome = false;
-                            Navigator.pop(context);
-                            if(trialActive == 1 && trialExpired==0){
-                              widgetForBody = MyOfferListScreen(drawerCall: drawerCall,);
-                            }else if(subActive == 1 && subExpired==0){
-                              if(pinVerified == '0') {
-                                navigationLoginScreen(orderId);
-                              }else{
-                                widgetForBody = MyOfferListScreen(drawerCall: drawerCall,);
-                              }
-                            }else{
-                              callPurchaseView();
-                            }
-                            setState(() {});
-                          },
-                        ),
-                        ListTile(
-                          title: const Align(
-                            alignment: Alignment(-1.2, 0),
-                            child: Text(
-                              'Discounts',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          leading: Padding(
-                            padding: const EdgeInsets.only(left: 5),
-                            child: SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: Image.asset(
-                                'assets/discount_menu_icon.png',
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                          onTap: () {
-                            isHome = false;
-                            Navigator.pop(context);
-                            if(trialActive == 1 && trialExpired==0){
+                          } else if (subActive == 1 && subExpired == 0) {
+                            if (pinVerified == '0') {
+                              navigationLoginScreen(orderId);
+                            } else {
                               isHome = true;
                               widgetForBody = HomeScreenPage(
                                 drawerCall: drawerCall,
                                 openViewCall: openViewCall,
                               );
-                            }else if(subActive == 1 && subExpired==0){
-                              if(pinVerified == '0') {
-                                navigationLoginScreen(orderId);
-                              }else{
-                                isHome = true;
-                                widgetForBody = HomeScreenPage(
-                                  drawerCall: drawerCall,
-                                  openViewCall: openViewCall,
-                                );
-                              }
-                            }else{
-                              callPurchaseView();
                             }
-                            setState(() {});
-                          },
+                          } else {
+                            callPurchaseView();
+                          }
+                          setState(() {});
+                        },
+                      ),
+                      ListTile(
+                        title: const Align(
+                          alignment: Alignment(-1.2, 0),
+                          child: Text(
+                            'Categories',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
+                        leading: Padding(
+                          padding: const EdgeInsets.only(left: 7),
+                          child: SizedBox(
+                            height: 15,
+                            width: 20,
+                            child: Image.asset(
+                              'assets/menu_icon.png',
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          isHome = false;
+                          var data = {
+                            kSearchType: 'NA',
+                          };
+                          widgetForBody = CategoriesListScreen(
+                            drawerCall: drawerCall,
+                            openViewCall: openViewCall,
+                            data: data,
+                          );
+                          setState(() {});
+                        },
+                      ),
+                      Container(
+                        height: 0.5,
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        color: Colors.black,
+                        margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                      ),
+                      if (!isGuest)
                         ListTile(
-                          title: const Align(
-                            alignment: Alignment(-1.2, 0),
-                            child: Text(
-                              'Categories',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          leading: Padding(
-                            padding: const EdgeInsets.only(left: 7),
-                            child: SizedBox(
-                              height: 15,
-                              width: 20,
-                              child: Image.asset(
-                                'assets/menu_icon.png',
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.pop(context);
-                            isHome = false;
-                            var data={
-                              kSearchType:'NA',
-                            };
-                            widgetForBody = CategoriesListScreen(
-                              drawerCall: drawerCall,
-                              openViewCall: openViewCall,
-                              data: data,
-                            );
-                            setState(() {});
-                          },
-                        ),
-                        Container(
-                          height: 0.5,
-                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          color: Colors.black,
-                          margin:
-                              const EdgeInsets.only(left: 10.0, right: 10.0),
-                        ),
-                        if (!isGuest)ListTile(
                           title: const Align(
                             alignment: Alignment(-1.2, 0),
                             child: Text(
@@ -536,8 +584,8 @@ class _AppDrawerState extends State<AppDrawer> {
                             setState(() {});
                           },
                         ),
-                        //Hidden as per client suggested
-                        /*ListTile(
+                      //Hidden as per client suggested
+                      /*ListTile(
                           title: const Align(
                             child: Text(
                               'Business Owner',
@@ -566,74 +614,73 @@ class _AppDrawerState extends State<AppDrawer> {
                             setState(() {});
                           },
                         ),*/
-                        ListTile(
-                          title: const Align(
-                            alignment: Alignment(-1.2, 0),
-                            child: Text(
-                              'Business Owner Registration',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          leading: const Padding(
-                            padding: EdgeInsets.only(left: 7),
-                            child: Icon(
-                              Icons.article,
+                      ListTile(
+                        title: const Align(
+                          alignment: Alignment(-1.2, 0),
+                          child: Text(
+                            'Business Owner Registration',
+                            style: TextStyle(
                               color: Colors.black,
                             ),
                           ),
-                          onTap: () {
-                            Navigator.pop(context);
-                            isHome = false;
-                            widgetForBody = OwnerRegisterPage(
-                              drawerCall: drawerCall,
-                              title: '',
-                              url: '',
-                            );
-                            setState(() {});
-                          },
                         ),
-                        Container(
-                          height: 0.5,
-                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          color: Colors.black,
-                          margin:
-                              const EdgeInsets.only(left: 10.0, right: 10.0),
+                        leading: const Padding(
+                          padding: EdgeInsets.only(left: 7),
+                          child: Icon(
+                            Icons.article,
+                            color: Colors.black,
+                          ),
                         ),
-                        ListTile(
-                          title: const Align(
-                            alignment: Alignment(-1.1, 0),
-                            child: Text(
-                              'Fundraising Registration',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          isHome = false;
+                          widgetForBody = OwnerRegisterPage(
+                            drawerCall: drawerCall,
+                            title: '',
+                            url: '',
+                          );
+                          setState(() {});
+                        },
+                      ),
+                      Container(
+                        height: 0.5,
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        color: Colors.black,
+                        margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                      ),
+                      ListTile(
+                        title: const Align(
+                          alignment: Alignment(-1.1, 0),
+                          child: Text(
+                            'Fundraising Registration',
+                            style: TextStyle(
+                              color: Colors.black,
                             ),
                           ),
-                          leading: Padding(
-                            padding: const EdgeInsets.only(left: 7),
-                            child: SizedBox(
-                              height: 20,
-                              width: 22,
-                              child: Image.asset(
-                                'assets/fundraising_icon.png',
-                                fit: BoxFit.fill,
-                              ),
+                        ),
+                        leading: Padding(
+                          padding: const EdgeInsets.only(left: 7),
+                          child: SizedBox(
+                            height: 20,
+                            width: 22,
+                            child: Image.asset(
+                              'assets/fundraising_icon.png',
+                              fit: BoxFit.fill,
                             ),
                           ),
-                          onTap: () {
-                            Navigator.pop(context);
-                            isHome = false;
-                            widgetForBody = NGORegisterPage(
-                              drawerCall: drawerCall,
-                              url: '',
-                              title: '',
-                            );
-                            setState(() {});
-                          },
                         ),
-                        /*ListTile(
+                        onTap: () {
+                          Navigator.pop(context);
+                          isHome = false;
+                          widgetForBody = NGORegisterPage(
+                            drawerCall: drawerCall,
+                            url: '',
+                            title: '',
+                          );
+                          setState(() {});
+                        },
+                      ),
+                      /*ListTile(
                           title: const Align(
                             child: Text(
                               'Fundraising Registration',
@@ -658,119 +705,117 @@ class _AppDrawerState extends State<AppDrawer> {
                             setState(() {});
                           },
                         ),*/
-                        Container(
-                          height: 0.5,
-                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          color: Colors.black,
-                          margin:
-                              const EdgeInsets.only(left: 10.0, right: 10.0),
-                        ),
-                        ListTile(
-                          title: const Align(
-                            alignment: Alignment(-1.0, 0),
-                            child: Text(
-                              'About Us',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          leading: Padding(
-                            padding: const EdgeInsets.only(left: 8),
-                            child: SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: Image.asset(
-                                'assets/about_icon.png',
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.pop(context);
-                            isHome = false;
-                            widgetForBody = AboutUsScreen(
-                              drawerCall: drawerCall,
-                            );
-                            setState(() {});
-                          },
-                        ),
-                        ListTile(
-                          title: const Align(
-                            alignment: Alignment(-1.0, 0),
-                            child: Text(
-                              'Contact Us',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          leading: const Padding(
-                            padding: EdgeInsets.only(left: 9),
-                            child: Icon(
-                              Icons.call,
+                      Container(
+                        height: 0.5,
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        color: Colors.black,
+                        margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                      ),
+                      ListTile(
+                        title: const Align(
+                          alignment: Alignment(-1.0, 0),
+                          child: Text(
+                            'About Us',
+                            style: TextStyle(
                               color: Colors.black,
                             ),
                           ),
-                          onTap: () {
-                            Navigator.pop(context);
+                        ),
+                        leading: Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: Image.asset(
+                              'assets/about_icon.png',
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          isHome = false;
+                          widgetForBody = AboutUsScreen(
+                            drawerCall: drawerCall,
+                          );
+                          setState(() {});
+                        },
+                      ),
+                      ListTile(
+                        title: const Align(
+                          alignment: Alignment(-1.0, 0),
+                          child: Text(
+                            'Contact Us',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        leading: const Padding(
+                          padding: EdgeInsets.only(left: 9),
+                          child: Icon(
+                            Icons.call,
+                            color: Colors.black,
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          isHome = false;
+                          widgetForBody = ContactUsPage(drawerCall: drawerCall);
+                          setState(() {});
+                        },
+                      ),
+                      ListTile(
+                        title: Align(
+                          alignment: const Alignment(-1.0, 0),
+                          child: Text(
+                            isGuest ? 'Login' : 'Settings',
+                            style: const TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        leading: const Padding(
+                          padding: EdgeInsets.only(left: 12),
+                          child: Icon(
+                            Icons.lock,
+                            color: Colors.black,
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                          if (isGuest) {
+                            _onLoginPressed();
+                          } else {
+                            //_onLogoutPressed();
+                            //Navigator.pop(context);
                             isHome = false;
                             widgetForBody =
-                                ContactUsPage(drawerCall: drawerCall);
+                                SettingsScreen(drawerCall: drawerCall);
                             setState(() {});
-                          },
-                        ),
-                        ListTile(
-                          title: Align(
-                            alignment: const Alignment(-1.0, 0),
-                            child: Text(
-                              isGuest ? 'Login' : 'Settings',
-                              style: const TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          leading: const Padding(
-                            padding: EdgeInsets.only(left: 12),
-                            child: Icon(
-                              Icons.lock,
+                          }
+                        },
+                      ),
+                      const Align(
+                        alignment: Alignment.topRight,
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 5, right: 5),
+                          child: Text(
+                            'Version 1.0',
+                            style: TextStyle(
                               color: Colors.black,
                             ),
                           ),
-                          onTap: () {
-                            Navigator.pop(context);
-                            if (isGuest) {
-                              _onLoginPressed();
-                            } else {
-                              //_onLogoutPressed();
-                              //Navigator.pop(context);
-                              isHome = false;
-                              widgetForBody =
-                                  SettingsScreen(drawerCall: drawerCall);
-                              setState(() {});
-                            }
-                          },
                         ),
-                        const Align(
-                          alignment: Alignment.topRight,
-                          child: Padding(
-                            padding: EdgeInsets.only(bottom: 5, right: 5),
-                            child: Text(
-                              'Version 1.0',
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
+      ),
     );
   }
 
@@ -780,5 +825,4 @@ class _AppDrawerState extends State<AppDrawer> {
       await checkSubscription();
     });
   }
-
 }

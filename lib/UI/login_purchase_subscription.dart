@@ -41,6 +41,12 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
 
   @override
   Widget build(BuildContext context) {
+    final bool trialHasDate =
+      (widget.trialText.contains('expires on') ||
+        widget.trialText.contains('expired on')) &&
+      !widget.trialText.contains('Date unavailable');
+    final double screenWidth = MediaQuery.of(context).size.width;
+
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -113,8 +119,7 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
                                     showLoader(context);
                                     apiTrialPurchase();
                                   } else {
-                                    if (widget.trialText
-                                        .contains('expired on')) {
+                                    if (trialHasDate) {
                                       showMessage(
                                         kAlert,
                                         widget.trialText,
@@ -132,18 +137,21 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
                                 }
                               },
                               child: Container(
-                                height: 40,
-                                width: widget.trialText.contains('expired on')
-                                    ? 270
-                                    : 200,
-                                padding:
-                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                height: trialHasDate ? 68 : 40,
+                                width:
+                                    trialHasDate ? screenWidth * 0.8 : 200,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 6,
+                                ),
                                 alignment: Alignment.center,
                                 child: Text(
                                   widget.trialText,
-                                  style: const TextStyle(
+                                  textAlign: TextAlign.center,
+                                  maxLines: trialHasDate ? 2 : 1,
+                                  style: TextStyle(
                                     color: buttonColor,
-                                    fontSize: 16,
+                                    fontSize: trialHasDate ? 14 : 16,
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),
@@ -257,8 +265,14 @@ class _LoginPurchaseSubscriptionState extends State<LoginPurchaseSubscription> {
     if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      showToast(context, kTrialPeriodStart);
+      final String message =
+          (result[kDataMessage] ?? '').toString().trim();
+      showToast(
+        context,
+        message.isNotEmpty ? message : kTrialPeriodStart,
+      );
       await Future.delayed(const Duration(seconds: 1));
+      if (!mounted) return;
       await navigationHomePage();
     } else {
       showToast(context, result[kDataMessage] as String);

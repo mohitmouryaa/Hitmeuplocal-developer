@@ -243,7 +243,10 @@ class _CommonPromotionByIdListState extends State<CommonPromotionByIdList> {
                         alignment: Alignment.topLeft,
                         color: Colors.white,
                         margin: const EdgeInsets.only(
-                            left: 0.0, top: 10, right: 0.0,),
+                          left: 0.0,
+                          top: 10,
+                          right: 0.0,
+                        ),
                       ),
                     ),
                     Expanded(

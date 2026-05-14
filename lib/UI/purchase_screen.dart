@@ -57,6 +57,12 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
 
   @override
   Widget build(BuildContext context) {
+    final bool trialHasDate =
+      (widget.trialText.contains('expires on') ||
+        widget.trialText.contains('expired on')) &&
+      !widget.trialText.contains('Date unavailable');
+    final double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -121,7 +127,10 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
                         alignment: Alignment.topLeft,
                         color: Colors.white,
                         margin: const EdgeInsets.only(
-                            left: 0.0, top: 10, right: 0.0,),
+                          left: 0.0,
+                          top: 10,
+                          right: 0.0,
+                        ),
                       ),
                     ),
                     Expanded(
@@ -137,39 +146,45 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
                               onTap: () {
                                 if (isGuest) {
                                   _loginRequired(
-                                      'Please login to get Free Trial',);
+                                    'Please login to get Free Trial',
+                                  );
                                 } else {
                                   if (widget.isTrialClicked) {
                                     showLoader(context);
                                     apiTrialPurchase();
                                   } else {
-                                    if (widget.trialText
-                                        .contains('expired on')) {
+                                    if (trialHasDate) {
                                       showMessage(
-                                          kAlert, widget.trialText, context,);
+                                        kAlert,
+                                        widget.trialText,
+                                        context,
+                                      );
                                     } else {
                                       showMessage(
-                                          kAlert,
-                                          'Your trial period has been expired',
-                                          context,);
+                                        kAlert,
+                                        'Your trial period has been expired',
+                                        context,
+                                      );
                                     }
                                   }
                                 }
                               },
                               child: Container(
-                                height: 50,
-                                width: widget.trialText.contains('expired on')
-                                    ? 270
-                                    : 260,
-                                padding:
-                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                height: trialHasDate ? 68 : 50,
+                                width:
+                                    trialHasDate ? screenWidth * 0.8 : 260,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 6,
+                                ),
                                 alignment: Alignment.center,
                                 child: Text(
                                   widget.trialText,
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(
+                                  maxLines: trialHasDate ? 2 : 1,
+                                  style: TextStyle(
                                     color: buttonColor,
-                                    fontSize: 16,
+                                    fontSize: trialHasDate ? 14 : 16,
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),
@@ -219,7 +234,11 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
                         width:
                             widget.subText.contains('expires on') ? 300 : 200,
                         padding: const EdgeInsets.only(
-                            top: 5, bottom: 5, left: 7, right: 7,),
+                          top: 5,
+                          bottom: 5,
+                          left: 7,
+                          right: 7,
+                        ),
                         alignment: Alignment.center,
                         child: Center(
                           child: Text(
@@ -276,7 +295,12 @@ class _PurchaseSubscriptionState extends State<PurchaseSubscription> {
     if (!mounted) return;
     hideLoader(context);
     if (result[kDataCode] == 200) {
-      showToast(context, kTrialPeriodStart);
+      final String message =
+          (result[kDataMessage] ?? '').toString().trim();
+      showToast(
+        context,
+        message.isNotEmpty ? message : kTrialPeriodStart,
+      );
       await Future.delayed(const Duration(seconds: 1));
       if (mounted) {
         await navigationHomePage();
